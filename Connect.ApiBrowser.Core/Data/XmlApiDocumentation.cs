@@ -51,9 +51,9 @@ namespace Connect.ApiBrowser.Core.Data
             Component component = Sprocs.GetOrCreateComponent(ModuleId, File, Version);
             log.Log(StartTime, "Component is {0}, ID={1}, version={2}", component.ComponentName, component.ComponentId, Version);
             List<int> handledClassIds = new List<int>();
-            foreach (XmlNode namespaceNode in this.DocumentElement.SelectNodes("namespace"))
+            foreach (XmlNode namespaceNode in DocumentElement.SelectNodes("namespace"))
             {
-                ApiNamespace ns = Sprocs.GetOrCreateNamespace(ModuleId, namespaceNode.Attributes["name"].InnerText);
+                ApiNamespace ns = ApiNamespaceRepository.Instance.GetOrCreateNamespace(ModuleId, namespaceNode.Attributes["name"].InnerText);
                 log.Log(StartTime, "Namespace {0}", ns.NamespaceName);
                 foreach (XmlNode classNode in namespaceNode.SelectNodes("class"))
                 {
@@ -125,6 +125,8 @@ namespace Connect.ApiBrowser.Core.Data
             }
 
             log.Log(StartTime, "Finished component {0}", component.ComponentName);
+            log.Flush();
+            log.Close();
 
         }
 

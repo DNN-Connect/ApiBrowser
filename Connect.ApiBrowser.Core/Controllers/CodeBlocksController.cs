@@ -1,11 +1,8 @@
 ﻿using Connect.ApiBrowser.Core.Models;
 using DotNetNuke.Entities.Portals;
 using System;
-using System.Collections.Generic;
 using System.IO.Compression;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Connect.ApiBrowser.Core.Controllers
 {

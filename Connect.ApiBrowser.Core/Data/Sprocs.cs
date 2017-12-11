@@ -120,19 +120,20 @@ namespace Connect.ApiBrowser.Core.Data
         }
 
         // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_ApiNamespaces WHERE [ModuleId]=@ModuleId AND [NamespaceName]=@NamespaceName)
-        //  INSERT INTO dbo.Connect_ApiBrowser_ApiNamespaces ([ModuleId], [NamespaceName])
-        //   VALUES (@ModuleId, @NamespaceName);
+        //  INSERT INTO dbo.Connect_ApiBrowser_ApiNamespaces ([ModuleId], [ParentId], [NamespaceName], [LastQualifier])
+        //   VALUES (@ModuleId, @ParentId, @NamespaceName, @LastQualifier);
         // SELECT *
         //  FROM dbo.Connect_ApiBrowser_ApiNamespaces
         //  WHERE [ModuleId]=@ModuleId
-        //    AND [NamespaceName]=@NamespaceName;;  
-        public static ApiNamespace GetOrCreateNamespace(int moduleId, string namespaceName)
+        //    AND [NamespaceName]=@NamespaceName;
+        // ;  
+        public static ApiNamespace GetOrCreateNamespace(int moduleId, int parentId, string namespaceName, string lastQualifier)
         {
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteSingleOrDefault<ApiNamespace>(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_GetOrCreateNamespace",
-                    moduleId, namespaceName);
+                    moduleId, parentId, namespaceName, lastQualifier);
             }
         }
 

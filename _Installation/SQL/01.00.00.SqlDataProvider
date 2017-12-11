@@ -1,3 +1,37 @@
-/*
-SQL Install Scripts
-*/
+-- new scheduled task
+INSERT INTO {databaseOwner}[{objectQualifier}Schedule]
+           ([TypeFullName]
+           ,[TimeLapse]
+           ,[TimeLapseMeasurement]
+           ,[RetryTimeLapse]
+           ,[RetryTimeLapseMeasurement]
+           ,[RetainHistoryNum]
+           ,[AttachToEvent]
+           ,[CatchUpEnabled]
+           ,[Enabled]
+           ,[ObjectDependencies]
+           ,[Servers]
+           ,[CreatedByUserID]
+           ,[CreatedOnDate]
+           ,[LastModifiedByUserID]
+           ,[LastModifiedOnDate]
+           ,[FriendlyName])
+     VALUES
+           ('Connect.ApiBrowser.Core.ApiScheduledTask, CONNECT.APIBROWSER.CORE'
+           ,24
+           ,'h'
+           ,5
+           ,'m'
+           ,20
+           ,''
+           ,0
+           ,1
+           ,''
+           ,null
+           ,-1
+           ,GETDATE()
+           ,-1
+           ,GETDATE()
+           ,'Api Browser Check New API Files')
+GO
+

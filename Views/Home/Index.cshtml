@@ -12,3 +12,7 @@
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
      >
 </div>
+
+<a href="@Url.Action("Upload", "Files")" class="btn btn-default">
+      <span class="glyphicon glyphicon-eye-open"></span>&nbsp;@Dnn.LocalizeString("Upload")
+     </a>

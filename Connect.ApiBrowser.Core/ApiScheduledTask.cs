@@ -11,30 +11,30 @@ namespace Connect.ApiBrowser.Core
         private StringBuilder Log = new StringBuilder();
         public ApiScheduledTask(DotNetNuke.Services.Scheduling.ScheduleHistoryItem objScheduleHistoryItem) : base()
         {
-            this.ScheduleHistoryItem = objScheduleHistoryItem;
+            ScheduleHistoryItem = objScheduleHistoryItem;
         }
 
         public override void DoWork()
         {
             try
             {
-                this.Progressing();
+                Progressing();
                 foreach (PortalInfo p in PortalController.Instance.GetPortals())
                 {
-                    System.IO.DirectoryInfo d = new System.IO.DirectoryInfo(p.HomeDirectoryMapPath + "\\Api");
+                    var d = new System.IO.DirectoryInfo(p.HomeDirectoryMapPath + "\\Api");
                     if (d.Exists)
                     {
-                        foreach (System.IO.DirectoryInfo sd in d.GetDirectories())
+                        foreach (var sd in d.GetDirectories())
                         {
                             int moduleId = -1;
                             int.TryParse(sd.Name, out moduleId);
                             if (moduleId > -1)
                             {
                                 Log.AppendFormat("Found Module Dir {0}" + Environment.NewLine, moduleId);
-                                foreach (System.IO.FileInfo f in sd.GetFiles("*.xml"))
+                                foreach (var f in sd.GetFiles("*.xml"))
                                 {
                                     Log.AppendFormat("Analyzing {0}" + Environment.NewLine, f.Name);
-                                    XmlApiDocumentation doc = new XmlApiDocumentation(f.FullName, moduleId);
+                                    var doc = new XmlApiDocumentation(f.FullName, moduleId);
                                     if (doc.IsValid)
                                     {
                                         doc.AddToModule();
@@ -46,14 +46,14 @@ namespace Connect.ApiBrowser.Core
                     }
                 }
 
-                this.ScheduleHistoryItem.AddLogNote(Log.ToString().Replace(Environment.NewLine, "<br />"));
-                this.ScheduleHistoryItem.Succeeded = true;
+                ScheduleHistoryItem.AddLogNote(Log.ToString().Replace(Environment.NewLine, "<br />"));
+                ScheduleHistoryItem.Succeeded = true;
             }
             catch (Exception ex)
             {
-                this.ScheduleHistoryItem.AddLogNote(Log.ToString() + Environment.NewLine + "Scheduled task failed: " + ex.Message + "(" + ex.StackTrace + ")" + Environment.NewLine + Log.ToString());
-                this.ScheduleHistoryItem.Succeeded = false;
-                this.Errored(ref ex);
+                ScheduleHistoryItem.AddLogNote(Log.ToString() + Environment.NewLine + "Scheduled task failed: " + ex.Message + "(" + ex.StackTrace + ")" + Environment.NewLine + Log.ToString());
+                ScheduleHistoryItem.Succeeded = false;
+                Errored(ref ex);
                 Exceptions.LogException(ex);
             }
         }
