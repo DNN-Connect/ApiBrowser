@@ -1,13 +1,13 @@
-@inherits ApiBrowserWebPage<ApiNamespace>
+@inherits ApiBrowserWebPage<ViewSelection>
 @using Connect.DNN.Modules.ApiBrowser.Common;
-@using Connect.ApiBrowser.Core.Models.ApiNamespaces;
+@using Connect.ApiBrowser.Core.Models;
 @using Connect.ApiBrowser.Core.Repositories;
 @{
     ApiBrowserModuleContext.AddModuleScript();
-    var classes = ApiClassRepository.Instance.GetApiClassesByApiNamespace(Model.NamespaceId);
+    var classes = ApiClassRepository.Instance.GetApiClassesByApiNamespace(Model.SelectedNamespace.NamespaceId);
 }
 
-<h2>@Model.NamespaceName</h2>
+<h2>@Model.SelectedNamespace.NamespaceName</h2>
 
 <div class="connectapibrowser apibrowser"
      data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
@@ -15,7 +15,7 @@
      data-tabid="@Dnn.ActiveModule.TabID"
      data-resources="@SerializedResources()"
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
-     data-namespace="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
+     data-selection="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
      data-classes="@(Newtonsoft.Json.JsonConvert.SerializeObject(classes))">
 </div>
 

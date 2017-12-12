@@ -11,6 +11,8 @@ export class ComponentLoader {
       var moduleId = $(el).data('moduleid');
       ReactDOM.render(<Browser
         module={AppManager.Modules.Item(moduleId.toString())}
+        selection={$(el).data('selection')}
+        classes={$(el).data('classes')}
         />, el);
     });
 

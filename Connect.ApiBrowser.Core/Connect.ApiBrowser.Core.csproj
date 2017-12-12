@@ -80,6 +80,7 @@
     <Compile Include="Models\Members\MemberType.cs" />
     <Compile Include="Models\Members\Member_Declaration.cs" />
     <Compile Include="Models\Members\Member_Interfaces.cs" />
+    <Compile Include="Models\ViewSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApiClassRepository.cs" />
     <Compile Include="Repositories\ApiClassRepository_Core.cs" />

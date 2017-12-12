@@ -10,7 +10,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiNamespaces
     [PrimaryKey("NamespaceId", AutoIncrement = true)]
     [DataContract]
     [Scope("ModuleId")]
-    public partial class ApiNamespace     {
+    public partial class ApiNamespace
+    {
 
         #region .ctor
         public ApiNamespace()

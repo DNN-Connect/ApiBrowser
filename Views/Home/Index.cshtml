@@ -17,7 +17,7 @@
   {
       <tr>
        <td>
-        <a href="@Url.Action("Namespace", "Namespaces", new { NamespaceId = a.NamespaceId, ClassId = a.ClassId })">@a.Name</a>
+        <a href="@Url.Action("Namespace", "Namespaces", new { view = a.Name })">@a.Name</a>
         @if (a.ClassId == -1)
         {
             <span>Namespace</span>
