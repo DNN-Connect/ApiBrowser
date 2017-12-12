@@ -35,7 +35,7 @@ export default class DataService {
                 }
             });
     };
-    public myMethod(someId: number, success: Function): any {
-        this.ajaxCall('POST', this.baseServicepath, 'Controller', 'Action', someId, null, success)        
+    public getMembers(classId: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'ApiClasses', 'Members', classId, null, success)        
     }
 }

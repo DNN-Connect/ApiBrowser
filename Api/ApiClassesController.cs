@@ -1,4 +1,3 @@
-
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -14,10 +13,9 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
 
 		[HttpGet()]
 		[DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
-		public HttpResponseMessage MyMethod(int id)
+		public HttpResponseMessage Members(int id)
 		{
-			bool res = true;
-			return Request.CreateResponse(HttpStatusCode.OK, res);
+			return Request.CreateResponse(HttpStatusCode.OK, MemberRepository.Instance.GetMembersByApiClass(id));
 		}
 
 	}

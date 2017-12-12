@@ -1,3 +1,5 @@
+import { IMember } from "./IMember";
+
 export interface IApiClass {
   ClassId: number;
   NamespaceId: number;
@@ -15,6 +17,7 @@ export interface IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
+  Members?: IMember[];
 }
 
 export class ApiClass implements IApiClass {
@@ -34,6 +37,7 @@ export class ApiClass implements IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
+  Members?: IMember[];
     constructor() {
   this.ClassId = -1;
   this.NamespaceId = -1;

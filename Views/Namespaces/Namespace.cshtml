@@ -7,8 +7,6 @@
     var classes = ApiClassRepository.Instance.GetApiClassesByApiNamespace(Model.SelectedNamespace.NamespaceId);
 }
 
-<h2>@Model.SelectedNamespace.NamespaceName</h2>
-
 <div class="connectapibrowser apibrowser"
      data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
      data-moduleid="@Dnn.ActiveModule.ModuleID"
