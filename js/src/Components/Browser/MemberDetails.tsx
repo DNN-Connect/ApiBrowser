@@ -49,7 +49,8 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                         {this.props.member.AppearedInVersion}
                     </dd>
                 </dl>
-
+                <h4>Declaration</h4>
+                <p>{this.props.member.Declaration}</p>
             </div>
         );
     }

@@ -58,8 +58,8 @@ namespace Connect.ApiBrowser.Core.Data
         }
 
         // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName)
-        //  INSERT INTO dbo.Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ClassName], [Declaration], [Documentation], [AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage])
-        //   VALUES (@NamespaceId, @ComponentId, @ClassName, @Declaration, @Documentation, @Version, NULL, NULL, 0, NULL);
+        //  INSERT INTO dbo.Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ClassName], [Declaration], [Documentation], [Description],[AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage])
+        //   VALUES (@NamespaceId, @ComponentId, @ClassName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL);
         // UPDATE dbo.Connect_ApiBrowser_ApiClasses
         //  SET [AppearedInVersion]=@Version
         //  WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName AND [AppearedInVersion]>@Version;
@@ -84,13 +84,13 @@ namespace Connect.ApiBrowser.Core.Data
         // WHERE
         //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
         // ;  
-        public static ApiClass GetOrCreateClass(int namespaceId, int componentId, string className, string declaration, string documentation, string version, bool isDeprecated, string deprecationMessage)
+        public static ApiClass GetOrCreateClass(int namespaceId, int componentId, string className, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage)
         {
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteSingleOrDefault<ApiClass>(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_GetOrCreateClass",
-                    namespaceId, componentId, className, declaration, documentation, version, isDeprecated, deprecationMessage);
+                    namespaceId, componentId, className, declaration, documentation, description, version, isDeprecated, deprecationMessage);
             }
         }
 
@@ -119,8 +119,8 @@ namespace Connect.ApiBrowser.Core.Data
         }
 
         // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName)
-        //  INSERT INTO dbo.Connect_ApiBrowser_Members ([ClassId],[MemberType],[MemberName],[Declaration],[Documentation],[AppearedInVersion],[DeprecatedInVersion],[DisappearedInVersion],[IsDeprecated],[DeprecationMessage])
-        //   VALUES (@ClassId, @MemberType, @MemberName, @Declaration, @Documentation, @Version, NULL, NULL, 0, NULL);
+        //  INSERT INTO dbo.Connect_ApiBrowser_Members ([ClassId],[MemberType],[MemberName],[Declaration],[Documentation],[Description], [AppearedInVersion],[DeprecatedInVersion],[DisappearedInVersion],[IsDeprecated],[DeprecationMessage])
+        //   VALUES (@ClassId, @MemberType, @MemberName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL);
         // UPDATE dbo.Connect_ApiBrowser_Members
         //  SET [AppearedInVersion]=@Version
         //  WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [AppearedInVersion]>@Version;
@@ -145,13 +145,13 @@ namespace Connect.ApiBrowser.Core.Data
         // WHERE
         //  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
         // ;  
-        public static Member GetOrCreateMember(int classId, int memberType, string memberName, string declaration, string documentation, string version, bool isDeprecated, string deprecationMessage)
+        public static Member GetOrCreateMember(int classId, int memberType, string memberName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage)
         {
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteSingleOrDefault<Member>(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_GetOrCreateMember",
-                    classId, memberType, memberName, declaration, documentation, version, isDeprecated, deprecationMessage);
+                    classId, memberType, memberName, declaration, documentation, description, version, isDeprecated, deprecationMessage);
             }
         }
 

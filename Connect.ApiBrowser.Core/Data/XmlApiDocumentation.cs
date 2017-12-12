@@ -11,6 +11,7 @@ using Connect.ApiBrowser.Core.Models.MemberCodeBlocks;
 using Connect.ApiBrowser.Core.Repositories;
 using Connect.ApiBrowser.Core.Controllers;
 using Connect.ApiBrowser.Core.Models;
+using System.Text.RegularExpressions;
 
 namespace Connect.ApiBrowser.Core.Data
 {
@@ -67,7 +68,9 @@ namespace Connect.ApiBrowser.Core.Data
                     }
                     try
                     {
-                        ApiClass cl = Sprocs.GetOrCreateClass(ns.NamespaceId, component.ComponentId, classNode.Attributes["name"].InnerText, classNode.SelectSingleNode("declaration").InnerText, classNode.SelectSingleNode("documentation").InnerXml.Trim(), Version, isDeprecated, deprecationMessage);
+                        var documentation = classNode.SelectSingleNode("documentation").InnerXml.Trim();
+                        var description = tryGetDescription(documentation);
+                        ApiClass cl = Sprocs.GetOrCreateClass(ns.NamespaceId, component.ComponentId, classNode.Attributes["name"].InnerText, classNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
                         log.Log(StartTime, "Class {0} (ID={1})", cl.ClassName, cl.ClassId);
                         foreach (XmlNode memberNode in classNode.SelectNodes("constructors/constructor"))
                         {
@@ -145,7 +148,9 @@ namespace Connect.ApiBrowser.Core.Data
 
             try
             {
-                Member m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, memberNode.SelectSingleNode("documentation").InnerXml.Trim(), Version, isDeprecated, deprecationMessage);
+                var documentation = memberNode.SelectSingleNode("documentation").InnerXml.Trim();
+                var description = tryGetDescription(documentation);
+                Member m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
                 log.Log(StartTime, "Member {0} (ID={1})", m.MemberName, m.MemberId);
                 foreach (XmlNode codeNode in memberNode.SelectNodes("codeblock"))
                 {
@@ -184,6 +189,19 @@ namespace Connect.ApiBrowser.Core.Data
 
             return res;
 
+        }
+
+        private string tryGetDescription(string documentation)
+        {
+            var m = Regex.Match(documentation, "(?si)<summary>(.*)</summary>(?-si)");
+            if (m.Success)
+            {
+                return m.Groups[1].Value;
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
