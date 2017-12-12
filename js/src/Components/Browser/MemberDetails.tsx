@@ -28,9 +28,18 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                 memType = "Event";
                 break;
         }
+        var props = [];
+        if (this.props.member.DeprecatedInVersion) {
+            props.push(<dt>Deprecated in:</dt>);
+            props.push(<dd>{this.props.apiclass.DeprecatedInVersion}</dd>);
+        }
+        var deprecation = this.props.member.DeprecationMessage == undefined ? null : (
+            <div className="alert alert-danger">{this.props.member.DeprecationMessage}</div>
+        );
         return (
             <div>
                 <h2>{this.props.member.ClassName}.{this.props.member.MemberName} {memType}</h2>
+                {deprecation}
                 <dl className="dl-horizontal">
                     <dt>Class:</dt>
                     <dd>
@@ -48,6 +57,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     <dd>
                         {this.props.member.AppearedInVersion}
                     </dd>
+                    {props}
                 </dl>
                 <h4>Declaration</h4>
                 <p>{this.props.member.Declaration}</p>

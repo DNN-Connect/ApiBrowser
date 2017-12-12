@@ -15,12 +15,16 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
             props.push(<dt>Deprecated in:</dt>);
             props.push(<dd>{this.props.apiclass.DeprecatedInVersion}</dd>);
         }
+        var deprecation = this.props.apiclass.DeprecationMessage == undefined ? null : (
+            <div className="alert alert-danger">{this.props.apiclass.DeprecationMessage}</div>
+        );
         var members = this.props.apiclass.Members ? (
             <MemberList module={this.props.module} members={this.props.apiclass.Members} changeSelection={(a, b) => this.props.changeSelection(this.props.apiclass, b)} />
         ) : null;
         return (
             <div>
                 <h2>{this.props.apiclass.ClassName} Class</h2>
+                {deprecation}
                 <dl className="dl-horizontal">
                     <dt>Namespace:</dt>
                     <dd>
@@ -34,6 +38,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     <dd>
                         {this.props.apiclass.AppearedInVersion}
                     </dd>
+                    {props}
                 </dl>
                 <h4>Declaration</h4>
                 <p>{this.props.apiclass.Declaration}</p>
