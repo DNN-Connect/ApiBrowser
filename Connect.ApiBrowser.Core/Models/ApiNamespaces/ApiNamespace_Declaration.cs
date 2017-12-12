@@ -30,6 +30,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiNamespaces
         public string NamespaceName { get; set; }
         [DataMember]
         public string LastQualifier { get; set; }
+        [DataMember]
+        public string Description { get; set; }
         #endregion
 
         #region Methods
@@ -49,6 +51,9 @@ namespace Connect.ApiBrowser.Core.Models.ApiNamespaces
 
             if (!String.IsNullOrEmpty(apiNamespace.LastQualifier))
                 LastQualifier = apiNamespace.LastQualifier;
+
+            if (!String.IsNullOrEmpty(apiNamespace.Description))
+                Description = apiNamespace.Description;
 
         }
         #endregion

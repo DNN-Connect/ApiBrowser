@@ -22,6 +22,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
    ClassName = Convert.ToString(Null.SetNull(dr["ClassName"], ClassName));
    Declaration = Convert.ToString(Null.SetNull(dr["Declaration"], Declaration));
    Documentation = Convert.ToString(Null.SetNull(dr["Documentation"], Documentation));
+   Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
    AppearedInVersion = Convert.ToString(Null.SetNull(dr["AppearedInVersion"], AppearedInVersion));
    DeprecatedInVersion = Convert.ToString(Null.SetNull(dr["DeprecatedInVersion"], DeprecatedInVersion));
    DisappearedInVersion = Convert.ToString(Null.SetNull(dr["DisappearedInVersion"], DisappearedInVersion));
@@ -66,6 +67,12 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
          return "";
      };
      return PropertyAccess.FormatString(Documentation, strFormat);
+    case "description": // NVarCharMax
+     if (Description == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(Description, strFormat);
     case "appearedinversion": // VarChar
      return PropertyAccess.FormatString(AppearedInVersion, strFormat);
     case "deprecatedinversion": // VarChar

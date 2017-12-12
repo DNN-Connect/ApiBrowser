@@ -21,6 +21,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiNamespaces
    ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
    NamespaceName = Convert.ToString(Null.SetNull(dr["NamespaceName"], NamespaceName));
    LastQualifier = Convert.ToString(Null.SetNull(dr["LastQualifier"], LastQualifier));
+   Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
         }
 
         [IgnoreColumn()]
@@ -46,6 +47,12 @@ namespace Connect.ApiBrowser.Core.Models.ApiNamespaces
      return PropertyAccess.FormatString(NamespaceName, strFormat);
     case "lastqualifier": // NVarChar
      return PropertyAccess.FormatString(LastQualifier, strFormat);
+    case "description": // NVarCharMax
+     if (Description == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(Description, strFormat);
                 default:
                     propertyNotFound = true;
                     break;

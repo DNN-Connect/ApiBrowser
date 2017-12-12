@@ -58,6 +58,7 @@
     <Compile Include="Models\ApiClasses\ApiClassBase_Interfaces.cs" />
     <Compile Include="Models\ApiClasses\ApiClass_Declaration.cs" />
     <Compile Include="Models\ApiClasses\ApiClass_Interfaces.cs" />
+    <Compile Include="Models\ApiClassOrNamespace.cs" />
     <Compile Include="Models\ApiNamespaces\ApiNamespace.cs" />
     <Compile Include="Models\ApiNamespaces\ApiNamespace_Declaration.cs" />
     <Compile Include="Models\ApiNamespaces\ApiNamespace_Interfaces.cs" />

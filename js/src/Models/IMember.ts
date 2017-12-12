@@ -5,6 +5,7 @@ export interface IMember {
   MemberName: string;
   Declaration: string;
   Documentation: string;
+  Description: string;
   AppearedInVersion: string;
   DeprecatedInVersion: string;
   DisappearedInVersion: string;
@@ -24,6 +25,7 @@ export class Member implements IMember {
   MemberName: string;
   Declaration: string;
   Documentation: string;
+  Description: string;
   AppearedInVersion: string;
   DeprecatedInVersion: string;
   DisappearedInVersion: string;

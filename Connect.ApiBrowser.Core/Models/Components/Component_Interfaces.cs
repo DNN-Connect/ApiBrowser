@@ -20,6 +20,7 @@ namespace Connect.ApiBrowser.Core.Models.Components
    ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
    ComponentName = Convert.ToString(Null.SetNull(dr["ComponentName"], ComponentName));
    LatestVersion = Convert.ToString(Null.SetNull(dr["LatestVersion"], LatestVersion));
+   Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
         }
 
         [IgnoreColumn()]
@@ -43,6 +44,12 @@ namespace Connect.ApiBrowser.Core.Models.Components
      return PropertyAccess.FormatString(ComponentName, strFormat);
     case "latestversion": // VarChar
      return PropertyAccess.FormatString(LatestVersion, strFormat);
+    case "description": // NVarCharMax
+     if (Description == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(Description, strFormat);
                 default:
                     propertyNotFound = true;
                     break;

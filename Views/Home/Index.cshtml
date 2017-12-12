@@ -1,18 +1,39 @@
 @inherits ApiBrowserWebPage
 @using Connect.DNN.Modules.ApiBrowser.Common;
-@{ 
-    ApiBrowserModuleContext.AddModuleScript();
+@using Connect.ApiBrowser.Core.Repositories;
+@{
+    var all = Connect.ApiBrowser.Core.Data.Sprocs.GetNamespacesAndClasses(Dnn.ModuleContext.ModuleId);
 }
 
-<div class="connectapibrowser apibrowser"
-     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
-     data-moduleid="@Dnn.ActiveModule.ModuleID"
-     data-tabid="@Dnn.ActiveModule.TabID"
-     data-resources="@SerializedResources()"
-     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
-     >
-</div>
+<table class="table">
+ <thead>
+  <tr>
+   <th>@Dnn.LocalizeString("Name")</th>
+   <th>@Dnn.LocalizeString("Description")</th>
+  </tr>
+ </thead>
+ <tbody>
+  @foreach(var a in all)
+  {
+      <tr>
+       <td>
+        <a href="@Url.Action("Namespace", "Namespaces", new { NamespaceId = a.NamespaceId, ClassId = a.ClassId })">@a.Name</a>
+        @if (a.ClassId == -1)
+        {
+            <span>Namespace</span>
+        }
+        else
+        {
+            <span>Class</span>
+        }
+       </td>
+       <td>@a.Description</td>
+      </tr>
+  }
+ </tbody>
+</table>
+
 
 <a href="@Url.Action("Upload", "Files")" class="btn btn-default">
-      <span class="glyphicon glyphicon-eye-open"></span>&nbsp;@Dnn.LocalizeString("Upload")
-     </a>
+ <span class="glyphicon glyphicon-eye-open"></span>&nbsp;@Dnn.LocalizeString("Upload")
+</a>

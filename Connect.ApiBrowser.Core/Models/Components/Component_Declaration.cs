@@ -28,6 +28,8 @@ namespace Connect.ApiBrowser.Core.Models.Components
         public string ComponentName { get; set; }
         [DataMember]
         public string LatestVersion { get; set; }
+        [DataMember]
+        public string Description { get; set; }
         #endregion
 
         #region Methods
@@ -44,6 +46,9 @@ namespace Connect.ApiBrowser.Core.Models.Components
 
             if (!String.IsNullOrEmpty(component.LatestVersion))
                 LatestVersion = component.LatestVersion;
+
+            if (!String.IsNullOrEmpty(component.Description))
+                Description = component.Description;
 
         }
         #endregion

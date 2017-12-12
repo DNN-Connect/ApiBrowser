@@ -4,6 +4,7 @@ export interface IApiNamespace {
   ModuleId: number;
   NamespaceName: string;
   LastQualifier: string;
+  Description: string;
 }
 
 export class ApiNamespace implements IApiNamespace {
@@ -12,6 +13,7 @@ export class ApiNamespace implements IApiNamespace {
   ModuleId: number;
   NamespaceName: string;
   LastQualifier: string;
+  Description: string;
     constructor() {
   this.NamespaceId = -1;
   this.ParentId = -1;

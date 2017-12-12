@@ -41,6 +41,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
              res.MemberName = MemberName;
              res.Declaration = Declaration;
              res.Documentation = Documentation;
+             res.Description = Description;
              res.AppearedInVersion = AppearedInVersion;
              res.DeprecatedInVersion = DeprecatedInVersion;
              res.DisappearedInVersion = DisappearedInVersion;
@@ -57,6 +58,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
             res.MemberName = MemberName;
             res.Declaration = Declaration;
             res.Documentation = Documentation;
+            res.Description = Description;
             res.AppearedInVersion = AppearedInVersion;
             res.DeprecatedInVersion = DeprecatedInVersion;
             res.DisappearedInVersion = DisappearedInVersion;

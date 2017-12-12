@@ -4,6 +4,7 @@ using Connect.ApiBrowser.Core.Models.ApiClasses;
 using Connect.ApiBrowser.Core.Models.Components;
 using Connect.ApiBrowser.Core.Models.Members;
 using Connect.ApiBrowser.Core.Models.ApiNamespaces;
+using Connect.ApiBrowser.Core.Models;
 
 namespace Connect.ApiBrowser.Core.Data
 {
@@ -21,6 +22,38 @@ namespace Connect.ApiBrowser.Core.Data
                 context.Execute(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_ClassDisappeared",
                     classId, version);
+            }
+        }
+
+        // SELECT
+        // *
+        // FROM (SELECT 
+        //  a.NamespaceId, 
+        //  a.ClassId,
+        //  n.NamespaceName + '.' + a.ClassName [Name],
+        //  a.Description,
+        //  a.IsDeprecated
+        // FROM dbo.Connect_ApiBrowser_ApiClasses a
+        // INNER JOIN dbo.Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=a.NamespaceId
+        // WHERE n.ModuleId=@ModuleId
+        // UNION
+        // SELECT
+        //  n.NamespaceId,
+        //  -1 ClassId,
+        //  n.NamespaceName [Name],
+        //  n.Description,
+        //  0 IsDeprecated
+        // FROM dbo.Connect_ApiBrowser_ApiNamespaces n
+        // WHERE n.ModuleId=@ModuleId) x
+        // ORDER BY x.[Name]
+        // ;  
+        public static IEnumerable<ApiClassOrNamespace> GetNamespacesAndClasses(int moduleId)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<ApiClassOrNamespace>(System.Data.CommandType.StoredProcedure,
+                    "Connect_ApiBrowser_GetNamespacesAndClasses",
+                    moduleId);
             }
         }
 
@@ -49,7 +82,8 @@ namespace Connect.ApiBrowser.Core.Data
         //  *
         // FROM dbo.Connect_ApiBrowser_ApiClasses
         // WHERE
-        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;;  
+        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+        // ;  
         public static ApiClass GetOrCreateClass(int namespaceId, int componentId, string className, string declaration, string documentation, string version, bool isDeprecated, string deprecationMessage)
         {
             using (var context = DataContext.Instance())
@@ -72,7 +106,8 @@ namespace Connect.ApiBrowser.Core.Data
         // SELECT *
         //  FROM dbo.Connect_ApiBrowser_Components
         //  WHERE [ModuleId]=@ModuleId
-        //    AND [ComponentName]=@ComponentName;;  
+        //    AND [ComponentName]=@ComponentName;
+        // ;  
         public static Component GetOrCreateComponent(int moduleId, string componentName, string latestVersion)
         {
             using (var context = DataContext.Instance())
@@ -108,7 +143,8 @@ namespace Connect.ApiBrowser.Core.Data
         //  *
         // FROM dbo.Connect_ApiBrowser_Members
         // WHERE
-        //  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;;  
+        //  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+        // ;  
         public static Member GetOrCreateMember(int classId, int memberType, string memberName, string declaration, string documentation, string version, bool isDeprecated, string deprecationMessage)
         {
             using (var context = DataContext.Instance())
@@ -140,7 +176,8 @@ namespace Connect.ApiBrowser.Core.Data
         // UPDATE dbo.Connect_ApiBrowser_Members
         //  SET [DisappearedInVersion]=@Version
         //  WHERE [MemberId]=@MemberId
-        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version;  
+        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version
+        // ;  
         public static void MemberDisappeared(int memberId, string version)
         {
             using (var context = DataContext.Instance())

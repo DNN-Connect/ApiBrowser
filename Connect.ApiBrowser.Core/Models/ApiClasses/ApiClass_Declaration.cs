@@ -1,3 +1,4 @@
+
 using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
@@ -38,6 +39,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
              res.ClassName = ClassName;
              res.Declaration = Declaration;
              res.Documentation = Documentation;
+             res.Description = Description;
              res.AppearedInVersion = AppearedInVersion;
              res.DeprecatedInVersion = DeprecatedInVersion;
              res.DisappearedInVersion = DisappearedInVersion;
@@ -54,6 +56,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             res.ClassName = ClassName;
             res.Declaration = Declaration;
             res.Documentation = Documentation;
+            res.Description = Description;
             res.AppearedInVersion = AppearedInVersion;
             res.DeprecatedInVersion = DeprecatedInVersion;
             res.DisappearedInVersion = DisappearedInVersion;

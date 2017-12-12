@@ -1,0 +1,16 @@
+@inherits ApiBrowserWebPage<Component>
+@using Connect.DNN.Modules.ApiBrowser.Common;
+@using Connect.ApiBrowser.Core.Models.Components;
+@{
+    ApiBrowserModuleContext.AddModuleScript();
+}
+
+<div class="connectapibrowser apibrowser"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))">
+</div>
+
+<h2>@Model.ComponentName</h2>

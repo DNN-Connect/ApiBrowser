@@ -32,6 +32,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
         [DataMember]
         public string Documentation { get; set; }
         [DataMember]
+        public string Description { get; set; }
+        [DataMember]
         public string AppearedInVersion { get; set; }
         [DataMember]
         public string DeprecatedInVersion { get; set; }
@@ -63,6 +65,9 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
 
             if (!String.IsNullOrEmpty(apiClass.Documentation))
                 Documentation = apiClass.Documentation;
+
+            if (!String.IsNullOrEmpty(apiClass.Description))
+                Description = apiClass.Description;
 
             if (!String.IsNullOrEmpty(apiClass.AppearedInVersion))
                 AppearedInVersion = apiClass.AppearedInVersion;
