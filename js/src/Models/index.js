@@ -8,4 +8,5 @@ export * from './IKeyedCollection';
 export * from './IMember';
 export * from './IMemberCodeBlock';
 export * from './INameValuePair';
+export * from './IScheduledFile';
 export * from './IViewSelection';

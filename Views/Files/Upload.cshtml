@@ -1,8 +1,18 @@
 @inherits ApiBrowserWebPage
 @using Connect.DNN.Modules.ApiBrowser.Common;
 @{ 
+    ApiBrowserModuleContext.AddModuleScript();
 }
 
-<input type="file" name="FileUpload" />
-<input type="submit" name="Submit" id="Submit" value="Upload" />
+<div class="connectapibrowser filemanager"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
+     >
+</div>
 
+<div class="text-right">
+ <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+</div>

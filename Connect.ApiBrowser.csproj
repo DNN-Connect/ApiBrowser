@@ -124,6 +124,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\FilesController.cs" />
     <Compile Include="Api\ApiClassesController.cs" />
     <Compile Include="Api\ApiNamespacesController.cs" />
     <Compile Include="Api\CodeBlocksController.cs" />
