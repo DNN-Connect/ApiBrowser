@@ -105,6 +105,7 @@ namespace Connect.ApiBrowser.Core.Data
                     catch (Exception ex)
                     {
                         Exceptions.LogException(ex);
+                        log.Log(StartTime, "Exception {0}. Stacktrace: {1}.", ex.Message, ex.StackTrace);
                     }
                 }
             }
@@ -152,6 +153,7 @@ namespace Connect.ApiBrowser.Core.Data
                 var description = tryGetDescription(documentation);
                 Member m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
                 log.Log(StartTime, "Member {0} (ID={1})", m.MemberName, m.MemberId);
+                res = m.MemberId;
                 foreach (XmlNode codeNode in memberNode.SelectNodes("codeblock"))
                 {
                     CodeBlock cb = new CodeBlock
@@ -160,7 +162,7 @@ namespace Connect.ApiBrowser.Core.Data
                         Body = codeNode.SelectSingleNode("body").InnerText,
                         Hash = codeNode.SelectSingleNode("body").Attributes["hash"].InnerText
                     };
-                    CodeBlocksController.SaveCodeBlock(cb);
+                    CodeBlocksController.SaveCodeBlock(cb, System.IO.Path.GetDirectoryName(FilePath));
                     log.Log(StartTime, "Codeblock {0}", cb.Hash);
                     MemberCodeBlock mcb = new MemberCodeBlock
                     {
@@ -178,13 +180,11 @@ namespace Connect.ApiBrowser.Core.Data
                         Sprocs.RegisterCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
                     }
                 }
-
-                res = m.MemberId;
-
             }
             catch (Exception ex)
             {
                 Exceptions.LogException(ex);
+                log.Log(StartTime, "Exception {0}. Stacktrace: {1}.", ex.Message, ex.StackTrace);
             }
 
             return res;

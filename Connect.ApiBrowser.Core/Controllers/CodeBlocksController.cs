@@ -8,9 +8,9 @@ namespace Connect.ApiBrowser.Core.Controllers
 {
     public class CodeBlocksController
     {
-        public static void SaveCodeBlock(CodeBlock block)
+        public static void SaveCodeBlock(CodeBlock block, string xmlFilePath)
         {
-            string savePath = string.Format("{0}\\Api\\{1}\\CodeBlocks\\{2}\\{3}.resources", PortalSettings.Current.HomeDirectoryMapPath, block.ModuleId, block.Hash.Substring(0, 2), block.Hash.Substring(2));
+            string savePath = string.Format("{0}\\CodeBlocks\\{1}\\{2}.resources", xmlFilePath, block.Hash.Substring(0, 2), block.Hash.Substring(2));
             if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(savePath)))
                 System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(savePath));
             if (!System.IO.File.Exists(savePath))
