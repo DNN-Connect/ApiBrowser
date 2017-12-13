@@ -11,10 +11,18 @@ interface INamespaceDetailsProps {
 export default class NamespaceDetails extends React.Component<INamespaceDetailsProps> {
     public render(): JSX.Element {
         var classRows = this.props.classes.map(c => {
+            var warning = null;
+            if (c.IsDeprecated) {
+                warning = (<span className="redhighlight">Deprecated</span>);
+            }
+            if (c.DisappearedInVersion) {
+                warning = (<span className="redhighlight">Removed</span>);
+            }
             return (
                 <tr key={c.ClassId}>
                     <td>
                         <a href="#" onClick={e => { e.preventDefault(); this.props.changeSelection(c, null) }}>{c.ClassName}</a>
+                        {warning}
                     </td>
                     <td>{c.Description}</td>
                 </tr>

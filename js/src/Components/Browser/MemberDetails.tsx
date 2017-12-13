@@ -30,10 +30,16 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         }
         var props = [];
         if (this.props.member.DeprecatedInVersion) {
-            props.push(<dt>Deprecated in:</dt>);
-            props.push(<dd>{this.props.apiclass.DeprecatedInVersion}</dd>);
+            props.push(<dt className="red">Deprecated in:</dt>);
+            props.push(<dd className="red">{this.props.apiclass.DeprecatedInVersion}</dd>);
         }
-        var deprecation = this.props.member.DeprecationMessage == undefined ? null : (
+        if (this.props.member.DisappearedInVersion) {
+            props.push(<dt className="red">Disappeared in:</dt>);
+            props.push(<dd className="red">{this.props.member.DisappearedInVersion}</dd>);
+        }
+        var deprecation = this.props.member.DeprecationMessage == undefined ? this.props.apiclass.DeprecationMessage == undefined ? null : (
+            <div className="alert alert-danger">{this.props.apiclass.DeprecationMessage}</div>
+        ) : (
             <div className="alert alert-danger">{this.props.member.DeprecationMessage}</div>
         );
         return (
