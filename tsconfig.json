@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
+        "lib": ["es2016", "dom"],
         "module": "es2015",
         "moduleResolution": "node",
         "jsx": "react",
@@ -9,11 +10,12 @@
         "strictNullChecks": true,
         "types": [],
         "experimentalDecorators": true,
-        "allowJs": true
+        "allowJs": true,
+        "typeRoots": [
+            "node_modules/@types"
+            //,"Types"
+        ]
     },
-    "files": [
-        "js/src/App.tsx"
-    ],
     "include": [
         "js/src/**/*.ts",
         "js/src/**/*.tsx"

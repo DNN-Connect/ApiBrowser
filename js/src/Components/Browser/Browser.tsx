@@ -14,6 +14,7 @@ interface IBrowserProps {
 interface IBrowserState {
     selectedClass: Models.ApiClass | null;
     selectedMember: Models.Member | null;
+    selectedMemberCodeblocks: Models.IMemberCodeBlock[];
 };
 
 export default class Browser extends React.Component<IBrowserProps, IBrowserState> {
@@ -25,14 +26,22 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
         super(props);
         this.state = {
             selectedClass: props.selection.SelectedClass,
-            selectedMember: props.selection.SelectedMember
+            selectedMember: props.selection.SelectedMember,
+            selectedMemberCodeblocks: []
         }
     }
 
     componentDidMount() {
         this.checkSelectedClass();
-        window.onpopstate = function(e) {
+        window.onpopstate = function (e) {
             location.reload();
+        }
+        if (this.state.selectedMember != null) {
+            this.props.module.service.getMemberCodeBlocks(this.state.selectedMember.MemberId, (data: Models.IMemberCodeBlock[]) => {
+                this.setState({
+                    selectedMemberCodeblocks: data
+                });
+            });
         }
     }
 
@@ -61,9 +70,24 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
     }
 
     private changeSelection(newClass: Models.IApiClass | null, newMember: Models.IMember | null): void {
+        var codeblocks = this.state.selectedMemberCodeblocks;
+        if (newMember == null && this.state.selectedMember != null) {
+            codeblocks = [];
+        }
+        else if (newMember != null) {
+            if (this.state.selectedMember == null || this.state.selectedMember.MemberId != newMember.MemberId) {
+                codeblocks = [];
+                this.props.module.service.getMemberCodeBlocks(newMember.MemberId, (data: Models.IMemberCodeBlock[]) => {
+                    this.setState({
+                        selectedMemberCodeblocks: data
+                    });
+                });
+            }
+        }
         this.setState({
             selectedClass: newClass,
-            selectedMember: newMember
+            selectedMember: newMember,
+            selectedMemberCodeblocks: codeblocks
         }, () => {
             this.changeUrl(this.getUrl());
             this.checkSelectedClass();
@@ -84,7 +108,8 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
                     <MemberDetails module={this.props.module}
                         member={this.state.selectedMember}
                         apiclass={this.state.selectedClass}
-                        changeSelection={(a, b) => this.changeSelection(a, b)} />
+                        changeSelection={(a, b) => this.changeSelection(a, b)}
+                        codeblocks={this.state.selectedMemberCodeblocks} />
                 );
         return (
             <div>

@@ -45,7 +45,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     {props}
                 </dl>
                 <h4>Declaration</h4>
-                <p>{this.props.apiclass.Declaration}</p>
+                <pre>{this.props.apiclass.Declaration}</pre>
                 {members}
             </div>
         );

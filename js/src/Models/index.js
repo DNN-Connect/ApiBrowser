@@ -1,6 +1,7 @@
 export * from './IApiClass';
 export * from './IApiNamespace';
 export * from './IAppModule';
+export * from './ICodeBlock';
 export * from './IComment';
 export * from './ICommentLike';
 export * from './IComponent';

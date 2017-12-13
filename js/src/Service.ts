@@ -38,6 +38,12 @@ export default class DataService {
     public getAll(classes: boolean, namespaces: boolean, searchText: string, pageIndex: number, pageSize: number, success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'NamespacesAndClasses', 'List', null, { classes: classes, namespaces: namespaces, searchText: searchText, pageIndex: pageIndex, pageSize: pageSize }, success)
     }
+    public getCodeblock(codeblockId: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'MemberCodeBlocks', 'Get', codeblockId, null, success)
+    }
+    public getMemberCodeBlocks(memberId: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'Members', 'Codeblocks', memberId, null, success)
+    }
     public getMembers(classId: number, success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'ApiClasses', 'Members', classId, null, success)
     }
