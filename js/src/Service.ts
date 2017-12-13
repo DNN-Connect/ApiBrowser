@@ -41,6 +41,9 @@ export default class DataService {
     public getScheduledFiles(success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'Files', 'Files', null, null, success)        
     }
+    public processFiles(success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)        
+    }
     public postFiles(files: any, success: Function, fail?: Function) {
         var data = new FormData();
         $.each(files, function (key, value) {

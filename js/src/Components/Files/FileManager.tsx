@@ -57,6 +57,14 @@ export default class FileManager extends React.Component<IFileManagerProps, IFil
         });
     }
 
+    private processFiles(): void {
+        this.props.module.service.processFiles((data: Models.IScheduledFile[]) => {
+            this.setState({
+                files: data
+            });
+        });
+    }
+
     public render(): JSX.Element {
         var rows = this.state.files.map(f => {
             var processing = f.Processing ? (
@@ -84,8 +92,11 @@ export default class FileManager extends React.Component<IFileManagerProps, IFil
                 <div className="row">
                     <div className="form-group">
                         <label htmlFor="Documents" className="col-sm-2 control-label">{this.props.module.resources.Files}</label>
-                        <div className="col-sm-10">
+                        <div className="col-sm-9">
                             <input type="file" className="form-control" data-action="upload" multiple />
+                        </div>
+                        <div className="col-sm-1">
+                            <a href="#" className="btn btn-default" onClick={e => { e.preventDefault(); this.processFiles() }}>{this.props.module.resources.Process}</a>
                         </div>
                     </div>
                 </div>

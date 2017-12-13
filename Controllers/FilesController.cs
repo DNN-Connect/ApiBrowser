@@ -14,11 +14,5 @@ namespace Connect.DNN.Modules.ApiBrowser.Controllers
         {
             return View();
         }
-
-        //var schedule = DotNetNuke.Services.Scheduling.SchedulingController.GetSchedule("Connect.ApiBrowser.Core.ApiScheduledTask, CONNECT.APIBROWSER.CORE", "");
-        //if (schedule != null)
-        //{
-        //    DotNetNuke.Services.Scheduling.SchedulingProvider.Instance().RunScheduleItemNow(schedule);
-        //}    
     }
 }

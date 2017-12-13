@@ -123,6 +123,9 @@
   <data name="Files" xml:space="preserve">
     <value>Files</value>
   </data>
+  <data name="Process" xml:space="preserve">
+    <value>Process</value>
+  </data>
   <data name="Processing" xml:space="preserve">
     <value>Processing</value>
   </data>

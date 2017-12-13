@@ -58,6 +58,24 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
             string uplDir = string.Format("{0}Api\\{1}\\", PortalSettings.HomeDirectoryMapPath, ApiBrowserModuleContext.ModuleContext.ModuleID);
             return Request.CreateResponse(HttpStatusCode.OK, Connect.ApiBrowser.Core.Common.Globals.GetScheduledFiles(uplDir));
         }
+
+        [HttpPost]
+        [DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.Edit)]
+        [ValidateAntiForgeryToken]
+        public HttpResponseMessage Process()
+        {
+            string uplDir = string.Format("{0}Api\\{1}\\", PortalSettings.HomeDirectoryMapPath, ApiBrowserModuleContext.ModuleContext.ModuleID);
+            var schedules = DotNetNuke.Services.Scheduling.SchedulingController.GetSchedule();
+            foreach (var schedule in schedules)
+            {
+                if (schedule.TypeFullName.IndexOf("ApiBrowser")>0)
+                {
+                    DotNetNuke.Services.Scheduling.SchedulingProvider.Instance().RunScheduleItemNow(schedule);
+                    break;
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, Connect.ApiBrowser.Core.Common.Globals.GetScheduledFiles(uplDir));
+        }
     }
 }
 
