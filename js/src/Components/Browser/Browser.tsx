@@ -31,6 +31,9 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
 
     componentDidMount() {
         this.checkSelectedClass();
+        window.onpopstate = function(e) {
+            location.reload();
+        }
     }
 
     private checkSelectedClass(): void {
