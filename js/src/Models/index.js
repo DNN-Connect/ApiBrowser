@@ -7,6 +7,7 @@ export * from './IComponent';
 export * from './IKeyedCollection';
 export * from './IMember';
 export * from './IMemberCodeBlock';
+export * from './INamespacesAndClass';
 export * from './INameValuePair';
 export * from './IScheduledFile';
 export * from './IViewSelection';

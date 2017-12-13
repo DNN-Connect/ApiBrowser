@@ -129,6 +129,9 @@
   <data name="Processing" xml:space="preserve">
     <value>Processing</value>
   </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
   <data name="Uploading" xml:space="preserve">
     <value>Uploading ...</value>
   </data>

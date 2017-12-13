@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiScheduledTask.cs" />
+    <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Globals.cs" />
+    <Compile Include="Common\SerializedPagedList.cs" />
     <Compile Include="Controllers\CodeBlocksController.cs" />
     <Compile Include="Data\AuditableEntity.cs" />
     <Compile Include="Data\Sprocs.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="Models\Members\MemberType.cs" />
     <Compile Include="Models\Members\Member_Declaration.cs" />
     <Compile Include="Models\Members\Member_Interfaces.cs" />
+    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass.cs" />
+    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Declaration.cs" />
+    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Interfaces.cs" />
     <Compile Include="Models\ScheduledFile.cs" />
     <Compile Include="Models\ViewSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +102,8 @@
     <Compile Include="Repositories\MemberCodeBlockRepository_Core.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\MemberRepository_Core.cs" />
+    <Compile Include="Repositories\NamespacesAndClassRepository.cs" />
+    <Compile Include="Repositories\NamespacesAndClassRepository_Core.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

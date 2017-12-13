@@ -4,6 +4,7 @@ import * as $ from "jquery";
 import { AppManager } from "./AppManager";
 import Browser from "./Components/Browser/Browser";
 import FileManager from "./Components/Files/FileManager";
+import ClassesAndNamespacesGrid from "./Components/ClassesAndNamespaces/Grid";
 
 export class ComponentLoader {
 
@@ -20,6 +21,13 @@ export class ComponentLoader {
       var moduleId = $(el).data('moduleid');
       ReactDOM.render(<FileManager
         module={AppManager.Modules.Item(moduleId.toString())}
+        />, el);
+    });
+    $('.classesandnamespaces').each(function (i, el) {
+      var moduleId = $(el).data('moduleid');
+      ReactDOM.render(<ClassesAndNamespacesGrid
+        module={AppManager.Modules.Item(moduleId.toString())}
+        detailLink={$(el).data('detail-link')}
         />, el);
     });
 

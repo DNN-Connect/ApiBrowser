@@ -126,13 +126,13 @@
   <ItemGroup>
     <Compile Include="Api\FilesController.cs" />
     <Compile Include="Api\ApiClassesController.cs" />
-    <Compile Include="Api\ApiNamespacesController.cs" />
     <Compile Include="Api\CodeBlocksController.cs" />
     <Compile Include="Api\CommentLikesController.cs" />
     <Compile Include="Api\CommentsController.cs" />
     <Compile Include="Api\ComponentsController.cs" />
     <Compile Include="Api\MemberCodeBlocksController.cs" />
     <Compile Include="Api\MembersController.cs" />
+    <Compile Include="Api\NamespacesAndClassesController.cs" />
     <Compile Include="Common\ApiBrowserApiController.cs" />
     <Compile Include="Common\ApiBrowserAuthorizeAttribute.cs" />
     <Compile Include="Common\ApiBrowserMvcController.cs" />

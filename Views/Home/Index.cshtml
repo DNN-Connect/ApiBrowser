@@ -1,40 +1,19 @@
 @inherits ApiBrowserWebPage
 @using Connect.DNN.Modules.ApiBrowser.Common;
 @{
+    ApiBrowserModuleContext.AddModuleScript();
     var all = Connect.ApiBrowser.Core.Data.Sprocs.GetNamespacesAndClasses(Dnn.ModuleContext.ModuleId);
 }
 
-<table class="table">
- <thead>
-  <tr>
-   <th>@Dnn.LocalizeString("Name")</th>
-   <th>@Dnn.LocalizeString("Description")</th>
-  </tr>
- </thead>
- <tbody>
-  @foreach(var a in all)
-  {
-      <tr>
-       <td>
-        <a href="@Url.Action("Namespace", "Namespaces", new { view = a.Name })">@a.Name</a>
-        @if (a.ClassId == -1)
-        {
-            <span class="greylabel">Namespace</span>
-        }
-        else
-        {
-            <span class="greylabel">Class</span>
-        }
-        @if (a.IsDeprecated)
-        {
-            <span class="redhighlight">@Dnn.LocalizeString("Deprecated")</span>
-        }
-       </td>
-       <td>@a.Description</td>
-      </tr>
-  }
- </tbody>
-</table>
+<div class="connectapibrowser classesandnamespaces"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
+     data-detail-link="@Url.Action("Namespace", "Namespaces", new { view = "" })"
+     >
+</div>
 
 @if (ApiBrowserModuleContext.Security.CanEdit)
 {

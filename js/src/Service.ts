@@ -35,14 +35,17 @@ export default class DataService {
                 }
             });
     };
+    public getAll(classes: boolean, namespaces: boolean, searchText: string, pageIndex: number, pageSize: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'NamespacesAndClasses', 'List', null, { classes: classes, namespaces: namespaces, searchText: searchText, pageIndex: pageIndex, pageSize: pageSize }, success)
+    }
     public getMembers(classId: number, success: Function): any {
-        this.ajaxCall('GET', this.baseServicepath, 'ApiClasses', 'Members', classId, null, success)        
+        this.ajaxCall('GET', this.baseServicepath, 'ApiClasses', 'Members', classId, null, success)
     }
     public getScheduledFiles(success: Function): any {
-        this.ajaxCall('GET', this.baseServicepath, 'Files', 'Files', null, null, success)        
+        this.ajaxCall('GET', this.baseServicepath, 'Files', 'Files', null, null, success)
     }
     public processFiles(success: Function): any {
-        this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)        
+        this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)
     }
     public postFiles(files: any, success: Function, fail?: Function) {
         var data = new FormData();
