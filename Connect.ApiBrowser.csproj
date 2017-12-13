@@ -144,7 +144,6 @@
     <Compile Include="Common\ModuleSettings.cs" />
     <Compile Include="Api\RouteMapper.cs" />
     <Compile Include="Controllers\NamespacesController.cs" />
-    <Compile Include="Controllers\AssembliesController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,9 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Files\Upload.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Assemblies\Assembly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Namespaces\Namespace.cshtml" />
