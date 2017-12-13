@@ -5,19 +5,21 @@
     var all = Connect.ApiBrowser.Core.Data.Sprocs.GetNamespacesAndClasses(Dnn.ModuleContext.ModuleId);
 }
 
+@if (ApiBrowserModuleContext.Security.CanEdit)
+{
+    <div class="text-right">
+     <a href="@Url.Action("Upload", "Files")" class="btn btn-default">
+      @Dnn.LocalizeString("Upload")
+     </a>
+    </div>
+}
+
 <div class="connectapibrowser classesandnamespaces"
      data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
      data-moduleid="@Dnn.ActiveModule.ModuleID"
      data-tabid="@Dnn.ActiveModule.TabID"
      data-resources="@SerializedResources()"
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
-     data-detail-link="@Url.Action("Namespace", "Namespaces", new { view = "5ef01dd5" })"
-     >
+     data-detail-link="@Url.Action("Namespace", "Namespaces", new { view = "5ef01dd5" })">
 </div>
 
-@if (ApiBrowserModuleContext.Security.CanEdit)
-{
-    <a href="@Url.Action("Upload", "Files")" class="btn btn-default">
-     @Dnn.LocalizeString("Upload")
-    </a>
-}
