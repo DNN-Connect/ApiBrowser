@@ -126,7 +126,7 @@ export default class Grid extends React.Component<IGridProps, IGridState> {
             var label = e.IsClass ? "Class" : "Namespace";
             var warning = e.IsDeprecated ? <span className="redhighlight">{this.props.module.resources.Deprecated}</span> : null;
             warning = e.DisappearedInVersion ? <span className="redhighlight">{this.props.module.resources.Removed}</span> : warning;
-            var url = this.props.detailLink + e.Name;
+            var url = this.props.detailLink.replace("5ef01dd5", e.Name);
             return (
                 <tr key={e.Name}>
                     <td>
