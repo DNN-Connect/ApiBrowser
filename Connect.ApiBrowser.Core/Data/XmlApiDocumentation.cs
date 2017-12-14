@@ -136,7 +136,6 @@ namespace Connect.ApiBrowser.Core.Data
 
         private int AddMemberToClass(int moduleId, int classId, XmlNode memberNode, MemberType memberType, ref System.IO.StreamWriter log)
         {
-
             int res = -1;
             bool isDeprecated = false;
             string deprecationMessage = "";
@@ -151,33 +150,32 @@ namespace Connect.ApiBrowser.Core.Data
             {
                 var documentation = memberNode.SelectSingleNode("documentation").InnerXml.Trim();
                 var description = tryGetDescription(documentation);
-                Member m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
+                var m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
+                var existingCodeblocks = MemberCodeBlockRepository.Instance.GetMemberCodeBlocksByMember(m.MemberId);
                 log.Log(StartTime, "Member {0} (ID={1})", m.MemberName, m.MemberId);
                 res = m.MemberId;
                 foreach (XmlNode codeNode in memberNode.SelectNodes("codeblock"))
                 {
-                    CodeBlock cb = new CodeBlock
+                    var cb = CodeBlock.FromXmlBlock(moduleId, codeNode);
+                    if (!cb.IsPresentIn(existingCodeblocks))
                     {
-                        ModuleId = moduleId,
-                        Body = codeNode.SelectSingleNode("body").InnerText,
-                        Hash = codeNode.SelectSingleNode("body").Attributes["hash"].InnerText
-                    };
-                    CodeBlocksController.SaveCodeBlock(cb, System.IO.Path.GetDirectoryName(FilePath));
-                    log.Log(StartTime, "Codeblock {0}", cb.Hash);
-                    MemberCodeBlock mcb = new MemberCodeBlock
-                    {
-                        EndColumn = int.Parse(codeNode.SelectSingleNode("location").Attributes["ec"].InnerText),
-                        EndLine = int.Parse(codeNode.SelectSingleNode("location").Attributes["el"].InnerText),
-                        StartColumn = int.Parse(codeNode.SelectSingleNode("location").Attributes["sc"].InnerText),
-                        StartLine = int.Parse(codeNode.SelectSingleNode("location").Attributes["sl"].InnerText),
-                        FileName = codeNode.SelectSingleNode("location").InnerText,
-                        MemberId = m.MemberId,
-                        CodeHash = codeNode.SelectSingleNode("body").Attributes["hash"].InnerText,
-                        Version = Version
-                    };
-                    if (mcb.EndLine != 0 && mcb.EndLine > mcb.StartLine)
-                    {
-                        Sprocs.RegisterCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
+                        CodeBlocksController.SaveCodeBlock(cb, System.IO.Path.GetDirectoryName(FilePath));
+                        log.Log(StartTime, "New Codeblock {0}", cb.Hash);
+                        MemberCodeBlock mcb = new MemberCodeBlock
+                        {
+                            EndColumn = cb.EndColumn,
+                            EndLine = cb.EndLine,
+                            StartColumn = cb.StartColumn,
+                            StartLine = cb.StartLine,
+                            FileName = cb.FileName,
+                            MemberId = m.MemberId,
+                            CodeHash = cb.Hash,
+                            Version = Version
+                        };
+                        if (mcb.EndLine != 0 && mcb.EndLine > mcb.StartLine)
+                        {
+                            Sprocs.RegisterCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
+                        }
                     }
                 }
             }
@@ -186,9 +184,7 @@ namespace Connect.ApiBrowser.Core.Data
                 Exceptions.LogException(ex);
                 log.Log(StartTime, "Exception {0}. Stacktrace: {1}.", ex.Message, ex.StackTrace);
             }
-
             return res;
-
         }
 
         private string tryGetDescription(string documentation)

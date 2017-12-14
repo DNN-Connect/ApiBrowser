@@ -8,7 +8,15 @@ interface IClassDetailsProps {
     changeSelection: (newClass: Models.IApiClass | null, newMember: Models.IMember | null) => void;
 };
 
+declare var hljs: any;
+
 export default class ClassDetails extends React.Component<IClassDetailsProps> {
+    refs: {
+        declaration: HTMLElement;
+    }
+    componentDidUpdate(prevProps: IClassDetailsProps) {
+      hljs.highlightBlock(this.refs.declaration);
+    }
     public render(): JSX.Element {
         var props = [];
         if (this.props.apiclass.DeprecatedInVersion) {
@@ -45,7 +53,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     {props}
                 </dl>
                 <h4>Declaration</h4>
-                <pre>{this.props.apiclass.Declaration}</pre>
+                <pre><code className="cs" ref="declaration">{this.props.apiclass.Declaration}</code></pre>
                 {members}
             </div>
         );

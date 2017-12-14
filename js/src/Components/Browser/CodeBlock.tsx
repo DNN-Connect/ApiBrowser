@@ -9,9 +9,12 @@ interface ICodeBlockState {
     contents: Models.ICodeBlock | null;
 };
 
+declare var hljs: any;
+
 export default class CodeBlock extends React.Component<ICodeBlockProps, ICodeBlockState> {
     refs: {
         dialog: any
+        codeblock: HTMLElement;
     }
 
     constructor(props: ICodeBlockProps) {
@@ -27,6 +30,7 @@ export default class CodeBlock extends React.Component<ICodeBlockProps, ICodeBlo
                 contents: data
             }, () => {
                 ($(this.refs.dialog) as any).modal('show');
+                hljs.highlightBlock(this.refs.codeblock);
             });
         });
     }
@@ -42,7 +46,9 @@ export default class CodeBlock extends React.Component<ICodeBlockProps, ICodeBlo
                         </div>
                         <div className="modal-body">
                             <pre>
-                                {this.state.contents ? this.state.contents.Body : ""}
+                                <code className="cs" ref="codeblock">
+                                    {this.state.contents ? this.state.contents.Body : ""}
+                                </code>
                             </pre>
                         </div>
                         <div className="modal-footer">

@@ -10,9 +10,15 @@ interface IMemberDetailsProps {
     codeblocks: Models.IMemberCodeBlock[];
 };
 
+declare var hljs: any;
+
 export default class MemberDetails extends React.Component<IMemberDetailsProps> {
     refs: {
         codeblock: CodeBlock;
+        declaration: HTMLElement;
+    }
+    componentDidUpdate(prevProps: IMemberDetailsProps) {
+      hljs.highlightBlock(this.refs.declaration);
     }
     private showCodeBlock(codeblockId: number): void {
         this.refs.codeblock.show(codeblockId);
@@ -91,7 +97,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     </dd>
                 </dl>
                 <h4>Declaration</h4>
-                <pre>{this.props.member.Declaration}</pre>
+                <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>Codeblocks</h4>
                 <table className="table">
                     <tbody>

@@ -4,6 +4,7 @@
 @using Connect.ApiBrowser.Core.Repositories;
 @{
     ApiBrowserModuleContext.AddModuleScript();
+    ApiBrowserModuleContext.AddCodeHighlighter();
     var classes = ApiClassRepository.Instance.GetApiClassesByApiNamespace(Model.SelectedNamespace.NamespaceId);
 }
 

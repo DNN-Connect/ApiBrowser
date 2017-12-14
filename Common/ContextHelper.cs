@@ -90,5 +90,11 @@ namespace Connect.DNN.Modules.ApiBrowser.Common
         }
         #endregion
 
+        public void AddCodeHighlighter()
+        {
+            AddCss("highlight.css");
+            AddScript("highlight.pack.js");
+        }
+
     }
 }
