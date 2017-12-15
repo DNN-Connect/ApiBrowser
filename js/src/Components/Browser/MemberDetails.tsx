@@ -18,7 +18,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         declaration: HTMLElement;
     }
     componentDidUpdate(prevProps: IMemberDetailsProps) {
-      hljs.highlightBlock(this.refs.declaration);
+        hljs.highlightBlock(this.refs.declaration);
     }
     private showCodeBlock(codeblockId: number): void {
         this.refs.codeblock.show(codeblockId);
@@ -62,7 +62,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     <td>{cb.Version}</td>
                     <td>{cb.FileName}</td>
                     <td>{cb.StartLine} - {cb.EndLine}</td>
-                    <td>
+                    <td style={{ width: "32px" }}>
                         <a href="#" className="btn btn-sm btn-default"
                             onClick={e => { e.preventDefault(); this.showCodeBlock(cb.CodeBlockId) }}><i className="glyphicon glyphicon-eye-open"></i></a>
                     </td>
@@ -100,6 +100,14 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>Codeblocks</h4>
                 <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Version</th>
+                            <th>File</th>
+                            <th>Lines</th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {cbrows}
                     </tbody>
