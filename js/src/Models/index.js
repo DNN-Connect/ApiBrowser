@@ -11,4 +11,5 @@ export * from './IMemberCodeBlock';
 export * from './INamespacesAndClass';
 export * from './INameValuePair';
 export * from './IScheduledFile';
+export * from './ITreeviewNode';
 export * from './IViewSelection';
