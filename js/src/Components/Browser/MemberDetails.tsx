@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
 import CodeBlock from './CodeBlock';
+const ReactMarkdown = require('react-markdown');
 
 interface IMemberDetailsProps {
     module: Models.IAppModule;
@@ -8,6 +9,7 @@ interface IMemberDetailsProps {
     changeSelection: (newClass: Models.IApiClass | null, newMember: Models.IMember | null) => void;
     apiclass: Models.IApiClass;
     codeblocks: Models.IMemberCodeBlock[];
+    documentationLink: string;
 };
 
 declare var hljs: any;
@@ -69,6 +71,9 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                 </tr>
             );
         });
+        var documentation = this.props.member.DocumentationContents ? (
+            <ReactMarkdown source={this.props.member.DocumentationContents} />
+        ) : null;
         return (
             <div>
                 <h2>{this.props.member.ClassName}.{this.props.member.MemberName} {memType}</h2>
@@ -96,6 +101,8 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                         {this.props.member.CodeBlockCount}
                     </dd>
                 </dl>
+                <h4>Description</h4>
+                <p>{this.props.member.Description}</p>
                 <h4>Declaration</h4>
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>Codeblocks</h4>
@@ -113,6 +120,8 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     </tbody>
                 </table>
                 <CodeBlock ref="codeblock" module={this.props.module} />
+                <h4>Documentation</h4>
+                {documentation}
             </div>
         );
     }

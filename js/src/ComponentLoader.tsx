@@ -5,6 +5,7 @@ import { AppManager } from "./AppManager";
 import Browser from "./Components/Browser/Browser";
 import FileManager from "./Components/Files/FileManager";
 import ClassesAndNamespacesGrid from "./Components/ClassesAndNamespaces/Grid";
+import DocumentationEditor from "./Components/Editor/DocumentationEditor";
 
 export class ComponentLoader {
 
@@ -15,6 +16,7 @@ export class ComponentLoader {
         module={AppManager.Modules.Item(moduleId.toString())}
         selection={$(el).data('selection')}
         classes={$(el).data('classes')}
+        documentationLink={$(el).data('documentation-link')}
         />, el);
     });
     $('.filemanager').each(function (i, el) {
@@ -28,6 +30,14 @@ export class ComponentLoader {
       ReactDOM.render(<ClassesAndNamespacesGrid
         module={AppManager.Modules.Item(moduleId.toString())}
         detailLink={$(el).data('detail-link')}
+        />, el);
+    });
+    $('.documentationeditor').each(function (i, el) {
+      var moduleId = $(el).data('moduleid');
+      ReactDOM.render(<DocumentationEditor
+        module={AppManager.Modules.Item(moduleId.toString())}
+        history={$(el).data('history')}
+        edit={$(el).data('edit')}
         />, el);
     });
 

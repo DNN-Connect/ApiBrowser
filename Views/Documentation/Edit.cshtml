@@ -1,0 +1,23 @@
+@inherits ApiBrowserWebPage<Documentation>
+@using Connect.DNN.Modules.ApiBrowser.Common;
+@using Connect.ApiBrowser.Core.Models.Documentations;
+@using Connect.ApiBrowser.Core.Repositories;
+@{
+    ApiBrowserModuleContext.AddModuleScript();
+    var currentlist = DocumentationRepository.Instance.GetDocumentations(Model.ClassId, Model.MemberId);
+    var returnObject = Model.ClassId == -1 ? MemberRepository.Instance.GetMember(Model.MemberId).FullQualifier : ApiClassRepository.Instance.GetApiClass(Model.ClassId).FullQualifier;
+}
+
+<div class="connectapibrowser documentationeditor"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
+     data-history="@(Newtonsoft.Json.JsonConvert.SerializeObject(currentlist))"
+     data-edit="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+</div>
+
+<div class="text-right">
+ <a href="@Url.Action("Namespace", "Namespaces", new { view = returnObject })" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+</div>

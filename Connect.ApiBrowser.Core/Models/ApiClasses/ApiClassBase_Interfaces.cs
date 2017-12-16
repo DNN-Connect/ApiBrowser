@@ -28,6 +28,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
    DisappearedInVersion = Convert.ToString(Null.SetNull(dr["DisappearedInVersion"], DisappearedInVersion));
    IsDeprecated = Convert.ToBoolean(Null.SetNull(dr["IsDeprecated"], IsDeprecated));
    DeprecationMessage = Convert.ToString(Null.SetNull(dr["DeprecationMessage"], DeprecationMessage));
+   DocumentationId = Convert.ToInt32(Null.SetNull(dr["DocumentationId"], DocumentationId));
         }
 
         [IgnoreColumn()]
@@ -95,6 +96,12 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
          return "";
      };
      return PropertyAccess.FormatString(DeprecationMessage, strFormat);
+    case "documentationid": // Int
+     if (DocumentationId == null)
+     {
+         return "";
+     };
+     return ((int)DocumentationId).ToString(strFormat, formatProvider);
                 default:
                     propertyNotFound = true;
                     break;

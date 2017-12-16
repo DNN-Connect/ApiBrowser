@@ -20,9 +20,13 @@ namespace Connect.ApiBrowser.Core.Models.Members
 
         #region Properties
         [DataMember]
+        public string DocumentationContents { get; set; }
+        [DataMember]
         public string ClassName { get; set; }
         [DataMember]
         public string NamespaceName { get; set; }
+        [DataMember]
+        public string FullQualifier { get; set; }
         [DataMember]
         public string ComponentName { get; set; }
         [DataMember]
@@ -47,6 +51,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
              res.DisappearedInVersion = DisappearedInVersion;
              res.IsDeprecated = IsDeprecated;
              res.DeprecationMessage = DeprecationMessage;
+             res.DocumentationId = DocumentationId;
             return res;
         }
         public Member Clone()
@@ -64,8 +69,11 @@ namespace Connect.ApiBrowser.Core.Models.Members
             res.DisappearedInVersion = DisappearedInVersion;
             res.IsDeprecated = IsDeprecated;
             res.DeprecationMessage = DeprecationMessage;
+            res.DocumentationId = DocumentationId;
+            res.DocumentationContents = DocumentationContents;
             res.ClassName = ClassName;
             res.NamespaceName = NamespaceName;
+            res.FullQualifier = FullQualifier;
             res.ComponentName = ComponentName;
             res.LatestVersion = LatestVersion;
             res.CodeBlockCount = CodeBlockCount;

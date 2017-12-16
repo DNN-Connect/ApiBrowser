@@ -15,7 +15,8 @@
      data-resources="@SerializedResources()"
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
      data-selection="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
-     data-classes="@(Newtonsoft.Json.JsonConvert.SerializeObject(classes))">
+     data-classes="@(Newtonsoft.Json.JsonConvert.SerializeObject(classes))"
+     data-documentation-link="@Url.Action("Edit", "Documentation")">
 </div>
 
 <div class="text-right">

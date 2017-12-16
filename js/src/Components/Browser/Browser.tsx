@@ -11,6 +11,7 @@ interface IBrowserProps {
     module: Models.IAppModule;
     selection: Models.IViewSelection;
     classes: Models.IApiClass[];
+    documentationLink: string;
 };
 
 interface IBrowserState {
@@ -183,13 +184,15 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
         ) : this.state.selectedMember == null ? (
             <ClassDetails module={this.props.module}
                 apiclass={this.state.selectedClass}
-                changeSelection={(a, b) => this.changeSelection(a, b)} />
+                changeSelection={(a, b) => this.changeSelection(a, b)}
+                documentationLink={this.props.documentationLink} />
         ) : (
                     <MemberDetails module={this.props.module}
                         member={this.state.selectedMember}
                         apiclass={this.state.selectedClass}
                         changeSelection={(a, b) => this.changeSelection(a, b)}
-                        codeblocks={this.state.selectedMemberCodeblocks} />
+                        codeblocks={this.state.selectedMemberCodeblocks}
+                        documentationLink={this.props.documentationLink} />
                 );
         var classNodes = this.state.classes.map(c => {
             var subNodes: JSX.Element[] | null = null;

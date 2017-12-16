@@ -11,8 +11,11 @@ export interface IMember {
   DisappearedInVersion: string;
   IsDeprecated: boolean;
   DeprecationMessage: string;
+  DocumentationId?: number;
+  DocumentationContents: string;
   ClassName: string;
   NamespaceName: string;
+  FullQualifier: string;
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
@@ -31,22 +34,26 @@ export class Member implements IMember {
   DisappearedInVersion: string;
   IsDeprecated: boolean;
   DeprecationMessage: string;
+  DocumentationId?: number;
+  DocumentationContents: string;
   ClassName: string;
   NamespaceName: string;
+  FullQualifier: string;
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
-    constructor() {
-  this.MemberId = -1;
-  this.ClassId = -1;
-  this.MemberType = -1;
-  this.MemberName = "";
-  this.AppearedInVersion = "";
-  this.IsDeprecated = false;
-  this.ClassName = "";
-  this.NamespaceName = "";
-  this.ComponentName = "";
-  this.LatestVersion = "";
-   }
+  constructor() {
+    this.MemberId = -1;
+    this.ClassId = -1;
+    this.MemberType = -1;
+    this.MemberName = "";
+    this.AppearedInVersion = "";
+    this.IsDeprecated = false;
+    this.ClassName = "";
+    this.NamespaceName = "";
+  this.FullQualifier = "";
+    this.ComponentName = "";
+    this.LatestVersion = "";
+  }
 }
 

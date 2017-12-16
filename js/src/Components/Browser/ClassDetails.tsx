@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
 import MemberList from './MemberList';
+const ReactMarkdown = require('react-markdown');
 
 interface IClassDetailsProps {
     module: Models.IAppModule;
     apiclass: Models.IApiClass;
     changeSelection: (newClass: Models.IApiClass | null, newMember: Models.IMember | null) => void;
+    documentationLink: string;
 };
 
 declare var hljs: any;
@@ -33,6 +35,15 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
         var members = this.props.apiclass.Members ? (
             <MemberList module={this.props.module} members={this.props.apiclass.Members} changeSelection={(a, b) => this.props.changeSelection(this.props.apiclass, b)} />
         ) : null;
+        var documentation = this.props.apiclass.DocumentationContents ? (
+            <ReactMarkdown source={this.props.apiclass.DocumentationContents} />
+        ) : null;
+        var editurl = this.props.apiclass.DocumentationId != null ? 
+        "id=" + (this.props.apiclass.DocumentationId as number).toString() : 
+        "memberId=-1&classId=" + this.props.apiclass.ClassId.toString();
+        var docedit = (
+            <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
+        );
         return (
             <div>
                 <h2>{this.props.apiclass.ClassName} Class</h2>
@@ -52,9 +63,13 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     </dd>
                     {props}
                 </dl>
+                <h4>Description</h4>
+                <p>{this.props.apiclass.Description}</p>
                 <h4>Declaration</h4>
                 <pre><code className="cs" ref="declaration">{this.props.apiclass.Declaration}</code></pre>
                 {members}
+                <h4>Documentation {docedit}</h4>
+                {documentation}
             </div>
         );
     }

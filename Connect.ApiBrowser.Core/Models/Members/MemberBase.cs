@@ -43,6 +43,8 @@ namespace Connect.ApiBrowser.Core.Models.Members
         public bool IsDeprecated { get; set; }
         [DataMember]
         public string DeprecationMessage { get; set; }
+        [DataMember]
+        public int? DocumentationId { get; set; }
         #endregion
 
         #region Methods
@@ -82,6 +84,9 @@ namespace Connect.ApiBrowser.Core.Models.Members
 
             if (!String.IsNullOrEmpty(member.DeprecationMessage))
                 DeprecationMessage = member.DeprecationMessage;
+
+            if (member.DocumentationId > -1)
+                DocumentationId = member.DocumentationId;
 
         }
         #endregion

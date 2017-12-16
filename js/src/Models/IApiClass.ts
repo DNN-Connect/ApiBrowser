@@ -13,7 +13,10 @@ export interface IApiClass {
   DisappearedInVersion: string;
   IsDeprecated: boolean;
   DeprecationMessage: string;
+  DocumentationId?: number;
+  DocumentationContents: string;
   NamespaceName: string;
+  FullQualifier: string;
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
@@ -33,20 +36,24 @@ export class ApiClass implements IApiClass {
   DisappearedInVersion: string;
   IsDeprecated: boolean;
   DeprecationMessage: string;
+  DocumentationId?: number;
+  DocumentationContents: string;
   NamespaceName: string;
+  FullQualifier: string;
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
   Members?: IMember[];
-    constructor() {
-  this.ClassId = -1;
-  this.NamespaceId = -1;
-  this.ClassName = "";
-  this.AppearedInVersion = "";
-  this.IsDeprecated = false;
-  this.NamespaceName = "";
-  this.ComponentName = "";
-  this.LatestVersion = "";
-   }
+  constructor() {
+    this.ClassId = -1;
+    this.NamespaceId = -1;
+    this.ClassName = "";
+    this.AppearedInVersion = "";
+    this.IsDeprecated = false;
+    this.NamespaceName = "";
+  this.FullQualifier = "";
+    this.ComponentName = "";
+    this.LatestVersion = "";
+  }
 }
 

@@ -56,6 +56,7 @@
     <Compile Include="Data\AuditableEntity.cs" />
     <Compile Include="Data\Sprocs.cs" />
     <Compile Include="Data\XmlApiDocumentation.cs" />
+    <Compile Include="Models\ApiClasses\ApiClass.cs" />
     <Compile Include="Models\ApiClasses\ApiClassBase.cs" />
     <Compile Include="Models\ApiClasses\ApiClassBase_Interfaces.cs" />
     <Compile Include="Models\ApiClasses\ApiClass_Declaration.cs" />
@@ -74,9 +75,15 @@
     <Compile Include="Models\Components\Component.cs" />
     <Compile Include="Models\Components\Component_Declaration.cs" />
     <Compile Include="Models\Components\Component_Interfaces.cs" />
+    <Compile Include="Models\Documentations\Documentation.cs" />
+    <Compile Include="Models\Documentations\DocumentationBase.cs" />
+    <Compile Include="Models\Documentations\DocumentationBase_Interfaces.cs" />
+    <Compile Include="Models\Documentations\Documentation_Declaration.cs" />
+    <Compile Include="Models\Documentations\Documentation_Interfaces.cs" />
     <Compile Include="Models\MemberCodeBlocks\MemberCodeBlock.cs" />
     <Compile Include="Models\MemberCodeBlocks\MemberCodeBlock_Declaration.cs" />
     <Compile Include="Models\MemberCodeBlocks\MemberCodeBlock_Interfaces.cs" />
+    <Compile Include="Models\Members\Member.cs" />
     <Compile Include="Models\Members\MemberBase.cs" />
     <Compile Include="Models\Members\MemberBase_Interfaces.cs" />
     <Compile Include="Models\Members\MemberType.cs" />
@@ -98,6 +105,8 @@
     <Compile Include="Repositories\CommentRepository_Core.cs" />
     <Compile Include="Repositories\ComponentRepository.cs" />
     <Compile Include="Repositories\ComponentRepository_Core.cs" />
+    <Compile Include="Repositories\DocumentationRepository.cs" />
+    <Compile Include="Repositories\DocumentationRepository_Core.cs" />
     <Compile Include="Repositories\MemberCodeBlockRepository.cs" />
     <Compile Include="Repositories\MemberCodeBlockRepository_Core.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />

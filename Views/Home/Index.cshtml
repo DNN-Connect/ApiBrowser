@@ -2,7 +2,6 @@
 @using Connect.DNN.Modules.ApiBrowser.Common;
 @{
     ApiBrowserModuleContext.AddModuleScript();
-    var all = Connect.ApiBrowser.Core.Data.Sprocs.GetNamespacesAndClasses(Dnn.ModuleContext.ModuleId);
 }
 
 @if (ApiBrowserModuleContext.Security.CanEdit)
