@@ -8,7 +8,6 @@ using Connect.ApiBrowser.Core.Models.ApiClasses;
 
 namespace Connect.ApiBrowser.Core.Repositories
 {
-
 	public partial class ApiClassRepository : ServiceLocator<IApiClassRepository, ApiClassRepository>, IApiClassRepository
  {
         protected override Func<IApiClassRepository> GetFactory()
@@ -62,7 +61,6 @@ namespace Connect.ApiBrowser.Core.Repositories
         public void DeleteApiClass(ApiClassBase apiClass)
         {
             Requires.NotNull(apiClass);
-            Requires.PropertyNotNegative(apiClass, "ApiClassId");
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiClassBase>();
@@ -80,7 +78,6 @@ namespace Connect.ApiBrowser.Core.Repositories
         public void UpdateApiClass(ApiClassBase apiClass)
         {
             Requires.NotNull(apiClass);
-            Requires.PropertyNotNegative(apiClass, "ApiClassId");
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiClassBase>();

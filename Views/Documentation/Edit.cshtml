@@ -6,6 +6,7 @@
     ApiBrowserModuleContext.AddModuleScript();
     var currentlist = DocumentationRepository.Instance.GetDocumentations(Model.ClassId, Model.MemberId);
     var returnObject = Model.ClassId == -1 ? MemberRepository.Instance.GetMember(Model.MemberId).FullQualifier : ApiClassRepository.Instance.GetApiClass(Model.ClassId).FullQualifier;
+    var current = Model.ClassId == -1 ? MemberRepository.Instance.GetMember(Model.MemberId).DocumentationId : ApiClassRepository.Instance.GetApiClass(Model.ClassId).DocumentationId;
 }
 
 <div class="connectapibrowser documentationeditor"
@@ -15,7 +16,8 @@
      data-resources="@SerializedResources()"
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
      data-history="@(Newtonsoft.Json.JsonConvert.SerializeObject(currentlist))"
-     data-edit="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+     data-edit="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
+     data-current-version="@current">
 </div>
 
 <div class="text-right">

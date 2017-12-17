@@ -1,3 +1,5 @@
+import * as Models from './Models/';
+
 export interface DnnServiceFramework extends JQueryStatic {
     dnnSF(moduleId: number): DnnServiceFramework;
     getServiceRoot(path: string): string;
@@ -35,6 +37,9 @@ export default class DataService {
                 }
             });
     };
+    public deleteDocumentation(docid: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'Delete', docid, null, success)
+    }
     public getAll(classes: boolean, namespaces: boolean, searchText: string, pageIndex: number, pageSize: number, success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'NamespacesAndClasses', 'List', null, { classes: classes, namespaces: namespaces, searchText: searchText, pageIndex: pageIndex, pageSize: pageSize }, success)
     }
@@ -52,6 +57,12 @@ export default class DataService {
     }
     public processFiles(success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)
+    }
+    public saveDocumentation(documentation: Models.IDocumentation, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'Save', null, documentation, success)
+    }
+    public setCurrentVersion(docid: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'SetCurrent', docid, null, success)
     }
     public postFiles(files: any, success: Function, fail?: Function) {
         var data = new FormData();

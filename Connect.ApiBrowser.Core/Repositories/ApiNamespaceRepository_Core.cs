@@ -45,7 +45,6 @@ namespace Connect.ApiBrowser.Core.Repositories
         public void DeleteApiNamespace(ApiNamespace apiNamespace)
         {
             Requires.NotNull(apiNamespace);
-            Requires.PropertyNotNegative(apiNamespace, "ApiNamespaceId");
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiNamespace>();
@@ -63,7 +62,6 @@ namespace Connect.ApiBrowser.Core.Repositories
         public void UpdateApiNamespace(ApiNamespace apiNamespace)
         {
             Requires.NotNull(apiNamespace);
-            Requires.PropertyNotNegative(apiNamespace, "ApiNamespaceId");
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiNamespace>();

@@ -9,6 +9,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Controllers
     public class NamespacesController : ApiBrowserMvcController
     {
         [HttpGet]
+        [ApiBrowserMvcAuthorize(SecurityLevel = SecurityAccessLevel.View)]
         public ActionResult Namespace(string view)
         {
             var s = new ViewSelection();

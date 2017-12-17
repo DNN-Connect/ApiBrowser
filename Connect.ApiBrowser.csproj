@@ -135,6 +135,7 @@
     <Compile Include="Api\MembersController.cs" />
     <Compile Include="Api\NamespacesAndClassesController.cs" />
     <Compile Include="Common\ApiBrowserApiController.cs" />
+    <Compile Include="Common\ApiBrowserMvcAuthorizeAttribute.cs" />
     <Compile Include="Common\ApiBrowserAuthorizeAttribute.cs" />
     <Compile Include="Common\ApiBrowserMvcController.cs" />
     <Compile Include="Common\ApiBrowserWebPage.cs" />

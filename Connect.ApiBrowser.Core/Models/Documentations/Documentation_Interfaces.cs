@@ -18,6 +18,7 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
   {
    base.Fill(dr);
    FullQualifier = Convert.ToString(Null.SetNull(dr["FullQualifier"], FullQualifier));
+   IsCurrentVersion = Convert.ToBoolean(Null.SetNull(dr["IsCurrentVersion"], IsCurrentVersion));
    CreatedByUserDisplayName = Convert.ToString(Null.SetNull(dr["CreatedByUserDisplayName"], CreatedByUserDisplayName));
    CreatedByUserEmail = Convert.ToString(Null.SetNull(dr["CreatedByUserEmail"], CreatedByUserEmail));
    LastModifiedByUserDisplayName = Convert.ToString(Null.SetNull(dr["LastModifiedByUserDisplayName"], LastModifiedByUserDisplayName));
@@ -35,6 +36,12 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
          return "";
      };
      return PropertyAccess.FormatString(FullQualifier, strFormat);
+    case "iscurrentversion": // Bit
+     if (IsCurrentVersion == null)
+     {
+         return "";
+     };
+     return IsCurrentVersion.ToString();
     case "createdbyuserdisplayname": // NVarChar
      return PropertyAccess.FormatString(CreatedByUserDisplayName, strFormat);
     case "createdbyuseremail": // NVarChar

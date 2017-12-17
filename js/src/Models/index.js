@@ -5,6 +5,7 @@ export * from './ICodeBlock';
 export * from './IComment';
 export * from './ICommentLike';
 export * from './IComponent';
+export * from './IContextSecurity';
 export * from './IDocumentation';
 export * from './IKeyedCollection';
 export * from './IMember';

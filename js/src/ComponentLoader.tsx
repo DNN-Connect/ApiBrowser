@@ -38,6 +38,7 @@ export class ComponentLoader {
         module={AppManager.Modules.Item(moduleId.toString())}
         history={$(el).data('history')}
         edit={$(el).data('edit')}
+        currentVersion={$(el).data('current-version')}
         />, el);
     });
 

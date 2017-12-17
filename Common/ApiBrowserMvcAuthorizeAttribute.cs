@@ -1,44 +1,63 @@
 using DotNetNuke.Common;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Web.Api;
+using DotNetNuke.Web.Mvc.Framework.ActionFilters;
+using DotNetNuke.Web.Mvc.Framework.Controllers;
+using System;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Connect.DNN.Modules.ApiBrowser.Common
 {
-    public enum SecurityAccessLevel
-    {
-        Anonymous = 0,
-        Authenticated = 1,
-        View = 2,
-        Edit = 3,
-        Comment = 4,
-        Moderate = 5,
-        Admin = 6,
-        Host = 7
-    }
-
-    public class ApiBrowserAuthorizeAttribute : AuthorizeAttributeBase, IOverrideDefaultAuthLevel
+    public class ApiBrowserMvcAuthorizeAttribute : AuthorizeAttributeBase
     {
         public SecurityAccessLevel SecurityLevel { get; set; }
         public UserInfo User { get; set; }
 
-        public ApiBrowserAuthorizeAttribute()
+        private ModuleInfo _module;
+
+        public ApiBrowserMvcAuthorizeAttribute()
         {
             SecurityLevel = SecurityAccessLevel.Admin;
         }
 
-        public ApiBrowserAuthorizeAttribute(SecurityAccessLevel accessLevel)
+        public ApiBrowserMvcAuthorizeAttribute(SecurityAccessLevel accessLevel)
         {
             SecurityLevel = accessLevel;
         }
 
-        public override bool IsAuthorized(AuthFilterContext context)
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            if (_module != null)
+            {
+                return HasModuleAccess();
+            }
+
+            return false;
+        }
+
+        public override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            var controller = filterContext.Controller as IDnnController;
+
+            if (controller == null)
+            {
+                throw new InvalidOperationException("This attribute can only be applied to Controllers that implement IDnnController");
+            }
+
+            _module = controller.ModuleContext.Configuration;
+
+            base.OnAuthorization(filterContext);
+        }
+
+        protected virtual bool HasModuleAccess()
         {
             if (SecurityLevel == SecurityAccessLevel.Anonymous)
             {
                 return true;
             }
             User = HttpContextSource.Current.Request.IsAuthenticated ? UserController.Instance.GetCurrentUserInfo() : new UserInfo();
-            ContextSecurity security = new ContextSecurity(context.ActionContext.Request.FindModuleInfo());
+            ContextSecurity security = new ContextSecurity(_module);
             switch (SecurityLevel)
             {
                 case SecurityAccessLevel.Authenticated:

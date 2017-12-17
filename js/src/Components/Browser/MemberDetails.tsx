@@ -74,6 +74,10 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         var documentation = this.props.member.DocumentationContents ? (
             <ReactMarkdown source={this.props.member.DocumentationContents} />
         ) : null;
+        var editurl = "classId=-1&memberId=" + this.props.member.MemberId.toString();
+        var docedit = this.props.module.security.CanComment ? (
+            <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
+        ) : null;
         return (
             <div>
                 <h2>{this.props.member.ClassName}.{this.props.member.MemberName} {memType}</h2>
@@ -120,7 +124,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     </tbody>
                 </table>
                 <CodeBlock ref="codeblock" module={this.props.module} />
-                <h4>Documentation</h4>
+                <h4>Documentation {docedit}</h4>
                 {documentation}
             </div>
         );

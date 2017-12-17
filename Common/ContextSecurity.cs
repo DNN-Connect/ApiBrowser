@@ -11,9 +11,11 @@ namespace Connect.DNN.Modules.ApiBrowser.Common
     {
         public bool CanView { get; set; }
         public bool CanEdit { get; set; }
+        public bool CanComment { get; set; }
+        public bool CanModerate { get; set; }
         public bool IsAdmin { get; set; }
         private UserInfo user { get; set; }
-        
+
         public int UserId
         {
             get
@@ -27,19 +29,21 @@ namespace Connect.DNN.Modules.ApiBrowser.Common
             user = UserController.Instance.GetCurrentUserInfo();
             if (user.IsSuperUser)
             {
-                CanView = CanEdit = IsAdmin = true;
+                CanView = CanEdit = CanComment = CanModerate = IsAdmin = true;
             }
             else
             {
                 IsAdmin = PortalSecurity.IsInRole(PortalSettings.Current.AdministratorRoleName);
                 if (IsAdmin)
                 {
-                    CanView = CanEdit = true;
+                    CanView = CanEdit = CanComment = CanModerate = true;
                 }
                 else
                 {
                     CanView = ModulePermissionController.CanViewModule(objModule);
                     CanEdit = ModulePermissionController.HasModulePermission(objModule.ModulePermissions, "EDIT");
+                    CanComment = ModulePermissionController.HasModulePermission(objModule.ModulePermissions, "COMMENT");
+                    CanModerate = ModulePermissionController.HasModulePermission(objModule.ModulePermissions, "MODERATE");
                 }
             }
         }

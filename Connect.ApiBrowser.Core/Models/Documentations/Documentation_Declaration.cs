@@ -1,3 +1,4 @@
+
 using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
@@ -20,6 +21,8 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         #region Properties
         [DataMember]
         public string FullQualifier { get; set; }
+        [DataMember]
+        public bool IsCurrentVersion { get; set; }
         [DataMember]
         public string CreatedByUserDisplayName { get; set; }
         [DataMember]
@@ -52,6 +55,7 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
             res.MemberId = MemberId;
             res.Contents = Contents;
             res.FullQualifier = FullQualifier;
+            res.IsCurrentVersion = IsCurrentVersion;
             res.CreatedByUserDisplayName = CreatedByUserDisplayName;
             res.CreatedByUserEmail = CreatedByUserEmail;
             res.LastModifiedByUserDisplayName = LastModifiedByUserDisplayName;
