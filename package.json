@@ -7,6 +7,7 @@
         "fullName": "Connect.ApiBrowser",
         "friendlyName": "ApiBrowser Module",
         "packageName": "Connect_ApiBrowser",
+        "iconFile": "DesktopModules\\MVC\\Connect\\ApiBrowser\\apibrowser.png",
         "owner": {
             "name": "Peter Donker",
             "organization": "Connect",
@@ -16,8 +17,7 @@
         "module": {
             "packageName": "Connect_ApiBrowser",
             "folderName": "MVC/Connect/ApiBrowser",
-            "azureCompatible": "true",
-            "iconFile": "DesktopModules\\MVC\\Connect\\ApiBrowser\\apibrowser.png"
+            "azureCompatible": "true"
         },
         "tempPath": "./package",
         "packagesPath": "./_Packages",
@@ -28,7 +28,8 @@
             "node_modules",
             "bin",
             "obj"
-        ]
+        ],
+        "zipName": "Connect.ApiBrowser"
     },
     "main": "index.js",
     "scripts": {
@@ -55,6 +56,7 @@
         "bootstrap": "^3.3.7",
         "gulp": "^3.9.1",
         "gulp-concat": "^2.6.1",
+        "gulp-debug": "^3.1.0",
         "gulp-dnn-manifest": "^0.2.1",
         "gulp-dotnet-assembly-info": "^0.1.12",
         "gulp-filter": "^5.0.1",

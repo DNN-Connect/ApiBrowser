@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    debug = require('gulp-debug'),
     msbuild = require('gulp-msbuild'),
     minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
@@ -48,9 +49,9 @@ gulp.task('assemblyInfo', function() {
 });
 
 gulp.task('build', ['assemblyInfo'], function() {
-    return gulp.src('./ApiBrowser.csproj')
+    return gulp.src('./Connect.ApiBrowser.csproj')
         .pipe(msbuild({
-            toolsVersion: 12.0,
+            toolsVersion: 14.0,
             targets: ['Clean', 'Build'],
             errorOnFail: true,
             stdout: true,
@@ -62,7 +63,7 @@ gulp.task('build', ['assemblyInfo'], function() {
 });
 
 gulp.task('packageInstall', ['build'], function() {
-    var packageName = config.dnn.fullName + '_' + config.version;
+    var packageName = config.dnn.zipName + '_' + config.version;
     var dirFilter = filter(fileTest);
     return merge(
             merge(
@@ -72,28 +73,34 @@ gulp.task('packageInstall', ['build'], function() {
                 ], {
                     base: '.'
                 })
-                .pipe(dirFilter),
-                gulp.src(['**/*.css'], {
+                .pipe(debug({ title: 'files:' })),
+                gulp.src(['*.css', 'css/*.css'], {
                     base: '.'
                 })
                 .pipe(minifyCss())
-                .pipe(dirFilter),
+                .pipe(debug({ title: 'css:' })),
                 gulp.src(['js/*.js', '!js/*.min.js'], {
                     base: '.'
                 })
-                .pipe(uglify().on('error', gutil.log)),
+                .pipe(uglify().on('error', gutil.log))
+                .pipe(debug({ title: 'js:' })),
                 gulp.src(['js/*.min.js'], {
                     base: '.'
                 })
+                .pipe(debug({ title: 'jsmin:' }))
             )
-            .pipe(zip('Resources.zip')),
-            gulp.src(config.dnn.pathToSupplementaryFiles + '/*.dnn')
-            .pipe(manifest(config)),
+            .pipe(dirFilter)
+            .pipe(zip('Resources.zip'))
+            .pipe(debug({ title: 'resources:' })),
+            manifest(config, './_Installation/Connect.ApiBrowser.dnn')
+            .pipe(rename('FormaMed.Management.dnn'))
+            .pipe(debug({ title: 'manifest:' })),
             gulp.src([config.dnn.pathToAssemblies + '/*.dll',
                 config.dnn.pathToScripts + '/*.SqlDataProvider',
                 config.dnn.pathToSupplementaryFiles + '/License.txt',
                 config.dnn.pathToSupplementaryFiles + '/ReleaseNotes.txt'
-            ]),
+            ])
+            .pipe(debug({ title: 'dlls:' })),
             gulp.src(config.dnn.pathToSupplementaryFiles + '/ReleaseNotes.md')
             .pipe(markdown())
             .pipe(rename('ReleaseNotes.txt'))
@@ -120,14 +127,18 @@ gulp.task('packageSource', ['build'], function() {
                 base: '.'
             })
             .pipe(dirFilter)
-            .pipe(zip('Resources.zip')),
-            gulp.src(config.dnn.pathToSupplementaryFiles + '/*.dnn')
-            .pipe(manifest(config)),
+            .pipe(debug({ title: 'files:' }))
+            .pipe(zip('Resources.zip'))
+            .pipe(debug({ title: 'resources:' })),
+            manifest(config, './_Installation/Connect.ApiBrowser.dnn')
+            .pipe(rename('FormaMed.Management.dnn'))
+            .pipe(debug({ title: 'manifest:' })),
             gulp.src([config.dnn.pathToAssemblies + '/*.dll',
                 config.dnn.pathToScripts + '/*.SqlDataProvider',
                 config.dnn.pathToSupplementaryFiles + '/License.txt',
                 config.dnn.pathToSupplementaryFiles + '/ReleaseNotes.txt'
             ])
+            .pipe(debug({ title: 'dlls:' }))
         )
         .pipe(zip(packageName + '_Source.zip'))
         .pipe(gulp.dest(config.dnn.packagesPath));
@@ -142,8 +153,11 @@ gulp.task('default', ['watch']);
 function fileTest(file) {
     var res = false;
     for (var i = config.dnn.excludeFilter.length - 1; i >= 0; i--) {
-        res = res | file.relative.startsWith(config.dnn.excludeFilter[i]);
+        res = res | file.relative.startsWith(config.dnn.excludeFilter[i]) | file.relative.indexOf('/obj/') > -1 | file.relative.indexOf('\\obj\\') > -1;
     };
+    if (!res) {
+        console.log(file.relative);
+    }
     return !res;
 }
 
