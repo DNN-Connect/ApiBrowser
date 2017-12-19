@@ -264,35 +264,6 @@ FROM
  LEFT JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations docs ON docs.DocumentationId=c.DocumentationId
 GO
 
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations'))
-DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
-AS
-SELECT
- d.*,
- ISNULL(c.FullQualifier, m.FullQualifier) FullQualifier,
- CAST(CASE WHEN ISNULL(c.DocumentationId, -1)=d.DocumentationId 
-        OR ISNULL(m.DocumentationId, -1)=d.DocumentationId
- THEN 1
- ELSE 0
- END AS BIT) IsCurrentVersion,
- uc.DisplayName CreatedByUserDisplayName,
- uc.Email CreatedByUserEmail,
- um.DisplayName LastModifiedByUserDisplayName,
- um.Email LastModifiedByUserEmail
-FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations d
- INNER JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=d.CreatedByUserID
- INNER JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=d.LastModifiedByUserID
- LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c ON c.ClassId=d.ClassId
- LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m ON m.MemberId=d.MemberId
-GO
-
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members'))
 DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members
 GO
@@ -354,6 +325,35 @@ SELECT
  NULL DeprecatedInVersion,
  NULL DisappearedInVersion
 FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
+AS
+SELECT
+ d.*,
+ ISNULL(c.FullQualifier, m.FullQualifier) FullQualifier,
+ CAST(CASE WHEN ISNULL(c.DocumentationId, -1)=d.DocumentationId 
+        OR ISNULL(m.DocumentationId, -1)=d.DocumentationId
+ THEN 1
+ ELSE 0
+ END AS BIT) IsCurrentVersion,
+ uc.DisplayName CreatedByUserDisplayName,
+ uc.Email CreatedByUserEmail,
+ um.DisplayName LastModifiedByUserDisplayName,
+ um.Email LastModifiedByUserEmail
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations d
+ INNER JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=d.CreatedByUserID
+ INNER JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=d.LastModifiedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c ON c.ClassId=d.ClassId
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m ON m.MemberId=d.MemberId
 GO
 
 /******* FUNCTIONS *******/

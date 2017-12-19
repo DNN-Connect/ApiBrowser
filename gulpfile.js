@@ -69,6 +69,8 @@ gulp.task('packageInstall', ['build'], function() {
             merge(
                 gulp.src([
                     '**/*.html',
+                    '**/*.cshtml',
+                    '**/*.ascx',
                     '**/*.resx'
                 ], {
                     base: '.'
@@ -121,6 +123,8 @@ gulp.task('packageSource', ['build'], function() {
                 '**/*.json',
                 '**/*.cs',
                 '**/*.vb',
+                '**/*.cshtml',
+                '**/*.ascx',
                 '**/*.resx',
                 config.dnn.pathToSupplementaryFiles + '**/*.*'
             ], {
