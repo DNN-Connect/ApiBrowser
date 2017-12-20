@@ -24,8 +24,7 @@ export default class DocumentationEditor extends React.Component<IDocumentationE
     constructor(props: IDocumentationEditorProps) {
         super(props);
         var ce = new Models.Documentation();
-        ce.ClassId = props.edit.ClassId;
-        ce.MemberId = props.edit.MemberId;
+        ce.FullName = props.edit.FullName;
         this.state = {
             currentList: props.history,
             currentEdit: ce,
@@ -87,8 +86,7 @@ export default class DocumentationEditor extends React.Component<IDocumentationE
             });
             if (doc.DocumentationId == this.state.currentEdit.DocumentationId) {
                 var ce = new Models.Documentation();
-                ce.ClassId = this.props.edit.ClassId;
-                ce.MemberId = this.props.edit.MemberId;
+                ce.FullName = this.props.edit.FullName;
                 this.setState({
                     currentEdit: ce,
                     changed: false

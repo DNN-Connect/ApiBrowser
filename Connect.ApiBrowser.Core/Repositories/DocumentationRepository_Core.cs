@@ -15,25 +15,26 @@ namespace Connect.ApiBrowser.Core.Repositories
         {
             return () => new DocumentationRepository();
         }
-        public IEnumerable<Documentation> GetDocumentations()
+        public IEnumerable<Documentation> GetDocumentations(int moduleId)
         {
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<Documentation>();
-                return rep.Get();
+                return rep.Get(moduleId);
             }
         }
-        public Documentation GetDocumentation(int documentationId)
+        public Documentation GetDocumentation(int moduleId, int documentationId)
         {
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<Documentation>();
-                return rep.GetById(documentationId);
+                return rep.GetById(documentationId, moduleId);
             }
         }
         public int AddDocumentation(ref DocumentationBase documentation, int userId)
         {
             Requires.NotNull(documentation);
+            Requires.PropertyNotNegative(documentation, "ModuleId");
             documentation.CreatedByUserID = userId;
             documentation.CreatedOnDate = DateTime.Now;
             documentation.LastModifiedByUserID = userId;
@@ -55,12 +56,12 @@ namespace Connect.ApiBrowser.Core.Repositories
                 rep.Delete(documentation);
             }
         }
-        public void DeleteDocumentation(int documentationId)
+        public void DeleteDocumentation(int moduleId, int documentationId)
         {
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<DocumentationBase>();
-                rep.Delete("WHERE DocumentationId = @0", documentationId);
+                rep.Delete("WHERE ModuleId = @0 AND DocumentationId = @1", moduleId, documentationId);
             }
         }
         public void UpdateDocumentation(DocumentationBase documentation, int userId)
@@ -78,11 +79,11 @@ namespace Connect.ApiBrowser.Core.Repositories
     }
     public partial interface IDocumentationRepository
     {
-        IEnumerable<Documentation> GetDocumentations();
-        Documentation GetDocumentation(int documentationId);
+        IEnumerable<Documentation> GetDocumentations(int moduleId);
+        Documentation GetDocumentation(int moduleId, int documentationId);
         int AddDocumentation(ref DocumentationBase documentation, int userId);
         void DeleteDocumentation(DocumentationBase documentation);
-        void DeleteDocumentation(int documentationId);
+        void DeleteDocumentation(int moduleId, int documentationId);
         void UpdateDocumentation(DocumentationBase documentation, int userId);
     }
 }

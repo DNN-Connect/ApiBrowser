@@ -115,8 +115,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{database
 BEGIN
 CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations(
  [DocumentationId] [int] IDENTITY(1,1) NOT NULL,
- [ClassId] [int] NOT NULL,
- [MemberId] [int] NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [FullName] [nvarchar](1000) NOT NULL,
  [Contents] [nvarchar](max) NOT NULL,
  [CreatedByUserID] [int] NOT NULL,
  [CreatedOnDate] [datetime] NOT NULL,
@@ -254,6 +254,7 @@ SELECT
  docs.Contents DocumentationContents,
  n.NamespaceName,
  n.NamespaceName + '.' + c.ClassName FullQualifier,
+ comp.ModuleId,
  comp.ComponentName,
  comp.LatestVersion,
  (SELECT COUNT(MemberId) FROM {objectQualifier}Connect_ApiBrowser_Members WHERE ClassId=c.ClassId) AS MemberCount
@@ -280,6 +281,7 @@ SELECT
  c.ClassName,
  n.NamespaceName,
  n.NamespaceName + '.' + c.ClassName + '.' + m.MemberName FullQualifier,
+ comp.ModuleId,
  comp.ComponentName,
  comp.LatestVersion,
  (SELECT COUNT(CodeBlockId) FROM {objectQualifier}Connect_ApiBrowser_MemberCodeBlocks WHERE MemberId=m.MemberId) AS CodeBlockCount
@@ -339,7 +341,6 @@ CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
 AS
 SELECT
  d.*,
- ISNULL(c.FullQualifier, m.FullQualifier) FullQualifier,
  CAST(CASE WHEN ISNULL(c.DocumentationId, -1)=d.DocumentationId 
         OR ISNULL(m.DocumentationId, -1)=d.DocumentationId
  THEN 1
@@ -352,8 +353,8 @@ SELECT
 FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations d
  INNER JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=d.CreatedByUserID
  INNER JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=d.LastModifiedByUserID
- LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c ON c.ClassId=d.ClassId
- LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m ON m.MemberId=d.MemberId
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c ON c.FullQualifier=d.FullName
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m ON m.FullQualifier=d.FullName
 GO
 
 /******* FUNCTIONS *******/

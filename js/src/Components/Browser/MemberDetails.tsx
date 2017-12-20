@@ -74,7 +74,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         var documentation = this.props.member.DocumentationContents ? (
             <ReactMarkdown source={this.props.member.DocumentationContents} />
         ) : null;
-        var editurl = "classId=-1&memberId=" + this.props.member.MemberId.toString();
+        var editurl = "name=" + this.props.member.FullQualifier;
         var docedit = this.props.module.security.CanComment ? (
             <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
         ) : null;

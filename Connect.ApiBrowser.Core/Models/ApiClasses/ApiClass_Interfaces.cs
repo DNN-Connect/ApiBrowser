@@ -20,6 +20,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
    DocumentationContents = Convert.ToString(Null.SetNull(dr["DocumentationContents"], DocumentationContents));
    NamespaceName = Convert.ToString(Null.SetNull(dr["NamespaceName"], NamespaceName));
    FullQualifier = Convert.ToString(Null.SetNull(dr["FullQualifier"], FullQualifier));
+   ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
    ComponentName = Convert.ToString(Null.SetNull(dr["ComponentName"], ComponentName));
    LatestVersion = Convert.ToString(Null.SetNull(dr["LatestVersion"], LatestVersion));
    MemberCount = Convert.ToInt32(Null.SetNull(dr["MemberCount"], MemberCount));
@@ -40,6 +41,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
      return PropertyAccess.FormatString(NamespaceName, strFormat);
     case "fullqualifier": // NVarChar
      return PropertyAccess.FormatString(FullQualifier, strFormat);
+    case "moduleid": // Int
+     return ModuleId.ToString(strFormat, formatProvider);
     case "componentname": // NVarChar
      return PropertyAccess.FormatString(ComponentName, strFormat);
     case "latestversion": // VarChar

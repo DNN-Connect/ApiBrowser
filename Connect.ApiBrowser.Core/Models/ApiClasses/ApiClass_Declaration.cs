@@ -26,6 +26,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
         [DataMember]
         public string FullQualifier { get; set; }
         [DataMember]
+        public int ModuleId { get; set; }
+        [DataMember]
         public string ComponentName { get; set; }
         [DataMember]
         public string LatestVersion { get; set; }
@@ -71,6 +73,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             res.DocumentationContents = DocumentationContents;
             res.NamespaceName = NamespaceName;
             res.FullQualifier = FullQualifier;
+            res.ModuleId = ModuleId;
             res.ComponentName = ComponentName;
             res.LatestVersion = LatestVersion;
             res.MemberCount = MemberCount;

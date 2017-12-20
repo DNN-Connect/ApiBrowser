@@ -10,18 +10,18 @@ namespace Connect.ApiBrowser.Core.Repositories
 {
     public partial class DocumentationRepository : ServiceLocator<IDocumentationRepository, DocumentationRepository>, IDocumentationRepository
     {
-        public IEnumerable<Documentation> GetDocumentations(int classId, int memberId)
+        public IEnumerable<Documentation> GetDocumentations(int moduleId, string fullName)
         {
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<Documentation>();
-                return rep.Find("WHERE ClassId=@0 AND MemberId=@1", classId, memberId);
+                return rep.Find("WHERE ModuleId=@0 AND FullName=@1", moduleId, fullName);
             }
         }
     }
     public partial interface IDocumentationRepository
     {
-        IEnumerable<Documentation> GetDocumentations(int classId, int memberId);
+        IEnumerable<Documentation> GetDocumentations(int moduleId, string fullName);
     }
 }
 

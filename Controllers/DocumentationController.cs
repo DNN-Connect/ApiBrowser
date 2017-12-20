@@ -8,12 +8,12 @@ namespace Connect.DNN.Modules.ApiBrowser.Controllers
     {
         [HttpGet]
         [ApiBrowserMvcAuthorize(SecurityLevel = SecurityAccessLevel.Comment)]
-        public ActionResult Edit(int classId, int memberId)
+        public ActionResult Edit(string name)
         {
             var d = new Documentation()
             {
-                ClassId = classId,
-                MemberId = memberId
+                ModuleId = ActiveModule.ModuleID,
+                FullName = name
             };
             return View(d);
         }

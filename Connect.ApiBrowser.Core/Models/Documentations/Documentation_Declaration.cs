@@ -9,6 +9,7 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
     [TableName("vw_Connect_ApiBrowser_Documentations")]
     [PrimaryKey("DocumentationId", AutoIncrement = true)]
     [DataContract]
+    [Scope("ModuleId")]                
     public partial class Documentation  : DocumentationBase 
     {
 
@@ -19,8 +20,6 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         #endregion
 
         #region Properties
-        [DataMember]
-        public string FullQualifier { get; set; }
         [DataMember]
         public bool IsCurrentVersion { get; set; }
         [DataMember]
@@ -38,8 +37,8 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         {
             DocumentationBase res = new DocumentationBase();
              res.DocumentationId = DocumentationId;
-             res.ClassId = ClassId;
-             res.MemberId = MemberId;
+             res.ModuleId = ModuleId;
+             res.FullName = FullName;
              res.Contents = Contents;
             res.CreatedByUserID = CreatedByUserID;
             res.CreatedOnDate = CreatedOnDate;
@@ -51,10 +50,9 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         {
             Documentation res = new Documentation();
             res.DocumentationId = DocumentationId;
-            res.ClassId = ClassId;
-            res.MemberId = MemberId;
+            res.ModuleId = ModuleId;
+            res.FullName = FullName;
             res.Contents = Contents;
-            res.FullQualifier = FullQualifier;
             res.IsCurrentVersion = IsCurrentVersion;
             res.CreatedByUserDisplayName = CreatedByUserDisplayName;
             res.CreatedByUserEmail = CreatedByUserEmail;

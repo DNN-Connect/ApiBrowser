@@ -38,7 +38,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
         var documentation = this.props.apiclass.DocumentationContents ? (
             <ReactMarkdown source={this.props.apiclass.DocumentationContents} />
         ) : null;
-        var editurl = "memberId=-1&classId=" + this.props.apiclass.ClassId.toString();
+        var editurl = "name=" + this.props.apiclass.FullQualifier;
         var docedit = this.props.module.security.CanComment ? (
             <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
         ) : null;

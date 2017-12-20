@@ -17,7 +17,6 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
   public override void Fill(IDataReader dr)
   {
    base.Fill(dr);
-   FullQualifier = Convert.ToString(Null.SetNull(dr["FullQualifier"], FullQualifier));
    IsCurrentVersion = Convert.ToBoolean(Null.SetNull(dr["IsCurrentVersion"], IsCurrentVersion));
    CreatedByUserDisplayName = Convert.ToString(Null.SetNull(dr["CreatedByUserDisplayName"], CreatedByUserDisplayName));
    CreatedByUserEmail = Convert.ToString(Null.SetNull(dr["CreatedByUserEmail"], CreatedByUserEmail));
@@ -30,12 +29,6 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
   public override string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
   {
    switch (strPropertyName.ToLower()) {
-    case "fullqualifier": // NVarChar
-     if (FullQualifier == null)
-     {
-         return "";
-     };
-     return PropertyAccess.FormatString(FullQualifier, strFormat);
     case "iscurrentversion": // Bit
      if (IsCurrentVersion == null)
      {

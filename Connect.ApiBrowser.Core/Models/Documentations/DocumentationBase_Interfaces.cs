@@ -18,8 +18,8 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         {
             FillAuditFields(dr);
    DocumentationId = Convert.ToInt32(Null.SetNull(dr["DocumentationId"], DocumentationId));
-   ClassId = Convert.ToInt32(Null.SetNull(dr["ClassId"], ClassId));
-   MemberId = Convert.ToInt32(Null.SetNull(dr["MemberId"], MemberId));
+   ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
+   FullName = Convert.ToString(Null.SetNull(dr["FullName"], FullName));
    Contents = Convert.ToString(Null.SetNull(dr["Contents"], Contents));
         }
 
@@ -38,10 +38,10 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
             {
     case "documentationid": // Int
      return DocumentationId.ToString(strFormat, formatProvider);
-    case "classid": // Int
-     return ClassId.ToString(strFormat, formatProvider);
-    case "memberid": // Int
-     return MemberId.ToString(strFormat, formatProvider);
+    case "moduleid": // Int
+     return ModuleId.ToString(strFormat, formatProvider);
+    case "fullname": // NVarChar
+     return PropertyAccess.FormatString(FullName, strFormat);
     case "contents": // NVarCharMax
      return PropertyAccess.FormatString(Contents, strFormat);
                 default:

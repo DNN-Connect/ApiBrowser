@@ -9,6 +9,7 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
     [TableName("Connect_ApiBrowser_Documentations")]
     [PrimaryKey("DocumentationId", AutoIncrement = true)]
     [DataContract]
+    [Scope("ModuleId")]
     public partial class DocumentationBase  : AuditableEntity 
     {
 
@@ -23,9 +24,9 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
         [DataMember]
         public int DocumentationId { get; set; }
         [DataMember]
-        public int ClassId { get; set; }
+        public int ModuleId { get; set; }
         [DataMember]
-        public int MemberId { get; set; }
+        public string FullName { get; set; }
         [DataMember]
         public string Contents { get; set; }
         #endregion
@@ -36,11 +37,11 @@ namespace Connect.ApiBrowser.Core.Models.Documentations
             if (documentation.DocumentationId > -1)
                 DocumentationId = documentation.DocumentationId;
 
-            if (documentation.ClassId > -1)
-                ClassId = documentation.ClassId;
+            if (documentation.ModuleId > -1)
+                ModuleId = documentation.ModuleId;
 
-            if (documentation.MemberId > -1)
-                MemberId = documentation.MemberId;
+            if (!String.IsNullOrEmpty(documentation.FullName))
+                FullName = documentation.FullName;
 
             if (!String.IsNullOrEmpty(documentation.Contents))
                 Contents = documentation.Contents;

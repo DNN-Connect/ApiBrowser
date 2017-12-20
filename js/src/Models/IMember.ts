@@ -16,6 +16,7 @@ export interface IMember {
   ClassName: string;
   NamespaceName: string;
   FullQualifier: string;
+  ModuleId: number;
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
@@ -39,6 +40,7 @@ export class Member implements IMember {
   ClassName: string;
   NamespaceName: string;
   FullQualifier: string;
+  ModuleId: number;
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
@@ -52,6 +54,7 @@ export class Member implements IMember {
     this.ClassName = "";
     this.NamespaceName = "";
   this.FullQualifier = "";
+  this.ModuleId = -1;
     this.ComponentName = "";
     this.LatestVersion = "";
   }

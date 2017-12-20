@@ -15,9 +15,9 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
         {
             var doc = data.DocumentationId == -1 ? new Documentation()
             {
-                ClassId = data.ClassId,
-                MemberId = data.MemberId
-            } : DocumentationRepository.Instance.GetDocumentation(data.DocumentationId);
+                ModuleId = ApiBrowserModuleContext.ModuleContext.ModuleID,
+                FullName = data.FullName
+            } : DocumentationRepository.Instance.GetDocumentation(ActiveModule.ModuleID, data.DocumentationId);
             if (doc.DocumentationId != -1 && !ApiBrowserModuleContext.Security.CanModerate)
             {
                 if (doc.CreatedByUserID != UserInfo.UserID || doc.IsCurrentVersion)
@@ -35,24 +35,27 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
             {
                 DocumentationRepository.Instance.UpdateDocumentation(db, UserInfo.UserID);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, DocumentationRepository.Instance.GetDocumentation(db.DocumentationId));
+            return Request.CreateResponse(HttpStatusCode.OK, DocumentationRepository.Instance.GetDocumentation(ActiveModule.ModuleID, db.DocumentationId));
         }
         [HttpPost]
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]
         public HttpResponseMessage SetCurrent(int id)
         {
-            var doc = DocumentationRepository.Instance.GetDocumentation(id);
-            if (doc.ClassId == -1)
+            var doc = DocumentationRepository.Instance.GetDocumentation(ActiveModule.ModuleID, id);
+            var m = MemberRepository.Instance.GetMember(doc.ModuleId, doc.FullName);
+            if (m != null)
             {
-                var m = MemberRepository.Instance.GetMember(doc.MemberId);
                 m.DocumentationId = doc.DocumentationId;
                 MemberRepository.Instance.UpdateMember(m.GetMemberBase());
             }
             else
             {
-                var c = ApiClassRepository.Instance.GetApiClass(doc.ClassId);
-                c.DocumentationId = doc.DocumentationId;
-                ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                var c = ApiClassRepository.Instance.GetApiClass(doc.ModuleId, doc.FullName);
+                if (c != null)
+                {
+                    c.DocumentationId = doc.DocumentationId;
+                    ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                }
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
@@ -60,7 +63,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Comment)]
         public HttpResponseMessage Delete(int id)
         {
-            var doc = DocumentationRepository.Instance.GetDocumentation(id);
+            var doc = DocumentationRepository.Instance.GetDocumentation(ActiveModule.ModuleID, id);
             if (doc.DocumentationId != -1 && !ApiBrowserModuleContext.Security.CanModerate)
             {
                 if (doc.CreatedByUserID != UserInfo.UserID || doc.IsCurrentVersion)
@@ -68,20 +71,23 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     return ServiceError("Not allowed");
                 }
             }
-            DocumentationRepository.Instance.DeleteDocumentation(id);
+            DocumentationRepository.Instance.DeleteDocumentation(ActiveModule.ModuleID, id);
             if (doc.IsCurrentVersion)
             {
-                if (doc.ClassId == -1)
+                var m = MemberRepository.Instance.GetMember(doc.ModuleId, doc.FullName);
+                if (m != null)
                 {
-                    var m = MemberRepository.Instance.GetMember(doc.MemberId);
                     m.DocumentationId = -1;
                     MemberRepository.Instance.UpdateMember(m.GetMemberBase());
                 }
                 else
                 {
-                    var c = ApiClassRepository.Instance.GetApiClass(doc.ClassId);
-                    c.DocumentationId = -1;
-                    ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                    var c = ApiClassRepository.Instance.GetApiClass(doc.ModuleId, doc.FullName);
+                    if (c != null)
+                    {
+                        c.DocumentationId = -1;
+                        ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                    }
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK);

@@ -1,9 +1,8 @@
 export interface IDocumentation {
   DocumentationId: number;
-  ClassId: number;
-  MemberId: number;
+  ModuleId: number;
+  FullName: string;
   Contents: string;
-  FullQualifier: string;
   IsCurrentVersion?: boolean;
   CreatedByUserDisplayName: string;
   CreatedByUserEmail: string;
@@ -17,10 +16,9 @@ export interface IDocumentation {
 
 export class Documentation implements IDocumentation {
   DocumentationId: number;
-  ClassId: number;
-  MemberId: number;
+  ModuleId: number;
+  FullName: string;
   Contents: string;
-  FullQualifier: string;
   IsCurrentVersion?: boolean;
   CreatedByUserDisplayName: string;
   CreatedByUserEmail: string;
@@ -32,8 +30,8 @@ export class Documentation implements IDocumentation {
   LastModifiedOnDate: Date;
   constructor() {
     this.DocumentationId = -1;
-    this.ClassId = -1;
-    this.MemberId = -1;
+  this.ModuleId = -1;
+  this.FullName = "";
     this.Contents = "";
     this.CreatedByUserDisplayName = "";
     this.LastModifiedByUserDisplayName = "";

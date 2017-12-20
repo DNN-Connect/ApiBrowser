@@ -17,6 +17,7 @@ export interface IApiClass {
   DocumentationContents: string;
   NamespaceName: string;
   FullQualifier: string;
+  ModuleId: number;
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
@@ -40,6 +41,7 @@ export class ApiClass implements IApiClass {
   DocumentationContents: string;
   NamespaceName: string;
   FullQualifier: string;
+  ModuleId: number;
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
@@ -52,6 +54,7 @@ export class ApiClass implements IApiClass {
     this.IsDeprecated = false;
     this.NamespaceName = "";
   this.FullQualifier = "";
+  this.ModuleId = -1;
     this.ComponentName = "";
     this.LatestVersion = "";
   }

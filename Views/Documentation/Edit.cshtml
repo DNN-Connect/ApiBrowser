@@ -4,9 +4,24 @@
 @using Connect.ApiBrowser.Core.Repositories;
 @{
     ApiBrowserModuleContext.AddModuleScript();
-    var currentlist = DocumentationRepository.Instance.GetDocumentations(Model.ClassId, Model.MemberId);
-    var returnObject = Model.ClassId == -1 ? MemberRepository.Instance.GetMember(Model.MemberId).FullQualifier : ApiClassRepository.Instance.GetApiClass(Model.ClassId).FullQualifier;
-    var current = Model.ClassId == -1 ? MemberRepository.Instance.GetMember(Model.MemberId).DocumentationId : ApiClassRepository.Instance.GetApiClass(Model.ClassId).DocumentationId;
+    var currentlist = DocumentationRepository.Instance.GetDocumentations(ApiBrowserModuleContext.ModuleContext.ModuleID, Model.FullName);
+    var returnObject = "";
+    var current = -1;
+    var m = MemberRepository.Instance.GetMember(ApiBrowserModuleContext.ModuleContext.ModuleID, Model.FullName);
+    if (m != null)
+    {
+     returnObject = m.FullQualifier;
+     current = m.DocumentationId != null ? (int)m.DocumentationId : -1;
+    }
+    else
+    {
+     var c = ApiClassRepository.Instance.GetApiClass(ApiBrowserModuleContext.ModuleContext.ModuleID, Model.FullName);
+     if (c != null)
+     {
+      returnObject = c.FullQualifier;
+      current = c.DocumentationId != null ? (int)c.DocumentationId : -1;
+     }
+    }
 }
 
 <div class="connectapibrowser documentationeditor"
