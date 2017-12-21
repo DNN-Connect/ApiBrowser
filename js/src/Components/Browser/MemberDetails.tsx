@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
 import CodeBlock from './CodeBlock';
+import EditableText from '../Generic/EditableText';
 const ReactMarkdown = require('react-markdown');
 
 interface IMemberDetailsProps {
@@ -10,6 +11,7 @@ interface IMemberDetailsProps {
     apiclass: Models.IApiClass;
     codeblocks: Models.IMemberCodeBlock[];
     documentationLink: string;
+    updateDescription: (id: number, description: string) => void;
 };
 
 declare var hljs: any;
@@ -106,7 +108,8 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     </dd>
                 </dl>
                 <h4>Description</h4>
-                <p>{this.props.member.Description}</p>
+                <EditableText module={this.props.module} element={this.props.member as Models.IClassOrMember}
+                    update={(description) => this.props.updateDescription(this.props.member.MemberId, description)} />
                 <h4>Declaration</h4>
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>Codeblocks</h4>

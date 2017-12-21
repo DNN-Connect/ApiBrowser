@@ -174,6 +174,20 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
             resolve();
         });
     }
+    private editMemberDescription(memberId: number, newDescription: string): void {
+        //
+    }
+    private editClassDescription(classId: number, newDescription: string): void {
+        this.props.module.service.saveClassDescription(classId, newDescription, (apiClass: Models.IApiClass) => {
+            var newClassList = this.state.classes.map(c => {
+                return c.ClassId == classId ? apiClass : c;
+            });
+            this.setState({
+                selectedClass: apiClass,
+                classes: newClassList
+            });
+        });
+    }
 
     public render(): JSX.Element {
         var mainScreen = this.state.selectedClass == null ? (
@@ -185,14 +199,16 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
             <ClassDetails module={this.props.module}
                 apiclass={this.state.selectedClass}
                 changeSelection={(a, b) => this.changeSelection(a, b)}
-                documentationLink={this.props.documentationLink} />
+                documentationLink={this.props.documentationLink}
+                updateDescription={(a, b) => this.editClassDescription(a, b)} />
         ) : (
                     <MemberDetails module={this.props.module}
                         member={this.state.selectedMember}
                         apiclass={this.state.selectedClass}
                         changeSelection={(a, b) => this.changeSelection(a, b)}
                         codeblocks={this.state.selectedMemberCodeblocks}
-                        documentationLink={this.props.documentationLink} />
+                        documentationLink={this.props.documentationLink}
+                        updateDescription={(a, b) => this.editMemberDescription(a, b)} />
                 );
         var classNodes = this.state.classes.map(c => {
             var subNodes: JSX.Element[] | null = null;

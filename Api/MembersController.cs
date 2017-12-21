@@ -8,14 +8,14 @@ using Connect.DNN.Modules.ApiBrowser.Common;
 
 namespace Connect.DNN.Modules.ApiBrowser.Api
 {
-	public partial class MembersController : ApiBrowserApiController
-	{
-		[HttpGet]
-		[DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
-		public HttpResponseMessage CodeBlocks(int id)
-		{
-			return Request.CreateResponse(HttpStatusCode.OK, MemberCodeBlockRepository.Instance.GetMemberCodeBlocksByMember(id).OrderBy(cb => cb.Version));
-		}
+    public partial class MembersController : ApiBrowserApiController
+    {
+        [HttpGet]
+        [DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
+        public HttpResponseMessage CodeBlocks(int id)
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, MemberCodeBlockRepository.Instance.GetMemberCodeBlocksByMember(id).OrderBy(cb => cb.Version));
+        }
         public class DescriptionDTO
         {
             public string Description { get; set; }
@@ -24,7 +24,6 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Comment)]
         public HttpResponseMessage Description(int id, DescriptionDTO data)
         {
-            var res = "";
             var m = MemberRepository.Instance.GetMember(id);
             if (m != null)
             {
@@ -33,7 +32,6 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     m.PendingDescription = null;
                     m.Description = data.Description.Trim();
                     MemberRepository.Instance.UpdateMember(m.GetMemberBase(), UserInfo.UserID);
-                    res = m.Description;
                 }
                 else
                 {
@@ -41,15 +39,10 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     {
                         m.PendingDescription = data.Description.Trim();
                         MemberRepository.Instance.UpdateMember(m.GetMemberBase(), UserInfo.UserID);
-                        res = m.PendingDescription;
-                    }
-                    else
-                    {
-                        res = m.Description;
                     }
                 }
             }
-            return Request.CreateResponse(HttpStatusCode.OK, res);
+            return Request.CreateResponse(HttpStatusCode.OK, MemberRepository.Instance.GetMember(id));
         }
         [HttpPost]
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]

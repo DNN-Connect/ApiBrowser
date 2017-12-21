@@ -38,7 +38,8 @@ export default class GridRow extends React.Component<IGridRowProps, IGridRowStat
         this.setState({
             editing: false
         }, () => {
-            this.props.module.service.saveClassDescription(this.props.element.ClassId, this.state.currentValue, (description: string) => {
+            this.props.module.service.saveClassDescription(this.props.element.ClassId, this.state.currentValue, (c: Models.IApiClass) => {
+                var description = c.PendingDescription != null && c.LastModifiedByUserID == this.props.module.security.UserId ? c.PendingDescription : c.Description;
                 this.setState({
                     currentValue: description
                 });

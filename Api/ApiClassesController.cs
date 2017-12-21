@@ -25,7 +25,6 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Comment)]
         public HttpResponseMessage Description(int id, DescriptionDTO data)
         {
-            var res = "";
             var c = ApiClassRepository.Instance.GetApiClass(id);
             if (c != null)
             {
@@ -34,7 +33,6 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     c.PendingDescription = null;
                     c.Description = data.Description.Trim();
                     ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase(), UserInfo.UserID);
-                    res = c.Description;
                 }
                 else
                 {
@@ -42,15 +40,10 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     {
                         c.PendingDescription = data.Description.Trim();
                         ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase(), UserInfo.UserID);
-                        res = c.PendingDescription;
-                    }
-                    else
-                    {
-                        res = c.Description;
                     }
                 }
             }
-            return Request.CreateResponse(HttpStatusCode.OK, res);
+            return Request.CreateResponse(HttpStatusCode.OK, ApiClassRepository.Instance.GetApiClass(id));
         }
         [HttpPost]
         [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]

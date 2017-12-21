@@ -23,6 +23,10 @@ export interface IMember {
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
 }
 
 export class Member implements IMember {
@@ -50,6 +54,10 @@ export class Member implements IMember {
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   constructor() {
     this.MemberId = -1;
     this.ClassId = -1;
@@ -59,8 +67,8 @@ export class Member implements IMember {
     this.IsDeprecated = false;
     this.ClassName = "";
     this.NamespaceName = "";
-  this.FullQualifier = "";
-  this.ModuleId = -1;
+    this.FullQualifier = "";
+    this.ModuleId = -1;
     this.ComponentName = "";
     this.LatestVersion = "";
   }

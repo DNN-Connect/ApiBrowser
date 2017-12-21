@@ -24,6 +24,10 @@ export interface IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   Members?: IMember[];
 }
 
@@ -51,6 +55,10 @@ export class ApiClass implements IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   Members?: IMember[];
   constructor() {
     this.ClassId = -1;

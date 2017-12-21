@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
 import MemberList from './MemberList';
+import EditableText from '../Generic/EditableText';
 const ReactMarkdown = require('react-markdown');
 
 interface IClassDetailsProps {
@@ -8,6 +9,7 @@ interface IClassDetailsProps {
     apiclass: Models.IApiClass;
     changeSelection: (newClass: Models.IApiClass | null, newMember: Models.IMember | null) => void;
     documentationLink: string;
+    updateDescription: (id: number, description: string) => void;
 };
 
 declare var hljs: any;
@@ -62,7 +64,8 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     {props}
                 </dl>
                 <h4>Description</h4>
-                <p>{this.props.apiclass.Description}</p>
+                <EditableText module={this.props.module} element={this.props.apiclass as Models.IClassOrMember}
+                    update={(description) => this.props.updateDescription(this.props.apiclass.ClassId, description)} />
                 <h4>Declaration</h4>
                 <pre><code className="cs" ref="declaration">{this.props.apiclass.Declaration}</code></pre>
                 {members}

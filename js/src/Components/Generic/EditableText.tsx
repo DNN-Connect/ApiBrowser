@@ -3,12 +3,13 @@ import * as Models from '../../Models/';
 
 interface IEditableTextProps {
     module: Models.IAppModule;
-    value: string;
-    proposedValue: string;
+    element: Models.IClassOrMember;
+    update: (description: string) => void;
 };
 
 interface IEditableTextState {
-    editing: boolean
+    editing: boolean;
+    editValue: string;
 };
 
 export default class EditableText extends React.Component<IEditableTextProps, IEditableTextState> {
@@ -19,14 +20,17 @@ export default class EditableText extends React.Component<IEditableTextProps, IE
     constructor(props: IEditableTextProps) {
         super(props);
         this.state = {
-            editing: false
+            editing: false,
+            editValue: ""
         }
     }
 
     private beginEdit(e: React.MouseEvent<HTMLAnchorElement>): void {
         e.preventDefault();
+        var description = this.props.element.PendingDescription != null && this.props.element.LastModifiedByUserID == this.props.module.security.UserId ? this.props.element.PendingDescription : this.props.element.Description;
         this.setState({
-            editing: true
+            editing: true,
+            editValue: description
         });
     }
 
@@ -34,38 +38,52 @@ export default class EditableText extends React.Component<IEditableTextProps, IE
         e.preventDefault();
         this.setState({
             editing: false
+        }, () => {
+            this.props.update(this.state.editValue);
         });
     }
 
     private cancel(e: React.MouseEvent<HTMLAnchorElement>): void {
         e.preventDefault();
         this.setState({
-            editing: false
+            editing: false,
+            editValue: ""
+        });
+    }
+
+    private changeText(e: React.ChangeEvent<HTMLTextAreaElement>): void {
+        this.setState({
+            editValue: e.target.value
         });
     }
 
     public render(): JSX.Element {
+        var description = this.props.element.PendingDescription != null && this.props.element.LastModifiedByUserID == this.props.module.security.UserId ? this.props.element.PendingDescription : this.props.element.Description;
+        var editBtn = this.props.element.ClassId != -1 && this.props.module.security.CanComment && (this.props.element.PendingDescription == null || this.props.element.LastModifiedByUserID == this.props.module.security.UserId || this.props.module.security.CanModerate) ? (
+            <span style={{ float: "right" }}>
+                <a href="#" onClick={e => this.beginEdit(e)}><i className="glyphicon glyphicon-pencil"></i></a>
+            </span>
+        ) : null;
+        var pendingEdit = (this.props.element.ClassId == -1 || this.props.element.PendingDescription == null) ? null : (
+            <span className="redhighlight">Pending Edit</span>
+        );
         var output = this.state.editing ? (
-            <div className="input-group input-group-sm">
-                <input type="text" value={this.props.value} className="form-control" />
-                <span className="input-group-addon">
-                    <a href="#" onClick={e => this.save(e)}>
-                        <i className="glyphicon glyphicon-floppy-disk"></i>
-                    </a>
-                </span>
-                <span className="input-group-addon">
-                    <a href="#" onClick={e => this.cancel(e)}>
-                        <i className="glyphicon glyphicon-remove"></i>
-                    </a>
-                </span>
+            <div>
+                <textarea value={this.state.editValue} className="form-control"
+                    rows={3} onChange={e => this.changeText(e)}>
+                </textarea>
+                <br />
+                <div className="text-right">
+                    <a href="#" className="btn btn-default" onClick={e => this.cancel(e)}>Cancel</a>
+                    <a href="#" className="btn btn-primary" onClick={e => this.save(e)}>Save</a>
+                </div>
             </div>
         ) : (
-                <div>
-                    <span>{this.props.value}</span>
-                    <span style={{ float: "right" }}>
-                        <a href="#" onClick={e => this.beginEdit(e)}><i className="glyphicon glyphicon-pencil"></i></a>
-                    </span>
-                </div>
+                <p>
+                    {description}
+                    {pendingEdit}
+                    {editBtn}
+                </p>
             );
         return output;
     }
