@@ -70,7 +70,7 @@ namespace Connect.ApiBrowser.Core.Data
                     {
                         var documentation = classNode.SelectSingleNode("documentation").InnerXml.Trim();
                         var description = tryGetDescription(documentation);
-                        ApiClass cl = Sprocs.GetOrCreateClass(ns.NamespaceId, component.ComponentId, classNode.Attributes["name"].InnerText, classNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
+                        ApiClass cl = Sprocs.GetOrCreateClass(ns.NamespaceId, component.ComponentId, classNode.Attributes["name"].InnerText.Trim(), classNode.SelectSingleNode("declaration").InnerText.Trim(), documentation, description, Version, isDeprecated, deprecationMessage.Trim());
                         log.Log(StartTime, "Class {0} (ID={1})", cl.ClassName, cl.ClassId);
                         foreach (XmlNode memberNode in classNode.SelectNodes("constructors/constructor"))
                         {
@@ -150,7 +150,7 @@ namespace Connect.ApiBrowser.Core.Data
             {
                 var documentation = memberNode.SelectSingleNode("documentation").InnerXml.Trim();
                 var description = tryGetDescription(documentation);
-                var m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage);
+                var m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText.Trim(), memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage.Trim());
                 var existingCodeblocks = MemberCodeBlockRepository.Instance.GetMemberCodeBlocksByMember(m.MemberId);
                 log.Log(StartTime, "Member {0} (ID={1})", m.MemberName, m.MemberId);
                 res = m.MemberId;
@@ -192,7 +192,7 @@ namespace Connect.ApiBrowser.Core.Data
             var m = Regex.Match(documentation, "(?si)<summary>(.*)</summary>(?-si)");
             if (m.Success)
             {
-                return m.Groups[1].Value;
+                return m.Groups[1].Value.Trim();
             }
             else
             {
