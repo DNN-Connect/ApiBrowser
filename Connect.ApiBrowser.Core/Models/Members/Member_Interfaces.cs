@@ -17,6 +17,8 @@ namespace Connect.ApiBrowser.Core.Models.Members
   public override void Fill(IDataReader dr)
   {
    base.Fill(dr);
+   CreatedByUserDisplayName = Convert.ToString(Null.SetNull(dr["CreatedByUserDisplayName"], CreatedByUserDisplayName));
+   LastModifiedByUserDisplayName = Convert.ToString(Null.SetNull(dr["LastModifiedByUserDisplayName"], LastModifiedByUserDisplayName));
    DocumentationContents = Convert.ToString(Null.SetNull(dr["DocumentationContents"], DocumentationContents));
    ClassName = Convert.ToString(Null.SetNull(dr["ClassName"], ClassName));
    NamespaceName = Convert.ToString(Null.SetNull(dr["NamespaceName"], NamespaceName));
@@ -32,6 +34,18 @@ namespace Connect.ApiBrowser.Core.Models.Members
   public override string GetProperty(string strPropertyName, string strFormat, System.Globalization.CultureInfo formatProvider, DotNetNuke.Entities.Users.UserInfo accessingUser, DotNetNuke.Services.Tokens.Scope accessLevel, ref bool propertyNotFound)
   {
    switch (strPropertyName.ToLower()) {
+    case "createdbyuserdisplayname": // NVarChar
+     if (CreatedByUserDisplayName == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(CreatedByUserDisplayName, strFormat);
+    case "lastmodifiedbyuserdisplayname": // NVarChar
+     if (LastModifiedByUserDisplayName == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(LastModifiedByUserDisplayName, strFormat);
     case "documentationcontents": // NVarCharMax
      if (DocumentationContents == null)
      {

@@ -48,9 +48,13 @@ namespace Connect.ApiBrowser.Core.Repositories
                 return rep.GetById(classId);
             }
         }
-        public int AddApiClass(ref ApiClassBase apiClass)
+        public int AddApiClass(ref ApiClassBase apiClass, int userId)
         {
             Requires.NotNull(apiClass);
+            apiClass.CreatedByUserID = userId;
+            apiClass.CreatedOnDate = DateTime.Now;
+            apiClass.LastModifiedByUserID = userId;
+            apiClass.LastModifiedOnDate = DateTime.Now;
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiClassBase>();
@@ -75,9 +79,11 @@ namespace Connect.ApiBrowser.Core.Repositories
                 rep.Delete("WHERE ClassId = @0", classId);
             }
         }
-        public void UpdateApiClass(ApiClassBase apiClass)
+        public void UpdateApiClass(ApiClassBase apiClass, int userId)
         {
             Requires.NotNull(apiClass);
+            apiClass.LastModifiedByUserID = userId;
+            apiClass.LastModifiedOnDate = DateTime.Now;
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<ApiClassBase>();
@@ -91,10 +97,10 @@ namespace Connect.ApiBrowser.Core.Repositories
         IEnumerable<ApiClass> GetApiClassesByApiNamespace(int namespaceId);
         IEnumerable<ApiClass> GetApiClassesByComponent(int componentId);
         ApiClass GetApiClass(int classId);
-        int AddApiClass(ref ApiClassBase apiClass);
+        int AddApiClass(ref ApiClassBase apiClass, int userId);
         void DeleteApiClass(ApiClassBase apiClass);
         void DeleteApiClass(int classId);
-        void UpdateApiClass(ApiClassBase apiClass);
+        void UpdateApiClass(ApiClassBase apiClass, int userId);
     }
 }
 

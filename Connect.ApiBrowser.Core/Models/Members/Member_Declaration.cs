@@ -20,6 +20,10 @@ namespace Connect.ApiBrowser.Core.Models.Members
 
         #region Properties
         [DataMember]
+        public string CreatedByUserDisplayName { get; set; }
+        [DataMember]
+        public string LastModifiedByUserDisplayName { get; set; }
+        [DataMember]
         public string DocumentationContents { get; set; }
         [DataMember]
         public string ClassName { get; set; }
@@ -54,6 +58,11 @@ namespace Connect.ApiBrowser.Core.Models.Members
              res.IsDeprecated = IsDeprecated;
              res.DeprecationMessage = DeprecationMessage;
              res.DocumentationId = DocumentationId;
+             res.PendingDescription = PendingDescription;
+            res.CreatedByUserID = CreatedByUserID;
+            res.CreatedOnDate = CreatedOnDate;
+            res.LastModifiedByUserID = LastModifiedByUserID;
+            res.LastModifiedOnDate = LastModifiedOnDate;
             return res;
         }
         public Member Clone()
@@ -72,6 +81,9 @@ namespace Connect.ApiBrowser.Core.Models.Members
             res.IsDeprecated = IsDeprecated;
             res.DeprecationMessage = DeprecationMessage;
             res.DocumentationId = DocumentationId;
+            res.PendingDescription = PendingDescription;
+            res.CreatedByUserDisplayName = CreatedByUserDisplayName;
+            res.LastModifiedByUserDisplayName = LastModifiedByUserDisplayName;
             res.DocumentationContents = DocumentationContents;
             res.ClassName = ClassName;
             res.NamespaceName = NamespaceName;
@@ -80,6 +92,10 @@ namespace Connect.ApiBrowser.Core.Models.Members
             res.ComponentName = ComponentName;
             res.LatestVersion = LatestVersion;
             res.CodeBlockCount = CodeBlockCount;
+            res.CreatedByUserID = CreatedByUserID;
+            res.CreatedOnDate = CreatedOnDate;
+            res.LastModifiedByUserID = LastModifiedByUserID;
+            res.LastModifiedOnDate = LastModifiedOnDate;
             return res;
         }
         #endregion

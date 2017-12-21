@@ -16,6 +16,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
 
         public virtual void Fill(IDataReader dr)
         {
+            FillAuditFields(dr);
    MemberId = Convert.ToInt32(Null.SetNull(dr["MemberId"], MemberId));
    ClassId = Convert.ToInt32(Null.SetNull(dr["ClassId"], ClassId));
    MemberType = Convert.ToInt32(Null.SetNull(dr["MemberType"], MemberType));
@@ -29,6 +30,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
    IsDeprecated = Convert.ToBoolean(Null.SetNull(dr["IsDeprecated"], IsDeprecated));
    DeprecationMessage = Convert.ToString(Null.SetNull(dr["DeprecationMessage"], DeprecationMessage));
    DocumentationId = Convert.ToInt32(Null.SetNull(dr["DocumentationId"], DocumentationId));
+   PendingDescription = Convert.ToString(Null.SetNull(dr["PendingDescription"], PendingDescription));
         }
 
         [IgnoreColumn()]
@@ -98,6 +100,12 @@ namespace Connect.ApiBrowser.Core.Models.Members
          return "";
      };
      return ((int)DocumentationId).ToString(strFormat, formatProvider);
+    case "pendingdescription": // NVarCharMax
+     if (PendingDescription == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(PendingDescription, strFormat);
                 default:
                     propertyNotFound = true;
                     break;

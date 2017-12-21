@@ -22,9 +22,12 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
    IsClass = Convert.ToBoolean(Null.SetNull(dr["IsClass"], IsClass));
    Name = Convert.ToString(Null.SetNull(dr["Name"], Name));
    Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
+   PendingDescription = Convert.ToString(Null.SetNull(dr["PendingDescription"], PendingDescription));
    IsDeprecated = Convert.ToInt32(Null.SetNull(dr["IsDeprecated"], IsDeprecated));
    DeprecatedInVersion = Convert.ToString(Null.SetNull(dr["DeprecatedInVersion"], DeprecatedInVersion));
    DisappearedInVersion = Convert.ToString(Null.SetNull(dr["DisappearedInVersion"], DisappearedInVersion));
+   LastModifiedByUserID = Convert.ToInt32(Null.SetNull(dr["LastModifiedByUserID"], LastModifiedByUserID));
+   LastModifiedOnDate = (DateTime)(Null.SetNull(dr["LastModifiedOnDate"], LastModifiedOnDate));
   }
   #endregion
 
@@ -52,6 +55,12 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
          return "";
      };
      return PropertyAccess.FormatString(Description, strFormat);
+    case "pendingdescription": // NVarCharMax
+     if (PendingDescription == null)
+     {
+         return "";
+     };
+     return PropertyAccess.FormatString(PendingDescription, strFormat);
     case "isdeprecated": // Int
      return IsDeprecated.ToString(strFormat, formatProvider);
     case "deprecatedinversion": // VarChar
@@ -66,6 +75,18 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
          return "";
      };
      return PropertyAccess.FormatString(DisappearedInVersion, strFormat);
+    case "lastmodifiedbyuserid": // Int
+     if (LastModifiedByUserID == null)
+     {
+         return "";
+     };
+     return ((int)LastModifiedByUserID).ToString(strFormat, formatProvider);
+    case "lastmodifiedondate": // DateTime
+     if (LastModifiedOnDate == null)
+     {
+         return "";
+     };
+     return ((DateTime)LastModifiedOnDate).ToString(strFormat, formatProvider);
     default:
        propertyNotFound = true;
        return "";

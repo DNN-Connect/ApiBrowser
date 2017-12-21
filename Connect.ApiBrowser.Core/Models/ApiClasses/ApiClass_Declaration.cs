@@ -20,6 +20,10 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
 
         #region Properties
         [DataMember]
+        public string CreatedByUserDisplayName { get; set; }
+        [DataMember]
+        public string LastModifiedByUserDisplayName { get; set; }
+        [DataMember]
         public string DocumentationContents { get; set; }
         [DataMember]
         public string NamespaceName { get; set; }
@@ -52,6 +56,11 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
              res.IsDeprecated = IsDeprecated;
              res.DeprecationMessage = DeprecationMessage;
              res.DocumentationId = DocumentationId;
+             res.PendingDescription = PendingDescription;
+            res.CreatedByUserID = CreatedByUserID;
+            res.CreatedOnDate = CreatedOnDate;
+            res.LastModifiedByUserID = LastModifiedByUserID;
+            res.LastModifiedOnDate = LastModifiedOnDate;
             return res;
         }
         public ApiClass Clone()
@@ -70,6 +79,9 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             res.IsDeprecated = IsDeprecated;
             res.DeprecationMessage = DeprecationMessage;
             res.DocumentationId = DocumentationId;
+            res.PendingDescription = PendingDescription;
+            res.CreatedByUserDisplayName = CreatedByUserDisplayName;
+            res.LastModifiedByUserDisplayName = LastModifiedByUserDisplayName;
             res.DocumentationContents = DocumentationContents;
             res.NamespaceName = NamespaceName;
             res.FullQualifier = FullQualifier;
@@ -77,6 +89,10 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             res.ComponentName = ComponentName;
             res.LatestVersion = LatestVersion;
             res.MemberCount = MemberCount;
+            res.CreatedByUserID = CreatedByUserID;
+            res.CreatedOnDate = CreatedOnDate;
+            res.LastModifiedByUserID = LastModifiedByUserID;
+            res.LastModifiedOnDate = LastModifiedOnDate;
             return res;
         }
         #endregion

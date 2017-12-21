@@ -9,7 +9,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
     [TableName("Connect_ApiBrowser_ApiClasses")]
     [PrimaryKey("ClassId", AutoIncrement = true)]
     [DataContract]
-    public partial class ApiClassBase     {
+    public partial class ApiClassBase  : AuditableEntity 
+    {
 
         #region .ctor
         public ApiClassBase()
@@ -45,6 +46,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
         public string DeprecationMessage { get; set; }
         [DataMember]
         public int? DocumentationId { get; set; }
+        [DataMember]
+        public string PendingDescription { get; set; }
         #endregion
 
         #region Methods
@@ -87,6 +90,9 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
 
             if (apiClass.DocumentationId > -1)
                 DocumentationId = apiClass.DocumentationId;
+
+            if (!String.IsNullOrEmpty(apiClass.PendingDescription))
+                PendingDescription = apiClass.PendingDescription;
 
         }
         #endregion

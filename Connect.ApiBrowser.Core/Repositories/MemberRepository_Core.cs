@@ -40,9 +40,13 @@ namespace Connect.ApiBrowser.Core.Repositories
                 return rep.GetById(memberId);
             }
         }
-        public int AddMember(ref MemberBase member)
+        public int AddMember(ref MemberBase member, int userId)
         {
             Requires.NotNull(member);
+            member.CreatedByUserID = userId;
+            member.CreatedOnDate = DateTime.Now;
+            member.LastModifiedByUserID = userId;
+            member.LastModifiedOnDate = DateTime.Now;
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<MemberBase>();
@@ -68,10 +72,12 @@ namespace Connect.ApiBrowser.Core.Repositories
                 rep.Delete("WHERE MemberId = @0", memberId);
             }
         }
-        public void UpdateMember(MemberBase member)
+        public void UpdateMember(MemberBase member, int userId)
         {
             Requires.NotNull(member);
             Requires.PropertyNotNegative(member, "MemberId");
+            member.LastModifiedByUserID = userId;
+            member.LastModifiedOnDate = DateTime.Now;
             using (var context = DataContext.Instance())
             {
                 var rep = context.GetRepository<MemberBase>();
@@ -84,10 +90,10 @@ namespace Connect.ApiBrowser.Core.Repositories
         IEnumerable<Member> GetMembers();
         IEnumerable<Member> GetMembersByApiClass(int classId);
         Member GetMember(int memberId);
-        int AddMember(ref MemberBase member);
+        int AddMember(ref MemberBase member, int userId);
         void DeleteMember(MemberBase member);
         void DeleteMember(int memberId);
-        void UpdateMember(MemberBase member);
+        void UpdateMember(MemberBase member, int userId);
     }
 }
 

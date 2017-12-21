@@ -12,6 +12,9 @@ export interface IMember {
   IsDeprecated: boolean;
   DeprecationMessage: string;
   DocumentationId?: number;
+  PendingDescription: string;
+  CreatedByUserDisplayName: string;
+  LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
   ClassName: string;
   NamespaceName: string;
@@ -36,6 +39,9 @@ export class Member implements IMember {
   IsDeprecated: boolean;
   DeprecationMessage: string;
   DocumentationId?: number;
+  PendingDescription: string;
+  CreatedByUserDisplayName: string;
+  LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
   ClassName: string;
   NamespaceName: string;

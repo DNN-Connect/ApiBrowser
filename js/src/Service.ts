@@ -37,6 +37,12 @@ export default class DataService {
                 }
             });
     };
+    public approveClassDescription(classId: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'ApiClasses', 'ApproveDescription', classId, null, success)
+    }
+    public approveMemberDescription(memberId: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Members', 'ApproveDescription', memberId, null, success)
+    }
     public deleteDocumentation(docid: number, success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'Delete', docid, null, success)
     }
@@ -58,8 +64,14 @@ export default class DataService {
     public processFiles(success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)
     }
+    public saveClassDescription(classId: number, newDescription: string, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'ApiClasses', 'Description', classId, { description: newDescription }, success)
+    }
     public saveDocumentation(documentation: Models.IDocumentation, success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'Save', null, documentation, success)
+    }
+    public saveMemberDescription(memberId: number, newDescription: string, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Members', 'Description', memberId, { description: newDescription }, success)
     }
     public setCurrentVersion(docid: number, success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'SetCurrent', docid, null, success)

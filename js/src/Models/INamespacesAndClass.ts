@@ -5,9 +5,12 @@ export interface INamespacesAndClass {
   IsClass?: boolean;
   Name: string;
   Description: string;
+  PendingDescription: string;
   IsDeprecated: number;
   DeprecatedInVersion: string;
   DisappearedInVersion: string;
+  LastModifiedByUserID?: number;
+  LastModifiedOnDate?: Date;
 }
 
 export class NamespacesAndClass implements INamespacesAndClass {
@@ -17,9 +20,12 @@ export class NamespacesAndClass implements INamespacesAndClass {
   IsClass?: boolean;
   Name: string;
   Description: string;
+  PendingDescription: string;
   IsDeprecated: number;
   DeprecatedInVersion: string;
   DisappearedInVersion: string;
+  LastModifiedByUserID?: number;
+  LastModifiedOnDate?: Date;
     constructor() {
   this.ModuleId = -1;
   this.NamespaceId = -1;

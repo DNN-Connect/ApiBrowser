@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
+import GridRow from './GridRow';
 
 interface IGridProps {
     module: Models.IAppModule;
@@ -123,19 +124,8 @@ export default class Grid extends React.Component<IGridProps, IGridState> {
 
     public render(): JSX.Element {
         var rows = this.state.list.map(e => {
-            var label = e.IsClass ? "Class" : "Namespace";
-            var warning = e.IsDeprecated ? <span className="redhighlight">{this.props.module.resources.Deprecated}</span> : null;
-            warning = e.DisappearedInVersion ? <span className="redhighlight">{this.props.module.resources.Removed}</span> : warning;
-            var url = this.props.detailLink + "?view=" + e.Name;
             return (
-                <tr key={e.Name}>
-                    <td>
-                        <a href={url}>{e.Name}</a>
-                        <span className="greylabel">{label}</span>
-                        {warning}
-                    </td>
-                    <td>{e.Description}</td>
-                </tr>
+                <GridRow module={this.props.module} key={e.Name} element={e} detailLink={this.props.detailLink} />
             );
         });
         var loadMore = this.state.loading || this.state.lastPage ? null : (

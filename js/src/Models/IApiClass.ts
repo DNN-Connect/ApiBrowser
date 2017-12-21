@@ -14,6 +14,9 @@ export interface IApiClass {
   IsDeprecated: boolean;
   DeprecationMessage: string;
   DocumentationId?: number;
+  PendingDescription: string;
+  CreatedByUserDisplayName: string;
+  LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
   NamespaceName: string;
   FullQualifier: string;
@@ -38,6 +41,9 @@ export class ApiClass implements IApiClass {
   IsDeprecated: boolean;
   DeprecationMessage: string;
   DocumentationId?: number;
+  PendingDescription: string;
+  CreatedByUserDisplayName: string;
+  LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
   NamespaceName: string;
   FullQualifier: string;

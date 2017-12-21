@@ -8,12 +8,10 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
 
     [TableName("vw_Connect_ApiBrowser_NamespacesAndClasses")]
     [DataContract]
-    public partial class NamespacesAndClass
-    {
+    public partial class NamespacesAndClass     {
 
         #region .ctor
-        public NamespacesAndClass()
-        {
+        public NamespacesAndClass()         {
         }
         #endregion
 
@@ -31,11 +29,17 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
         [DataMember]
         public string Description { get; set; }
         [DataMember]
+        public string PendingDescription { get; set; }
+        [DataMember]
         public int IsDeprecated { get; set; }
         [DataMember]
         public string DeprecatedInVersion { get; set; }
         [DataMember]
         public string DisappearedInVersion { get; set; }
+        [DataMember]
+        public int? LastModifiedByUserID { get; set; }
+        [DataMember]
+        public DateTime? LastModifiedOnDate { get; set; }
         #endregion
 
         #region Methods

@@ -46,7 +46,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
             if (m != null)
             {
                 m.DocumentationId = doc.DocumentationId;
-                MemberRepository.Instance.UpdateMember(m.GetMemberBase());
+                MemberRepository.Instance.UpdateMember(m.GetMemberBase(), UserInfo.UserID);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                 if (c != null)
                 {
                     c.DocumentationId = doc.DocumentationId;
-                    ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                    ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase(), UserInfo.UserID);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK);
@@ -78,7 +78,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                 if (m != null)
                 {
                     m.DocumentationId = -1;
-                    MemberRepository.Instance.UpdateMember(m.GetMemberBase());
+                    MemberRepository.Instance.UpdateMember(m.GetMemberBase(), UserInfo.UserID);
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                     if (c != null)
                     {
                         c.DocumentationId = -1;
-                        ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase());
+                        ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase(), UserInfo.UserID);
                     }
                 }
             }
