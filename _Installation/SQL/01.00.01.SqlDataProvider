@@ -260,3 +260,63 @@ WHERE
  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
 GO
 
+/******* Trim existing descriptions *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX(@str VARCHAR(MAX)) RETURNS VARCHAR(MAX)
+AS
+BEGIN
+DECLARE @trimchars VARCHAR(10)
+SET @trimchars = CHAR(9)+CHAR(10)+CHAR(13)+CHAR(32)
+IF @str LIKE '[' + @trimchars + ']%' SET @str = SUBSTRING(@str, PATINDEX('%[^' + @trimchars + ']%', @str), 8000)
+RETURN @str
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX(@str VARCHAR(MAX)) RETURNS VARCHAR(MAX)
+AS
+BEGIN
+DECLARE @trimchars VARCHAR(10)
+SET @trimchars = CHAR(9)+CHAR(10)+CHAR(13)+CHAR(32)
+IF @str LIKE '%[' + @trimchars + ']'
+SET @str = REVERSE({databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX(REVERSE(@str)))
+RETURN @str
+END
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX(@str VARCHAR(MAX)) RETURNS VARCHAR(MAX)
+AS
+BEGIN
+RETURN {databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX({databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX(@str))
+END
+GO
+
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+SET Description = {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX(Description)
+GO
+
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+SET Description = {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX(Description)
+GO
