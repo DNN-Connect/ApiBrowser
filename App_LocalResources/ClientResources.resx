@@ -120,11 +120,20 @@
   <data name="Accept" xml:space="preserve">
     <value>Accept</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
   <data name="At" xml:space="preserve">
     <value>At</value>
   </data>
   <data name="By" xml:space="preserve">
     <value>By</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Classes" xml:space="preserve">
+    <value>Classes</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -132,26 +141,62 @@
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="Codeblocks" xml:space="preserve">
+    <value>Codeblocks</value>
+  </data>
   <data name="Compare" xml:space="preserve">
     <value>Compare</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Created</value>
   </data>
   <data name="Current" xml:space="preserve">
     <value>Current</value>
   </data>
+  <data name="Declaration" xml:space="preserve">
+    <value>Declaration</value>
+  </data>
   <data name="Deprecated" xml:space="preserve">
     <value>Deprecated</value>
+  </data>
+  <data name="DeprecatedIn" xml:space="preserve">
+    <value>Deprecated In</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="DisappearedIn" xml:space="preserve">
+    <value>Disappeared In</value>
+  </data>
   <data name="Documentation" xml:space="preserve">
     <value>Documentation</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="Files" xml:space="preserve">
     <value>Files</value>
   </data>
+  <data name="FirstDetected" xml:space="preserve">
+    <value>First Detected</value>
+  </data>
   <data name="Item" xml:space="preserve">
     <value>Item</value>
+  </data>
+  <data name="LastModified" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="Lines" xml:space="preserve">
+    <value>Lines</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Load More</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="Namespaces" xml:space="preserve">
+    <value>Namespaces</value>
   </data>
   <data name="Process" xml:space="preserve">
     <value>Process</value>
@@ -168,7 +213,13 @@
   <data name="Removed" xml:space="preserve">
     <value>Removed</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Uploading" xml:space="preserve">
     <value>Uploading ...</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
   </data>
 </root>

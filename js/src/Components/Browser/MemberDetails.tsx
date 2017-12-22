@@ -48,11 +48,11 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         }
         var props = [];
         if (this.props.member.DeprecatedInVersion) {
-            props.push(<dt className="red">Deprecated in:</dt>);
+            props.push(<dt className="red">{this.props.module.resources.DeprecatedIn}:</dt>);
             props.push(<dd className="red">{this.props.apiclass.DeprecatedInVersion}</dd>);
         }
         if (this.props.member.DisappearedInVersion) {
-            props.push(<dt className="red">Disappeared in:</dt>);
+            props.push(<dt className="red">{this.props.module.resources.DisappearedIn}:</dt>);
             props.push(<dd className="red">{this.props.member.DisappearedInVersion}</dd>);
         }
         var deprecation = this.props.member.DeprecationMessage == undefined ? this.props.apiclass.DeprecationMessage == undefined ? null : (
@@ -97,28 +97,28 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     <dd>
                         {this.props.member.ComponentName}
                     </dd>
-                    <dt>First detected:</dt>
+                    <dt>{this.props.module.resources.FirstDetected}:</dt>
                     <dd>
                         {this.props.member.AppearedInVersion}
                     </dd>
                     {props}
-                    <dt>Codeblocks:</dt>
+                    <dt>{this.props.module.resources.Codeblocks}:</dt>
                     <dd>
                         {this.props.member.CodeBlockCount}
                     </dd>
                 </dl>
-                <h4>Description</h4>
+                <h4>{this.props.module.resources.Description}</h4>
                 <EditableText module={this.props.module} element={this.props.member as Models.IClassOrMember}
                     update={(description) => this.props.updateDescription(this.props.member.MemberId, description)} />
-                <h4>Declaration</h4>
+                <h4>{this.props.module.resources.Declaration}</h4>
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
-                <h4>Codeblocks</h4>
+                <h4>{this.props.module.resources.Codeblocks}</h4>
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Version</th>
-                            <th>File</th>
-                            <th>Lines</th>
+                            <th>{this.props.module.resources.Version}</th>
+                            <th>{this.props.module.resources.File}</th>
+                            <th>{this.props.module.resources.Lines}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -127,7 +127,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                     </tbody>
                 </table>
                 <CodeBlock ref="codeblock" module={this.props.module} />
-                <h4>Documentation {docedit}</h4>
+                <h4>{this.props.module.resources.Documentation} {docedit}</h4>
                 {documentation}
             </div>
         );

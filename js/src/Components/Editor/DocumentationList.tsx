@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
+import * as moment from 'moment';
 
 interface IDocumentationListProps {
     module: Models.IAppModule;
@@ -8,6 +9,7 @@ interface IDocumentationListProps {
     copy: (d: Models.IDocumentation) => void;
     delete: (d: Models.IDocumentation) => void;
     setLastVersion: (d: Models.IDocumentation) => void;
+    show: (d: Models.IDocumentation) => void;
 };
 
 export default class DocumentationList extends React.Component<IDocumentationListProps> {
@@ -38,12 +40,17 @@ export default class DocumentationList extends React.Component<IDocumentationLis
                     <i className="glyphicon glyphicon-remove"></i></a>
             ) : null;
             return (
-                <tr>
+                <tr key={d.DocumentationId}>
                     <td>{d.DocumentationId}</td>
-                    <td>{d.CreatedOnDate}</td>
+                    <td>{moment(d.CreatedOnDate).format('l')}</td>
                     <td>{d.CreatedByUserDisplayName}</td>
-                    <td>{d.LastModifiedOnDate}</td>
+                    <td>{moment(d.LastModifiedOnDate).format('l')}</td>
                     <td>{d.LastModifiedByUserDisplayName}</td>
+                    <td style={btncol}>
+                        <a href="#" className="btn btn-info"
+                            onClick={e => { e.preventDefault(); this.props.show(d) }}>
+                            <i className="glyphicon glyphicon-eye-open"></i></a>
+                    </td>
                     <td style={btncol}>{editbtn}</td>
                     <td style={btncol}>{copybtn}</td>
                     <td style={btncol}>{deletebtn}</td>
@@ -56,10 +63,10 @@ export default class DocumentationList extends React.Component<IDocumentationLis
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Created</th>
-                        <th>By</th>
-                        <th>Last Modified</th>
-                        <th>By</th>
+                        <th>{this.props.module.resources.Created}</th>
+                        <th>{this.props.module.resources.By}</th>
+                        <th>{this.props.module.resources.LastModified}</th>
+                        <th>{this.props.module.resources.By}</th>
                         <th></th>
                         <th></th>
                         <th></th>

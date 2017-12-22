@@ -46,6 +46,7 @@ export class ComponentLoader {
       var moduleId = $(el).data('moduleid');
       ReactDOM.render(<ModerationScreen
         module={AppManager.Modules.Item(moduleId.toString())}
+        documentationLink={$(el).data('documentation-link')}
         />, el);
     });
 

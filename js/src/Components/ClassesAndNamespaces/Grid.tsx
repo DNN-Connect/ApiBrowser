@@ -129,18 +129,18 @@ export default class Grid extends React.Component<IGridProps, IGridState> {
             );
         });
         var loadMore = this.state.loading || this.state.lastPage ? null : (
-            <div ref="test" className="btn btn-default btn-block" onClick={e => this.loadMore()}>Load More</div>
+            <div ref="test" className="btn btn-default btn-block" onClick={e => this.loadMore()}>{this.props.module.resources.LoadMore}</div>
         );
         return (
             <div>
                 <div className="row">
                     <div className="col-sm-4 listoptions">
                         <input type="radio" name="cl" value="all" checked={this.state.classes && this.state.namespaces} onChange={e => this.changeType('all')} />
-                        <span>All</span>
+                        <span>{this.props.module.resources.All}</span>
                         <input type="radio" name="cl" value="class" checked={this.state.classes && !this.state.namespaces} onChange={e => this.changeType('class')} />
-                        <span>Classes</span>
+                        <span>{this.props.module.resources.Classes}</span>
                         <input type="radio" name="cl" value="namespace" checked={!this.state.classes && this.state.namespaces} onChange={e => this.changeType('namespace')} />
-                        <span>Namespaces</span>
+                        <span>{this.props.module.resources.Namespaces}</span>
                     </div>
                     <div className="col-sm-8">
                         <div className="input-group">

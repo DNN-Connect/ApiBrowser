@@ -19,7 +19,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
         declaration: HTMLElement;
     }
     componentDidUpdate(prevProps: IClassDetailsProps) {
-      hljs.highlightBlock(this.refs.declaration);
+        hljs.highlightBlock(this.refs.declaration);
     }
     public render(): JSX.Element {
         var props = [];
@@ -57,19 +57,19 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
                     <dd>
                         {this.props.apiclass.ComponentName}
                     </dd>
-                    <dt>First detected:</dt>
+                    <dt>{this.props.module.resources.FirstDetected}:</dt>
                     <dd>
                         {this.props.apiclass.AppearedInVersion}
                     </dd>
                     {props}
                 </dl>
-                <h4>Description</h4>
+                <h4>{this.props.module.resources.Description}</h4>
                 <EditableText module={this.props.module} element={this.props.apiclass as Models.IClassOrMember}
                     update={(description) => this.props.updateDescription(this.props.apiclass.ClassId, description)} />
-                <h4>Declaration</h4>
+                <h4>{this.props.module.resources.Declaration}</h4>
                 <pre><code className="cs" ref="declaration">{this.props.apiclass.Declaration}</code></pre>
                 {members}
-                <h4>Documentation {docedit}</h4>
+                <h4>{this.props.module.resources.Documentation} {docedit}</h4>
                 {documentation}
             </div>
         );

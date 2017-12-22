@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
 import DocumentationList from './DocumentationList';
+import Viewer from './Viewer';
 const ReactMarkdown = require('react-markdown');
 
 interface IDocumentationEditorProps {
@@ -19,6 +20,7 @@ interface IDocumentationEditorState {
 export default class DocumentationEditor extends React.Component<IDocumentationEditorProps, IDocumentationEditorState> {
 
     refs: {
+        viewer: Viewer;
     }
 
     constructor(props: IDocumentationEditorProps) {
@@ -118,6 +120,7 @@ export default class DocumentationEditor extends React.Component<IDocumentationE
                             copy={d => this.copy(d)}
                             delete={d => this.delete(d)}
                             setLastVersion={d => this.setCrtVersion(d)}
+                            show={d => this.refs.viewer.show(d)}
                         />
                     </div>
                 </div>
@@ -137,6 +140,7 @@ export default class DocumentationEditor extends React.Component<IDocumentationE
                     <a href="#" className="btn btn-primary"
                         onClick={e => this.save(e)}>Save</a>
                 </div>
+                <Viewer ref="viewer" module={this.props.module} />
             </div>
         );
     }

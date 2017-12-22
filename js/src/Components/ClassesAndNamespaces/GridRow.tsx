@@ -86,8 +86,8 @@ export default class GridRow extends React.Component<IGridRowProps, IGridRowStat
                     </textarea>
                     <br />
                     <div className="text-right">
-                        <a href="#" className="btn btn-default" onClick={e => this.cancel(e)}>Cancel</a>
-                        <a href="#" className="btn btn-primary" onClick={e => this.save(e)}>Save</a>
+                        <a href="#" className="btn btn-default" onClick={e => this.cancel(e)}>{this.props.module.resources.Cancel}</a>
+                        <a href="#" className="btn btn-primary" onClick={e => this.save(e)}>{this.props.module.resources.Save}</a>
                     </div>
                 </td>
             </tr>

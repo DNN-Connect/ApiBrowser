@@ -120,6 +120,9 @@
   <data name="Deprecated.Text" xml:space="preserve">
     <value>Deprecated</value>
   </data>
+  <data name="Moderate.Text" xml:space="preserve">
+    <value>Moderate</value>
+  </data>
   <data name="Return.Text" xml:space="preserve">
     <value>Return</value>
   </data>

@@ -175,7 +175,23 @@ export default class Browser extends React.Component<IBrowserProps, IBrowserStat
         });
     }
     private editMemberDescription(memberId: number, newDescription: string): void {
-        //
+        this.props.module.service.saveMemberDescription(memberId, newDescription, (member: Models.IMember) => {
+            var apiClass = this.state.selectedClass;
+            var newClassList = this.state.classes.map(c => {
+                if (c.ClassId == member.ClassId) {
+                    var newMembers = (c.Members as Models.IMember[]).map(m => {
+                        return m.MemberId == member.MemberId ? member : m;
+                    });
+                    c.Members = newMembers;
+                    apiClass = c;
+                }
+                return c;
+            });
+            this.setState({
+                selectedClass: apiClass,
+                classes: newClassList
+            });
+        });
     }
     private editClassDescription(classId: number, newDescription: string): void {
         this.props.module.service.saveClassDescription(classId, newDescription, (apiClass: Models.IApiClass) => {

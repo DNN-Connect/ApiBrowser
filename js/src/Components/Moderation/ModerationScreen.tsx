@@ -5,6 +5,7 @@ import Compare from './Compare';
 
 interface IModerationScreenProps {
     module: Models.IAppModule;
+    documentationLink: string;
 };
 
 interface IModerationScreenState {
@@ -90,7 +91,8 @@ export default class ModerationScreen extends React.Component<IModerationScreenP
         var rows = this.state.moderationList.map(m => {
             i++;
             return <ModerationRow key={i} module={this.props.module} item={m}
-                showItem={a => this.showItem(a)} />
+                showItem={a => this.showItem(a)}
+                documentationLink={this.props.documentationLink} />
         });
         return (
             <div>
