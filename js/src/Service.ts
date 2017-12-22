@@ -58,11 +58,20 @@ export default class DataService {
     public getMembers(classId: number, success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'ApiClasses', 'Members', classId, null, success)
     }
+    public getModerationItems(success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'Documentations', 'Moderation', null, null, success)
+    }
     public getScheduledFiles(success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'Files', 'Files', null, null, success)
     }
     public processFiles(success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Files', 'Process', null, null, success)
+    }
+    public rejectClassDescription(classId: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'ApiClasses', 'RejectDescription', classId, null, success)
+    }
+    public rejectMemberDescription(memberId: number, success: Function): any {
+        this.ajaxCall('POST', this.baseServicepath, 'Members', 'RejectDescription', memberId, null, success)
     }
     public saveClassDescription(classId: number, newDescription: string, success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'ApiClasses', 'Description', classId, { description: newDescription }, success)

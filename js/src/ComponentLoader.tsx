@@ -6,6 +6,7 @@ import Browser from "./Components/Browser/Browser";
 import FileManager from "./Components/Files/FileManager";
 import ClassesAndNamespacesGrid from "./Components/ClassesAndNamespaces/Grid";
 import DocumentationEditor from "./Components/Editor/DocumentationEditor";
+import ModerationScreen from "./Components/Moderation/ModerationScreen";
 
 export class ComponentLoader {
 
@@ -39,6 +40,12 @@ export class ComponentLoader {
         history={$(el).data('history')}
         edit={$(el).data('edit')}
         currentVersion={$(el).data('current-version')}
+        />, el);
+    });
+    $('.moderation').each(function (i, el) {
+      var moduleId = $(el).data('moduleid');
+      ReactDOM.render(<ModerationScreen
+        module={AppManager.Modules.Item(moduleId.toString())}
         />, el);
     });
 

@@ -11,6 +11,7 @@ export * from './IDocumentation';
 export * from './IKeyedCollection';
 export * from './IMember';
 export * from './IMemberCodeBlock';
+export * from './IModerationItem';
 export * from './INamespacesAndClass';
 export * from './INameValuePair';
 export * from './IScheduledFile';

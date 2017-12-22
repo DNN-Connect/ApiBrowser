@@ -27,6 +27,61 @@ namespace Connect.ApiBrowser.Core.Data
 
         // SELECT
         // *
+        // FROM (SELECT
+        //  0 DocType,
+        //  c.ClassId,
+        //  -1 MemberId,
+        //  -1 DocumentationId,
+        //  c.FullQualifier,
+        //  c.Description OldText,
+        //  c.PendingDescription NewText,
+        //  c.LastModifiedOnDate,
+        //  c.LastModifiedByUserDisplayName
+        // FROM dbo.vw_Connect_ApiBrowser_ApiClasses c
+        // WHERE NOT c.PendingDescription IS NULL AND c.ModuleId=@ModuleId
+        // UNION
+        // SELECT
+        //  1 DocType,
+        //  m.ClassId,
+        //  m.MemberId,
+        //  -1 DocumentationId,
+        //  m.FullQualifier,
+        //  m.Description OldText,
+        //  m.PendingDescription NewText,
+        //  m.LastModifiedOnDate,
+        //  m.LastModifiedByUserDisplayName
+        // FROM dbo.vw_Connect_ApiBrowser_Members m
+        // WHERE NOT m.PendingDescription IS NULL AND m.ModuleId=@ModuleId
+        // UNION
+        // SELECT
+        //  2 DocType,
+        //  -1 ClassId,
+        //  -1 MemberId,
+        //  d1.DocumentationId,
+        //  d1.FullName FullQualifier,
+        //  d2.Contents OldText,
+        //  d1.Contents NewText,
+        //  d1.LastModifiedOnDate,
+        //  d1.LastModifiedByUserDisplayName
+        // FROM dbo.vw_Connect_ApiBrowser_Documentations d1
+        //  LEFT JOIN dbo.vw_Connect_ApiBrowser_Documentations d2 ON d1.FullName=d2.FullName AND d2.IsCurrentVersion=1 AND d2.ModuleId=@ModuleId
+        // WHERE d1.ModuleId=@ModuleId AND d1.LastModifiedOnDate > d2.LastModifiedOnDate OR d2.DocumentationId IS NULL) x
+        // ORDER BY x.FullQualifier, x.LastModifiedOnDate
+        // 
+        // 
+        // ;  
+        public static IEnumerable<ModerationItem> GetModerationList(int moduleId)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<ModerationItem>(System.Data.CommandType.StoredProcedure,
+                    "Connect_ApiBrowser_GetModerationList",
+                    moduleId);
+            }
+        }
+
+        // SELECT
+        // *
         // FROM (SELECT 
         //  a.NamespaceId, 
         //  a.ClassId,

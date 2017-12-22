@@ -4,6 +4,7 @@ using System.Web.Http;
 using Connect.ApiBrowser.Core.Repositories;
 using Connect.DNN.Modules.ApiBrowser.Common;
 using Connect.ApiBrowser.Core.Models.Documentations;
+using Connect.ApiBrowser.Core.Data;
 
 namespace Connect.DNN.Modules.ApiBrowser.Api
 {
@@ -91,6 +92,12 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+        [HttpGet]
+        [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]
+        public HttpResponseMessage Moderation()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, Sprocs.GetModerationList(ApiBrowserModuleContext.ModuleContext.ModuleID));
         }
     }
 }

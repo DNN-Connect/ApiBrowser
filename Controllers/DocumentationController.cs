@@ -17,5 +17,11 @@ namespace Connect.DNN.Modules.ApiBrowser.Controllers
             };
             return View(d);
         }
+        [HttpGet]
+        [ApiBrowserMvcAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]
+        public ActionResult Moderate()
+        {
+            return View();
+        }
     }
 }

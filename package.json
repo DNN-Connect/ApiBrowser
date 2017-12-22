@@ -54,6 +54,7 @@
     "devDependencies": {
         "@types/bootstrap": "^3.3.36",
         "@types/jquery": "^3.2.16",
+        "@types/moment": "^2.13.0",
         "@types/rc-tree": "^1.4.5",
         "@types/react": "^16.0.28",
         "@types/react-dom": "^16.0.3",
@@ -75,6 +76,7 @@
         "gulp-zip": "^4.0.0",
         "less-plugin-clean-css": "^1.5.1",
         "merge2": "^1.2.0",
+        "moment": "^2.20.1",
         "path": "^0.12.7",
         "rc-tree": "^1.7.10",
         "react": "^16.2.0",

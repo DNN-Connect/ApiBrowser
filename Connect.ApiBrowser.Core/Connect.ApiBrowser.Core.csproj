@@ -89,6 +89,7 @@
     <Compile Include="Models\Members\MemberType.cs" />
     <Compile Include="Models\Members\Member_Declaration.cs" />
     <Compile Include="Models\Members\Member_Interfaces.cs" />
+    <Compile Include="Models\ModerationItem.cs" />
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass.cs" />
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Declaration.cs" />
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Interfaces.cs" />

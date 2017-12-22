@@ -58,6 +58,18 @@ namespace Connect.DNN.Modules.ApiBrowser.Api
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        [HttpPost]
+        [ApiBrowserAuthorize(SecurityLevel = SecurityAccessLevel.Moderate)]
+        public HttpResponseMessage RejectDescription(int id)
+        {
+            var c = ApiClassRepository.Instance.GetApiClass(id);
+            if (c != null && !string.IsNullOrEmpty(c.PendingDescription))
+            {
+                c.PendingDescription = null;
+                ApiClassRepository.Instance.UpdateApiClass(c.GetApiClassBase(), UserInfo.UserID);
+            }
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }
 

@@ -4,14 +4,20 @@
     ApiBrowserModuleContext.AddModuleScript();
 }
 
-@if (ApiBrowserModuleContext.Security.CanEdit)
-{
-    <div class="text-right">
+<div class="text-right">
+ @if (ApiBrowserModuleContext.Security.CanModerate)
+ {
+     <a href="@Url.Action("Moderate", "Documentation")" class="btn btn-default">
+      @Dnn.LocalizeString("Moderate")
+     </a>
+ }
+ @if (ApiBrowserModuleContext.Security.CanEdit)
+ {
      <a href="@Url.Action("Upload", "Files")" class="btn btn-default">
       @Dnn.LocalizeString("Upload")
      </a>
-    </div>
-}
+ }
+</div>
 
 <div class="connectapibrowser classesandnamespaces"
      data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
