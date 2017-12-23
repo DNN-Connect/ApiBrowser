@@ -320,3 +320,60 @@ GO
 UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
 SET Description = {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX(Description)
 GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetModerationList') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetModerationList
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetModerationList
+@ModuleId INT
+AS
+SELECT
+*
+FROM (SELECT
+ 0 DocType,
+ c.ClassId,
+ -1 MemberId,
+ -1 DocumentationId,
+ c.FullQualifier,
+ c.Description OldText,
+ c.PendingDescription NewText,
+ c.LastModifiedOnDate,
+ c.LastModifiedByUserDisplayName
+FROM {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c
+WHERE NOT c.PendingDescription IS NULL AND c.ModuleId=@ModuleId
+UNION
+SELECT
+ 1 DocType,
+ m.ClassId,
+ m.MemberId,
+ -1 DocumentationId,
+ m.FullQualifier,
+ m.Description OldText,
+ m.PendingDescription NewText,
+ m.LastModifiedOnDate,
+ m.LastModifiedByUserDisplayName
+FROM {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m
+WHERE NOT m.PendingDescription IS NULL AND m.ModuleId=@ModuleId
+UNION
+SELECT
+ 2 DocType,
+ -1 ClassId,
+ -1 MemberId,
+ d1.DocumentationId,
+ d1.FullName FullQualifier,
+ d2.Contents OldText,
+ d1.Contents NewText,
+ d1.LastModifiedOnDate,
+ d1.LastModifiedByUserDisplayName
+FROM {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations d1
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations d2 ON d1.FullName=d2.FullName AND d2.IsCurrentVersion=1 AND d2.ModuleId=@ModuleId
+WHERE d1.ModuleId=@ModuleId AND d1.LastModifiedOnDate > d2.LastModifiedOnDate OR d2.DocumentationId IS NULL) x
+ORDER BY x.FullQualifier, x.LastModifiedOnDate
+GO
+
+
