@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Classes.Text" xml:space="preserve">
+    <value>Classes</value>
+  </data>
+  <data name="Components.Text" xml:space="preserve">
+    <value>Components</value>
+  </data>
   <data name="Deprecated.Text" xml:space="preserve">
     <value>Deprecated</value>
   </data>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Documented.Text" xml:space="preserve">
+    <value>Documented</value>
+  </data>
+  <data name="LatestVersion.Text" xml:space="preserve">
+    <value>Latest Version</value>
+  </data>
+  <data name="Members.Text" xml:space="preserve">
+    <value>Members</value>
+  </data>
   <data name="Moderate.Text" xml:space="preserve">
     <value>Moderate</value>
+  </data>
+  <data name="Name.Text" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="Return.Text" xml:space="preserve">
     <value>Return</value>

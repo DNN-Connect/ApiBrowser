@@ -72,6 +72,7 @@
     <Compile Include="Models\Comments\Comment.cs" />
     <Compile Include="Models\Comments\Comment_Declaration.cs" />
     <Compile Include="Models\Comments\Comment_Interfaces.cs" />
+    <Compile Include="Models\Components\ComponentWithStats.cs" />
     <Compile Include="Models\Components\Component.cs" />
     <Compile Include="Models\Components\Component_Declaration.cs" />
     <Compile Include="Models\Components\Component_Interfaces.cs" />

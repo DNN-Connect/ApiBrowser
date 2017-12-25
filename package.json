@@ -1,6 +1,6 @@
 {
     "name": "apibrowser",
-    "version": "01.00.01",
+    "version": "01.00.02",
     "description": "DNN ApiBrowser module",
     "dnn": {
         "projectType": "module",

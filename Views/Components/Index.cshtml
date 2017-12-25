@@ -1,0 +1,34 @@
+@inherits ApiBrowserWebPage
+@using Connect.DNN.Modules.ApiBrowser.Common;
+@using Connect.ApiBrowser.Core.Data;
+@{
+    var components = Sprocs.GetComponents(ApiBrowserModuleContext.ModuleContext.ModuleID).OrderBy(c => c.ComponentName);
+}
+
+<table class="table">
+ <thead>
+  <tr>
+   <th>@Dnn.LocalizeString("Name")</th>
+   <th>@Dnn.LocalizeString("LatestVersion")</th>
+   <th>@Dnn.LocalizeString("Description")</th>
+   <th>@Dnn.LocalizeString("Classes") (@Dnn.LocalizeString("Documented"))</th>
+   <th>@Dnn.LocalizeString("Members") (@Dnn.LocalizeString("Documented"))</th>
+  </tr>
+ </thead>
+ <tbody>
+  @foreach (var c in components)
+  {
+      <tr>
+       <td>@c.ComponentName</td>
+       <td>@c.LatestVersion</td>
+       <td>@c.Description</td>
+       <td>@c.NrClasses (@c.NrDocumentedClasses)</td>
+       <td>@c.NrMembers (@c.NrDocumentedMembers)</td>
+      </tr>
+  }
+ </tbody>
+</table>
+
+<div class="text-right">
+ <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+</div>

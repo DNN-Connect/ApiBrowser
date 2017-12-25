@@ -26,6 +26,25 @@ namespace Connect.ApiBrowser.Core.Data
         }
 
         // SELECT
+        //  c.*,
+        //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_ApiClasses cl WHERE cl.ComponentId=c.ComponentId) NrClasses,
+        //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_ApiClasses cl WHERE cl.ComponentId=c.ComponentId AND ISNULL(cl.DocumentationId, -1) <> -1) NrDocumentedClasses,
+        //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_Members m INNER JOIN dbo.Connect_ApiBrowser_ApiClasses cl ON m.ClassId=cl.ClassId WHERE cl.ComponentId=c.ComponentId) NrMembers,
+        //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_Members m INNER JOIN dbo.Connect_ApiBrowser_ApiClasses cl ON m.ClassId=cl.ClassId WHERE cl.ComponentId=c.ComponentId AND ISNULL(m.DocumentationId, -1) <> -1) NrDocumentedMembers
+        // FROM dbo.Connect_ApiBrowser_Components c
+        // WHERE c.ModuleId=@ModuleId
+        // ;  
+        public static IEnumerable<ComponentWithStats> GetComponents(int moduleId)
+        {
+            using (var context = DataContext.Instance())
+            {
+                return context.ExecuteQuery<ComponentWithStats>(System.Data.CommandType.StoredProcedure,
+                    "Connect_ApiBrowser_GetComponents",
+                    moduleId);
+            }
+        }
+
+        // SELECT
         // *
         // FROM (SELECT
         //  0 DocType,

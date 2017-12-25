@@ -5,6 +5,9 @@
 }
 
 <div class="text-right">
+     <a href="@Url.Action("Index", "Components")" class="btn btn-default">
+      @Dnn.LocalizeString("Components")
+     </a>
  @if (ApiBrowserModuleContext.Security.CanModerate)
  {
      <a href="@Url.Action("Moderate", "Documentation")" class="btn btn-default">
