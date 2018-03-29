@@ -13,6 +13,11 @@ export interface IMember {
   DeprecationMessage: string;
   DocumentationId?: number;
   PendingDescription: string;
+  FullName: string;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   CreatedByUserDisplayName: string;
   LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
@@ -23,10 +28,6 @@ export interface IMember {
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
-  CreatedByUserID: number;
-  CreatedOnDate: Date;
-  LastModifiedByUserID: number;
-  LastModifiedOnDate: Date;
 }
 
 export class Member implements IMember {
@@ -44,6 +45,11 @@ export class Member implements IMember {
   DeprecationMessage: string;
   DocumentationId?: number;
   PendingDescription: string;
+  FullName: string;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   CreatedByUserDisplayName: string;
   LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
@@ -54,10 +60,6 @@ export class Member implements IMember {
   ComponentName: string;
   LatestVersion: string;
   CodeBlockCount?: number;
-  CreatedByUserID: number;
-  CreatedOnDate: Date;
-  LastModifiedByUserID: number;
-  LastModifiedOnDate: Date;
   constructor() {
     this.MemberId = -1;
     this.ClassId = -1;
@@ -65,6 +67,11 @@ export class Member implements IMember {
     this.MemberName = "";
     this.AppearedInVersion = "";
     this.IsDeprecated = false;
+  this.FullName = "";
+  this.CreatedByUserID = -1;
+  this.CreatedOnDate = new Date();
+  this.LastModifiedByUserID = -1;
+  this.LastModifiedOnDate = new Date();
     this.ClassName = "";
     this.NamespaceName = "";
     this.FullQualifier = "";

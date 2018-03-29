@@ -48,6 +48,8 @@ namespace Connect.ApiBrowser.Core.Models.Members
         public int? DocumentationId { get; set; }
         [DataMember]
         public string PendingDescription { get; set; }
+        [DataMember]
+        public string FullName { get; set; }
         #endregion
 
         #region Methods
@@ -93,6 +95,9 @@ namespace Connect.ApiBrowser.Core.Models.Members
 
             if (!String.IsNullOrEmpty(member.PendingDescription))
                 PendingDescription = member.PendingDescription;
+
+            if (!String.IsNullOrEmpty(member.FullName))
+                FullName = member.FullName;
 
         }
         #endregion

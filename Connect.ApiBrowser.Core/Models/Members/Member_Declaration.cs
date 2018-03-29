@@ -59,6 +59,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
              res.DeprecationMessage = DeprecationMessage;
              res.DocumentationId = DocumentationId;
              res.PendingDescription = PendingDescription;
+             res.FullName = FullName;
             res.CreatedByUserID = CreatedByUserID;
             res.CreatedOnDate = CreatedOnDate;
             res.LastModifiedByUserID = LastModifiedByUserID;
@@ -82,6 +83,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
             res.DeprecationMessage = DeprecationMessage;
             res.DocumentationId = DocumentationId;
             res.PendingDescription = PendingDescription;
+            res.FullName = FullName;
             res.CreatedByUserDisplayName = CreatedByUserDisplayName;
             res.LastModifiedByUserDisplayName = LastModifiedByUserDisplayName;
             res.DocumentationContents = DocumentationContents;

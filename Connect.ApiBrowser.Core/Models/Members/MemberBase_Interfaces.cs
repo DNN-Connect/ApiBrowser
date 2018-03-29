@@ -31,6 +31,7 @@ namespace Connect.ApiBrowser.Core.Models.Members
    DeprecationMessage = Convert.ToString(Null.SetNull(dr["DeprecationMessage"], DeprecationMessage));
    DocumentationId = Convert.ToInt32(Null.SetNull(dr["DocumentationId"], DocumentationId));
    PendingDescription = Convert.ToString(Null.SetNull(dr["PendingDescription"], PendingDescription));
+   FullName = Convert.ToString(Null.SetNull(dr["FullName"], FullName));
         }
 
         [IgnoreColumn()]
@@ -52,9 +53,9 @@ namespace Connect.ApiBrowser.Core.Models.Members
      return ClassId.ToString(strFormat, formatProvider);
     case "membertype": // Int
      return MemberType.ToString(strFormat, formatProvider);
-    case "membername": // NVarChar
+    case "membername": // VarChar
      return PropertyAccess.FormatString(MemberName, strFormat);
-    case "declaration": // NVarChar
+    case "declaration": // VarChar
      if (Declaration == null)
      {
          return "";
@@ -106,6 +107,8 @@ namespace Connect.ApiBrowser.Core.Models.Members
          return "";
      };
      return PropertyAccess.FormatString(PendingDescription, strFormat);
+    case "fullname": // VarChar
+     return PropertyAccess.FormatString(FullName, strFormat);
                 default:
                     propertyNotFound = true;
                     break;

@@ -48,6 +48,50 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
         public int? DocumentationId { get; set; }
         [DataMember]
         public string PendingDescription { get; set; }
+        [DataMember]
+        public string FullName { get; set; }
+        [DataMember]
+        public bool IsAbstract { get; set; }
+        [DataMember]
+        public bool IsAnsiClass { get; set; }
+        [DataMember]
+        public bool IsArray { get; set; }
+        [DataMember]
+        public bool IsAutoClass { get; set; }
+        [DataMember]
+        public bool IsAutoLayout { get; set; }
+        [DataMember]
+        public bool IsBeforeFieldInit { get; set; }
+        [DataMember]
+        public bool IsByReference { get; set; }
+        [DataMember]
+        public bool IsClass { get; set; }
+        [DataMember]
+        public bool IsDefinition { get; set; }
+        [DataMember]
+        public bool IsEnum { get; set; }
+        [DataMember]
+        public bool IsExplicitLayout { get; set; }
+        [DataMember]
+        public bool IsFunctionPointer { get; set; }
+        [DataMember]
+        public bool IsGenericInstance { get; set; }
+        [DataMember]
+        public bool IsGenericParameter { get; set; }
+        [DataMember]
+        public bool IsImport { get; set; }
+        [DataMember]
+        public bool IsInterface { get; set; }
+        [DataMember]
+        public bool IsNested { get; set; }
+        [DataMember]
+        public bool IsNestedAssembly { get; set; }
+        [DataMember]
+        public bool IsNestedPrivate { get; set; }
+        [DataMember]
+        public bool IsNestedPublic { get; set; }
+        [DataMember]
+        public bool IsNotPublic { get; set; }
         #endregion
 
         #region Methods
@@ -93,6 +137,51 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
 
             if (!String.IsNullOrEmpty(apiClass.PendingDescription))
                 PendingDescription = apiClass.PendingDescription;
+
+            if (!String.IsNullOrEmpty(apiClass.FullName))
+                FullName = apiClass.FullName;
+
+            IsAbstract = apiClass.IsAbstract;
+
+            IsAnsiClass = apiClass.IsAnsiClass;
+
+            IsArray = apiClass.IsArray;
+
+            IsAutoClass = apiClass.IsAutoClass;
+
+            IsAutoLayout = apiClass.IsAutoLayout;
+
+            IsBeforeFieldInit = apiClass.IsBeforeFieldInit;
+
+            IsByReference = apiClass.IsByReference;
+
+            IsClass = apiClass.IsClass;
+
+            IsDefinition = apiClass.IsDefinition;
+
+            IsEnum = apiClass.IsEnum;
+
+            IsExplicitLayout = apiClass.IsExplicitLayout;
+
+            IsFunctionPointer = apiClass.IsFunctionPointer;
+
+            IsGenericInstance = apiClass.IsGenericInstance;
+
+            IsGenericParameter = apiClass.IsGenericParameter;
+
+            IsImport = apiClass.IsImport;
+
+            IsInterface = apiClass.IsInterface;
+
+            IsNested = apiClass.IsNested;
+
+            IsNestedAssembly = apiClass.IsNestedAssembly;
+
+            IsNestedPrivate = apiClass.IsNestedPrivate;
+
+            IsNestedPublic = apiClass.IsNestedPublic;
+
+            IsNotPublic = apiClass.IsNotPublic;
 
         }
         #endregion

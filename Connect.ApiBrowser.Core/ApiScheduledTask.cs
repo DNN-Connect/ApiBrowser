@@ -41,6 +41,8 @@ namespace Connect.ApiBrowser.Core
                                         Log.AppendFormat("Processed {0}" + Environment.NewLine, f.Name);
                                     }
                                 }
+                                Sprocs.UpdateDependencies(moduleId);
+                                Sprocs.UpdateReferences(moduleId);
                             }
                         }
                     }

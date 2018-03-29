@@ -72,10 +72,17 @@
     <Compile Include="Models\Comments\Comment.cs" />
     <Compile Include="Models\Comments\Comment_Declaration.cs" />
     <Compile Include="Models\Comments\Comment_Interfaces.cs" />
+    <Compile Include="Models\ComponentHistories\ComponentHistory.cs" />
+    <Compile Include="Models\ComponentHistories\ComponentHistory_Declaration.cs" />
+    <Compile Include="Models\ComponentHistories\ComponentHistory_Interfaces.cs" />
     <Compile Include="Models\Components\ComponentWithStats.cs" />
     <Compile Include="Models\Components\Component.cs" />
     <Compile Include="Models\Components\Component_Declaration.cs" />
     <Compile Include="Models\Components\Component_Interfaces.cs" />
+    <Compile Include="Models\Dependencies\DependencyBase.cs" />
+    <Compile Include="Models\Dependencies\DependencyBase_Interfaces.cs" />
+    <Compile Include="Models\Dependencies\Dependency_Declaration.cs" />
+    <Compile Include="Models\Dependencies\Dependency_Interfaces.cs" />
     <Compile Include="Models\Documentations\Documentation.cs" />
     <Compile Include="Models\Documentations\DocumentationBase.cs" />
     <Compile Include="Models\Documentations\DocumentationBase_Interfaces.cs" />
@@ -94,6 +101,10 @@
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass.cs" />
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Declaration.cs" />
     <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Interfaces.cs" />
+    <Compile Include="Models\References\ReferenceBase.cs" />
+    <Compile Include="Models\References\ReferenceBase_Interfaces.cs" />
+    <Compile Include="Models\References\Reference_Declaration.cs" />
+    <Compile Include="Models\References\Reference_Interfaces.cs" />
     <Compile Include="Models\ScheduledFile.cs" />
     <Compile Include="Models\ViewSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,8 +116,12 @@
     <Compile Include="Repositories\CommentLikeRepository_Core.cs" />
     <Compile Include="Repositories\CommentRepository.cs" />
     <Compile Include="Repositories\CommentRepository_Core.cs" />
+    <Compile Include="Repositories\ComponentHistoryRepository.cs" />
+    <Compile Include="Repositories\ComponentHistoryRepository_Core.cs" />
     <Compile Include="Repositories\ComponentRepository.cs" />
     <Compile Include="Repositories\ComponentRepository_Core.cs" />
+    <Compile Include="Repositories\DependencyRepository.cs" />
+    <Compile Include="Repositories\DependencyRepository_Core.cs" />
     <Compile Include="Repositories\DocumentationRepository.cs" />
     <Compile Include="Repositories\DocumentationRepository_Core.cs" />
     <Compile Include="Repositories\MemberCodeBlockRepository.cs" />
@@ -115,6 +130,8 @@
     <Compile Include="Repositories\MemberRepository_Core.cs" />
     <Compile Include="Repositories\NamespacesAndClassRepository.cs" />
     <Compile Include="Repositories\NamespacesAndClassRepository_Core.cs" />
+    <Compile Include="Repositories\ReferenceRepository.cs" />
+    <Compile Include="Repositories\ReferenceRepository_Core.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

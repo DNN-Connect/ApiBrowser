@@ -95,7 +95,7 @@ gulp.task('packageInstall', ['build'], function() {
             .pipe(zip('Resources.zip'))
             .pipe(debug({ title: 'resources:' })),
             manifest(config, './_Installation/Connect.ApiBrowser.dnn')
-            .pipe(rename('FormaMed.Management.dnn'))
+            .pipe(rename('Connect.ApiBrowser.dnn'))
             .pipe(debug({ title: 'manifest:' })),
             gulp.src([config.dnn.pathToAssemblies + '/*.dll',
                 config.dnn.pathToScripts + '/*.SqlDataProvider',
@@ -135,7 +135,7 @@ gulp.task('packageSource', ['build'], function() {
             .pipe(zip('Resources.zip'))
             .pipe(debug({ title: 'resources:' })),
             manifest(config, './_Installation/Connect.ApiBrowser.dnn')
-            .pipe(rename('FormaMed.Management.dnn'))
+            .pipe(rename('Connect.ApiBrowser.dnn'))
             .pipe(debug({ title: 'manifest:' })),
             gulp.src([config.dnn.pathToAssemblies + '/*.dll',
                 config.dnn.pathToScripts + '/*.SqlDataProvider',
