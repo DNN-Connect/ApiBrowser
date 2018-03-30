@@ -217,7 +217,7 @@ namespace Connect.ApiBrowser.Core.Data
                             block=Sprocs.GetOrCreateMemberCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
                         }
                     }
-                    if (block is null)
+                    if (block == null)
                     {
                         block = MemberCodeBlockRepository.Instance.GetMemberCodeBlock(m.MemberId, Version);
                     }

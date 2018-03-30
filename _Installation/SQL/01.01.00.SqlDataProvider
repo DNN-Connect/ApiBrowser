@@ -750,8 +750,8 @@ GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
---DECLARE @ModuleId INT = 2430;
-CREATE PROC {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateDependencies
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateDependencies
 @ModuleId INT
 AS
 UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Dependencies
@@ -774,7 +774,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROC {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateReferences
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateReferences
 @ModuleId INT
 AS
 UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_References

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Connect")]
 [assembly: AssemblyProduct("ApiBrowser")]
-[assembly: AssemblyCopyright("Copyright 2017 by Connect")]
+[assembly: AssemblyCopyright("Copyright 2018 by Connect")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("01.00.02")]
-[assembly: AssemblyFileVersion("01.00.02")]
+[assembly: AssemblyVersion("01.01.00")]
+[assembly: AssemblyFileVersion("01.01.00")]
