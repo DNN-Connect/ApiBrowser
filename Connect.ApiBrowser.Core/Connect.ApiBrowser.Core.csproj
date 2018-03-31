@@ -98,9 +98,9 @@
     <Compile Include="Models\Members\Member_Declaration.cs" />
     <Compile Include="Models\Members\Member_Interfaces.cs" />
     <Compile Include="Models\ModerationItem.cs" />
-    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass.cs" />
-    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Declaration.cs" />
-    <Compile Include="Models\NamespacesAndClasses\NamespacesAndClass_Interfaces.cs" />
+    <Compile Include="Models\NamespacesClassesAndMembers\NamespacesClassesAndMember.cs" />
+    <Compile Include="Models\NamespacesClassesAndMembers\NamespacesClassesAndMember_Declaration.cs" />
+    <Compile Include="Models\NamespacesClassesAndMembers\NamespacesClassesAndMember_Interfaces.cs" />
     <Compile Include="Models\References\ReferenceBase.cs" />
     <Compile Include="Models\References\ReferenceBase_Interfaces.cs" />
     <Compile Include="Models\References\Reference_Declaration.cs" />
@@ -128,8 +128,8 @@
     <Compile Include="Repositories\MemberCodeBlockRepository_Core.cs" />
     <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\MemberRepository_Core.cs" />
-    <Compile Include="Repositories\NamespacesAndClassRepository.cs" />
-    <Compile Include="Repositories\NamespacesAndClassRepository_Core.cs" />
+    <Compile Include="Repositories\NamespacesClassesAndMemberRepository.cs" />
+    <Compile Include="Repositories\NamespacesClassesAndMemberRepository_Core.cs" />
     <Compile Include="Repositories\ReferenceRepository.cs" />
     <Compile Include="Repositories\ReferenceRepository_Core.cs" />
   </ItemGroup>

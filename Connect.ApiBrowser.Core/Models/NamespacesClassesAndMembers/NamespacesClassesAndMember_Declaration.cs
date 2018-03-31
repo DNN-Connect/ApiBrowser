@@ -3,15 +3,15 @@ using System;
 using System.Runtime.Serialization;
 using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
+namespace Connect.ApiBrowser.Core.Models.NamespacesClassesAndMembers
 {
 
-    [TableName("vw_Connect_ApiBrowser_NamespacesAndClasses")]
+    [TableName("vw_Connect_ApiBrowser_NamespacesClassesAndMembers")]
     [DataContract]
-    public partial class NamespacesAndClass     {
+    public partial class NamespacesClassesAndMember     {
 
         #region .ctor
-        public NamespacesAndClass()         {
+        public NamespacesClassesAndMember()         {
         }
         #endregion
 
@@ -23,7 +23,11 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
         [DataMember]
         public int ClassId { get; set; }
         [DataMember]
-        public bool? IsClass { get; set; }
+        public int MemberId { get; set; }
+        [DataMember]
+        public int? MainType { get; set; }
+        [DataMember]
+        public int? SubType { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
@@ -43,9 +47,9 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
         #endregion
 
         #region Methods
-        public NamespacesAndClass Clone()
+        public NamespacesClassesAndMember Clone()
         {
-            NamespacesAndClass res = new NamespacesAndClass();
+            NamespacesClassesAndMember res = new NamespacesClassesAndMember();
             return res;
         }
         #endregion

@@ -3,7 +3,7 @@ import * as Models from '../../Models/';
 
 interface IGridRowProps {
     module: Models.IAppModule;
-    element: Models.INamespacesAndClass;
+    element: Models.INamespacesClassesAndMember;
     detailLink: string;
 };
 
@@ -62,7 +62,7 @@ export default class GridRow extends React.Component<IGridRowProps, IGridRowStat
     }
 
     public render(): JSX.Element {
-        var label = this.props.element.IsClass ? "Class" : "Namespace";
+        var label = this.props.element.MainType == 0 ? "Namespace" : this.props.element.MainType == 1 ? "Class" : "Member";
         var warning = this.props.element.IsDeprecated ? <span className="redhighlight">{this.props.module.resources.Deprecated}</span> : null;
         warning = this.props.element.DisappearedInVersion ? <span className="redhighlight">{this.props.module.resources.Removed}</span> : warning;
         var url = this.props.detailLink + "?view=" + this.props.element.Name;

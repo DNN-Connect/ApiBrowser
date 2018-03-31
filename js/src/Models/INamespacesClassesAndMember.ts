@@ -1,8 +1,10 @@
-export interface INamespacesAndClass {
+export interface INamespacesClassesAndMember {
   ModuleId: number;
   NamespaceId: number;
   ClassId: number;
-  IsClass?: boolean;
+  MemberId: number;
+  MainType?: number;
+  SubType?: number;
   Name: string;
   Description: string;
   PendingDescription: string;
@@ -13,11 +15,13 @@ export interface INamespacesAndClass {
   LastModifiedOnDate?: Date;
 }
 
-export class NamespacesAndClass implements INamespacesAndClass {
+export class NamespacesClassesAndMember implements INamespacesClassesAndMember {
   ModuleId: number;
   NamespaceId: number;
   ClassId: number;
-  IsClass?: boolean;
+  MemberId: number;
+  MainType?: number;
+  SubType?: number;
   Name: string;
   Description: string;
   PendingDescription: string;
@@ -30,6 +34,7 @@ export class NamespacesAndClass implements INamespacesAndClass {
   this.ModuleId = -1;
   this.NamespaceId = -1;
   this.ClassId = -1;
+  this.MemberId = -1;
   this.Name = "";
   this.IsDeprecated = -1;
    }

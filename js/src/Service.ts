@@ -46,8 +46,8 @@ export default class DataService {
     public deleteDocumentation(docid: number, success: Function): any {
         this.ajaxCall('POST', this.baseServicepath, 'Documentations', 'Delete', docid, null, success)
     }
-    public getAll(classes: boolean, namespaces: boolean, searchText: string, pageIndex: number, pageSize: number, success: Function): any {
-        this.ajaxCall('GET', this.baseServicepath, 'NamespacesAndClasses', 'List', null, { classes: classes, namespaces: namespaces, searchText: searchText, pageIndex: pageIndex, pageSize: pageSize }, success)
+    public getAll(mainType: number, subType: number, status: number, searchText: string, pageIndex: number, pageSize: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'NamespacesClassesAndMembers', 'List', null, { mainType: mainType, subType: subType, status: status, searchText: searchText, pageIndex: pageIndex, pageSize: pageSize }, success)
     }
     public getCodeblock(codeblockId: number, success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'MemberCodeBlocks', 'Get', codeblockId, null, success)

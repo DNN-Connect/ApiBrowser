@@ -6,11 +6,11 @@ using System.Xml.Serialization;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Services.Tokens;
 
-namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
+namespace Connect.ApiBrowser.Core.Models.NamespacesClassesAndMembers
 {
 
- [Serializable(), XmlRoot("NamespacesAndClass")]
- public partial class NamespacesAndClass
+ [Serializable(), XmlRoot("NamespacesClassesAndMember")]
+ public partial class NamespacesClassesAndMember
  {
 
   #region IHydratable
@@ -19,7 +19,9 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
    ModuleId = Convert.ToInt32(Null.SetNull(dr["ModuleId"], ModuleId));
    NamespaceId = Convert.ToInt32(Null.SetNull(dr["NamespaceId"], NamespaceId));
    ClassId = Convert.ToInt32(Null.SetNull(dr["ClassId"], ClassId));
-   IsClass = Convert.ToBoolean(Null.SetNull(dr["IsClass"], IsClass));
+   MemberId = Convert.ToInt32(Null.SetNull(dr["MemberId"], MemberId));
+   MainType = Convert.ToInt32(Null.SetNull(dr["MainType"], MainType));
+   SubType = Convert.ToInt32(Null.SetNull(dr["SubType"], SubType));
    Name = Convert.ToString(Null.SetNull(dr["Name"], Name));
    Description = Convert.ToString(Null.SetNull(dr["Description"], Description));
    PendingDescription = Convert.ToString(Null.SetNull(dr["PendingDescription"], PendingDescription));
@@ -41,12 +43,20 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesAndClasses
      return NamespaceId.ToString(strFormat, formatProvider);
     case "classid": // Int
      return ClassId.ToString(strFormat, formatProvider);
-    case "isclass": // Bit
-     if (IsClass == null)
+    case "memberid": // Int
+     return MemberId.ToString(strFormat, formatProvider);
+    case "maintype": // Int
+     if (MainType == null)
      {
          return "";
      };
-     return IsClass.ToString();
+     return ((int)MainType).ToString(strFormat, formatProvider);
+    case "subtype": // Int
+     if (SubType == null)
+     {
+         return "";
+     };
+     return ((int)SubType).ToString(strFormat, formatProvider);
     case "name": // NVarChar
      return PropertyAccess.FormatString(Name, strFormat);
     case "description": // NVarCharMax
