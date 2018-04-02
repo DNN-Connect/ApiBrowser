@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
-import ClassTree from './ClassTree';
 import ClassDetails from './ClassDetails';
 import MemberDetails from './MemberDetails';
 import NamespaceDetails from './NamespaceDetails';
-import Tree, { TreeNode, TreeNodeProps } from 'rc-tree';
-import { IApiClass } from '../../../../_Development/Out/js/src/Models/index';
+import BrowserNavBar from './BrowserNavBar';
 
 interface IBrowserProps {
     module: Models.IAppModule;

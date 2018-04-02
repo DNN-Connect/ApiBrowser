@@ -46,10 +46,6 @@ export interface IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
-  CreatedByUserID: number;
-  CreatedOnDate: Date;
-  LastModifiedByUserID: number;
-  LastModifiedOnDate: Date;
   Members?: IMember[];
 }
 
@@ -90,6 +86,11 @@ export class ApiClass implements IApiClass {
   IsNestedPrivate: boolean;
   IsNestedPublic: boolean;
   IsNotPublic: boolean;
+  ParentClassId: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   CreatedByUserDisplayName: string;
   LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
@@ -99,47 +100,45 @@ export class ApiClass implements IApiClass {
   ComponentName: string;
   LatestVersion: string;
   MemberCount?: number;
-  CreatedByUserID: number;
-  CreatedOnDate: Date;
-  LastModifiedByUserID: number;
-  LastModifiedOnDate: Date;
   Members?: IMember[];
-  constructor() {
-    this.ClassId = -1;
-    this.NamespaceId = -1;
-    this.ClassName = "";
-    this.AppearedInVersion = "";
-    this.IsDeprecated = false;
-    this.FullName = "";
-    this.IsAbstract = false;
-    this.IsAnsiClass = false;
-    this.IsArray = false;
-    this.IsAutoClass = false;
-    this.IsAutoLayout = false;
-    this.IsBeforeFieldInit = false;
-    this.IsByReference = false;
-    this.IsClass = false;
-    this.IsDefinition = false;
-    this.IsEnum = false;
-    this.IsExplicitLayout = false;
-    this.IsFunctionPointer = false;
-    this.IsGenericInstance = false;
-    this.IsGenericParameter = false;
-    this.IsImport = false;
-    this.IsInterface = false;
-    this.IsNested = false;
-    this.IsNestedAssembly = false;
-    this.IsNestedPrivate = false;
-    this.IsNestedPublic = false;
-    this.IsNotPublic = false;
-    this.CreatedByUserID = -1;
-    this.CreatedOnDate = new Date();
-    this.LastModifiedByUserID = -1;
-    this.LastModifiedOnDate = new Date();
-    this.NamespaceName = "";
-    this.FullQualifier = "";
-    this.ModuleId = -1;
-    this.ComponentName = "";
-    this.LatestVersion = "";
-  }
+    constructor() {
+  this.ClassId = -1;
+  this.NamespaceId = -1;
+  this.ClassName = "";
+  this.AppearedInVersion = "";
+  this.IsDeprecated = false;
+  this.FullName = "";
+  this.IsAbstract = false;
+  this.IsAnsiClass = false;
+  this.IsArray = false;
+  this.IsAutoClass = false;
+  this.IsAutoLayout = false;
+  this.IsBeforeFieldInit = false;
+  this.IsByReference = false;
+  this.IsClass = false;
+  this.IsDefinition = false;
+  this.IsEnum = false;
+  this.IsExplicitLayout = false;
+  this.IsFunctionPointer = false;
+  this.IsGenericInstance = false;
+  this.IsGenericParameter = false;
+  this.IsImport = false;
+  this.IsInterface = false;
+  this.IsNested = false;
+  this.IsNestedAssembly = false;
+  this.IsNestedPrivate = false;
+  this.IsNestedPublic = false;
+  this.IsNotPublic = false;
+  this.ParentClassId = -1;
+  this.CreatedByUserID = -1;
+  this.CreatedOnDate = new Date();
+  this.LastModifiedByUserID = -1;
+  this.LastModifiedOnDate = new Date();
+  this.NamespaceName = "";
+  this.FullQualifier = "";
+  this.ModuleId = -1;
+  this.ComponentName = "";
+  this.LatestVersion = "";
+   }
 }
+
