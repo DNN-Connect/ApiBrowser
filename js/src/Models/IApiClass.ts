@@ -37,6 +37,11 @@ export interface IApiClass {
   IsNestedPrivate: boolean;
   IsNestedPublic: boolean;
   IsNotPublic: boolean;
+  ParentClassId: number;
+  CreatedByUserID: number;
+  CreatedOnDate: Date;
+  LastModifiedByUserID: number;
+  LastModifiedOnDate: Date;
   CreatedByUserDisplayName: string;
   LastModifiedByUserDisplayName: string;
   DocumentationContents: string;
