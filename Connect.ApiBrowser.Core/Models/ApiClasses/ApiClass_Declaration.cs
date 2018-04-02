@@ -79,6 +79,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
              res.IsNestedPrivate = IsNestedPrivate;
              res.IsNestedPublic = IsNestedPublic;
              res.IsNotPublic = IsNotPublic;
+             res.ParentClassId = ParentClassId;
             res.CreatedByUserID = CreatedByUserID;
             res.CreatedOnDate = CreatedOnDate;
             res.LastModifiedByUserID = LastModifiedByUserID;
@@ -124,6 +125,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             res.IsNestedPrivate = IsNestedPrivate;
             res.IsNestedPublic = IsNestedPublic;
             res.IsNotPublic = IsNotPublic;
+            res.ParentClassId = ParentClassId;
             res.CreatedByUserDisplayName = CreatedByUserDisplayName;
             res.LastModifiedByUserDisplayName = LastModifiedByUserDisplayName;
             res.DocumentationContents = DocumentationContents;

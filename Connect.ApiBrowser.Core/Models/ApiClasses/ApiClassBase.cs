@@ -92,6 +92,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
         public bool IsNestedPublic { get; set; }
         [DataMember]
         public bool IsNotPublic { get; set; }
+        [DataMember]
+        public int ParentClassId { get; set; }
         #endregion
 
         #region Methods
@@ -182,6 +184,9 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
             IsNestedPublic = apiClass.IsNestedPublic;
 
             IsNotPublic = apiClass.IsNotPublic;
+
+            if (apiClass.ParentClassId > -1)
+                ParentClassId = apiClass.ParentClassId;
 
         }
         #endregion

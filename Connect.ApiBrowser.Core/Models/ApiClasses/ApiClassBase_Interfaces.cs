@@ -53,6 +53,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
    IsNestedPrivate = Convert.ToBoolean(Null.SetNull(dr["IsNestedPrivate"], IsNestedPrivate));
    IsNestedPublic = Convert.ToBoolean(Null.SetNull(dr["IsNestedPublic"], IsNestedPublic));
    IsNotPublic = Convert.ToBoolean(Null.SetNull(dr["IsNotPublic"], IsNotPublic));
+   ParentClassId = Convert.ToInt32(Null.SetNull(dr["ParentClassId"], ParentClassId));
         }
 
         [IgnoreColumn()]
@@ -132,7 +133,7 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
          return "";
      };
      return PropertyAccess.FormatString(PendingDescription, strFormat);
-    case "fullname": // NVarChar
+    case "fullname": // VarChar
      return PropertyAccess.FormatString(FullName, strFormat);
     case "isabstract": // Bit
      return IsAbstract.ToString();
@@ -176,6 +177,8 @@ namespace Connect.ApiBrowser.Core.Models.ApiClasses
      return IsNestedPublic.ToString();
     case "isnotpublic": // Bit
      return IsNotPublic.ToString();
+    case "parentclassid": // Int
+     return ParentClassId.ToString(strFormat, formatProvider);
                 default:
                     propertyNotFound = true;
                     break;

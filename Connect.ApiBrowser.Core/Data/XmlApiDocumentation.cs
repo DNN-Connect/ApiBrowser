@@ -75,76 +75,7 @@ namespace Connect.ApiBrowser.Core.Data
                 log.Log(StartTime, "Namespace {0}", ns.NamespaceName);
                 foreach (XmlNode classNode in namespaceNode.SelectNodes("class"))
                 {
-                    List<int> handledMemberIds = new List<int>();
-                    bool isDeprecated = false;
-                    string deprecationMessage = "";
-                    if (classNode.SelectSingleNode("deprecation") != null)
-                    {
-                        isDeprecated = true;
-                        deprecationMessage = classNode.SelectSingleNode("deprecation").InnerText;
-                    }
-                    try
-                    {
-                        var documentation = classNode.SelectSingleNode("documentation").InnerXml.Trim();
-                        var description = tryGetDescription(documentation);
-                        ApiClass cl = Sprocs.GetOrCreateClass(ns.NamespaceId, component.ComponentId, classNode.Attributes["name"].InnerText.Trim(), classNode.SelectSingleNode("fullName").InnerText.Trim(), classNode.SelectSingleNode("declaration").InnerText.Trim(), documentation, description, Version, isDeprecated, deprecationMessage.Trim(),
-                            bool.Parse(classNode.Attributes["IsAbstract"].InnerText),
-                            bool.Parse(classNode.Attributes["IsAnsiClass"].InnerText),
-                            bool.Parse(classNode.Attributes["IsArray"].InnerText),
-                            bool.Parse(classNode.Attributes["IsAutoClass"].InnerText),
-                            bool.Parse(classNode.Attributes["IsAutoLayout"].InnerText),
-                            bool.Parse(classNode.Attributes["IsBeforeFieldInit"].InnerText),
-                            bool.Parse(classNode.Attributes["IsByReference"].InnerText),
-                            bool.Parse(classNode.Attributes["IsClass"].InnerText),
-                            bool.Parse(classNode.Attributes["IsDefinition"].InnerText),
-                            bool.Parse(classNode.Attributes["IsEnum"].InnerText),
-                            bool.Parse(classNode.Attributes["IsExplicitLayout"].InnerText),
-                            bool.Parse(classNode.Attributes["IsFunctionPointer"].InnerText),
-                            bool.Parse(classNode.Attributes["IsGenericInstance"].InnerText),
-                            bool.Parse(classNode.Attributes["IsGenericParameter"].InnerText),
-                            bool.Parse(classNode.Attributes["IsImport"].InnerText),
-                            bool.Parse(classNode.Attributes["IsInterface"].InnerText),
-                            bool.Parse(classNode.Attributes["IsNested"].InnerText),
-                            bool.Parse(classNode.Attributes["IsNestedAssembly"].InnerText),
-                            bool.Parse(classNode.Attributes["IsNestedPrivate"].InnerText),
-                            bool.Parse(classNode.Attributes["IsNestedPublic"].InnerText),
-                            bool.Parse(classNode.Attributes["IsNotPublic"].InnerText));
-                        log.Log(StartTime, "Class {0} (ID={1})", cl.ClassName, cl.ClassId);
-                        foreach (XmlNode memberNode in classNode.SelectNodes("constructors/constructor"))
-                        {
-                            handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Constructor, ref log));
-                        }
-                        foreach (XmlNode memberNode in classNode.SelectNodes("methods/method"))
-                        {
-                            handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Method, ref log));
-                        }
-                        foreach (XmlNode memberNode in classNode.SelectNodes("fields/field"))
-                        {
-                            handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Field, ref log));
-                        }
-                        foreach (XmlNode memberNode in classNode.SelectNodes("properties/property"))
-                        {
-                            handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Property, ref log));
-                        }
-                        foreach (XmlNode memberNode in classNode.SelectNodes("events/event"))
-                        {
-                            handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Event, ref log));
-                        }
-                        foreach (var m in MemberRepository.Instance.GetMembersByApiClass(cl.ClassId))
-                        {
-                            if (!handledMemberIds.Contains(m.MemberId))
-                            {
-                                Sprocs.MemberDisappeared(m.MemberId, Version);
-                            }
-                        }
-                        handledClassIds.Add(cl.ClassId);
-                        log.Log(StartTime, "Finished class {0}", cl.ClassName);
-                    }
-                    catch (Exception ex)
-                    {
-                        Exceptions.LogException(ex);
-                        log.Log(StartTime, "Exception {0}. Stacktrace: {1}.", ex.Message, ex.StackTrace);
-                    }
+                    AddClass(ns.NamespaceId, component.ComponentId, -1, classNode, ref handledClassIds, ref log);
                 }
             }
 
@@ -170,6 +101,84 @@ namespace Connect.ApiBrowser.Core.Data
             log.Flush();
             log.Close();
 
+        }
+
+        private void AddClass(int namespaceId, int componentId, int parentId, XmlNode classNode, ref List<int> handledClassIds, ref System.IO.StreamWriter log)
+        {
+            List<int> handledMemberIds = new List<int>();
+            bool isDeprecated = false;
+            string deprecationMessage = "";
+            if (classNode.SelectSingleNode("deprecation") != null)
+            {
+                isDeprecated = true;
+                deprecationMessage = classNode.SelectSingleNode("deprecation").InnerText;
+            }
+            try
+            {
+                var documentation = classNode.SelectSingleNode("documentation").InnerXml.Trim();
+                var description = tryGetDescription(documentation);
+                ApiClass cl = Sprocs.GetOrCreateClass(namespaceId, componentId, parentId, classNode.Attributes["name"].InnerText.Trim(), classNode.SelectSingleNode("fullName").InnerText.Trim(), classNode.SelectSingleNode("declaration").InnerText.Trim(), documentation, description, Version, isDeprecated, deprecationMessage.Trim(),
+                    bool.Parse(classNode.Attributes["IsAbstract"].InnerText),
+                    bool.Parse(classNode.Attributes["IsAnsiClass"].InnerText),
+                    bool.Parse(classNode.Attributes["IsArray"].InnerText),
+                    bool.Parse(classNode.Attributes["IsAutoClass"].InnerText),
+                    bool.Parse(classNode.Attributes["IsAutoLayout"].InnerText),
+                    bool.Parse(classNode.Attributes["IsBeforeFieldInit"].InnerText),
+                    bool.Parse(classNode.Attributes["IsByReference"].InnerText),
+                    bool.Parse(classNode.Attributes["IsClass"].InnerText),
+                    bool.Parse(classNode.Attributes["IsDefinition"].InnerText),
+                    bool.Parse(classNode.Attributes["IsEnum"].InnerText),
+                    bool.Parse(classNode.Attributes["IsExplicitLayout"].InnerText),
+                    bool.Parse(classNode.Attributes["IsFunctionPointer"].InnerText),
+                    bool.Parse(classNode.Attributes["IsGenericInstance"].InnerText),
+                    bool.Parse(classNode.Attributes["IsGenericParameter"].InnerText),
+                    bool.Parse(classNode.Attributes["IsImport"].InnerText),
+                    bool.Parse(classNode.Attributes["IsInterface"].InnerText),
+                    bool.Parse(classNode.Attributes["IsNested"].InnerText),
+                    bool.Parse(classNode.Attributes["IsNestedAssembly"].InnerText),
+                    bool.Parse(classNode.Attributes["IsNestedPrivate"].InnerText),
+                    bool.Parse(classNode.Attributes["IsNestedPublic"].InnerText),
+                    bool.Parse(classNode.Attributes["IsNotPublic"].InnerText));
+                log.Log(StartTime, "Class {0} (ID={1})", cl.ClassName, cl.ClassId);
+                foreach (XmlNode memberNode in classNode.SelectNodes("constructors/constructor"))
+                {
+                    handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Constructor, ref log));
+                }
+                foreach (XmlNode memberNode in classNode.SelectNodes("methods/method"))
+                {
+                    handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Method, ref log));
+                }
+                foreach (XmlNode memberNode in classNode.SelectNodes("fields/field"))
+                {
+                    handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Field, ref log));
+                }
+                foreach (XmlNode memberNode in classNode.SelectNodes("properties/property"))
+                {
+                    handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Property, ref log));
+                }
+                foreach (XmlNode memberNode in classNode.SelectNodes("events/event"))
+                {
+                    handledMemberIds.Add(AddMemberToClass(ModuleId, cl.ClassId, memberNode, MemberType.Event, ref log));
+                }
+                foreach (var m in MemberRepository.Instance.GetMembersByApiClass(cl.ClassId))
+                {
+                    if (!handledMemberIds.Contains(m.MemberId))
+                    {
+                        Sprocs.MemberDisappeared(m.MemberId, Version);
+                    }
+                }
+                handledClassIds.Add(cl.ClassId);
+                foreach (XmlNode childClassNode in classNode.SelectNodes("class"))
+                {
+                    AddClass(namespaceId, componentId, cl.ClassId, childClassNode, ref handledClassIds, ref log);
+                }
+                log.Log(StartTime, "Finished class {0}", cl.ClassName);
+            }
+            catch (Exception ex)
+            {
+                Exceptions.LogException(ex);
+                log.Log(StartTime, "Exception {0}. Stacktrace: {1}.", ex.Message, ex.StackTrace);
+            }
         }
 
         private int AddMemberToClass(int moduleId, int classId, XmlNode memberNode, MemberType memberType, ref System.IO.StreamWriter log)
@@ -214,7 +223,7 @@ namespace Connect.ApiBrowser.Core.Data
                         };
                         if (mcb.EndLine != 0 && mcb.EndLine > mcb.StartLine)
                         {
-                            block=Sprocs.GetOrCreateMemberCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
+                            block = Sprocs.GetOrCreateMemberCodeBlock(mcb.MemberId, mcb.CodeHash, mcb.Version, mcb.FileName, (int)mcb.StartLine, (int)mcb.StartColumn, (int)mcb.EndLine, (int)mcb.EndColumn);
                         }
                     }
                     if (block == null)

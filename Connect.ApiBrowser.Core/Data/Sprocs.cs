@@ -135,12 +135,12 @@ namespace Connect.ApiBrowser.Core.Data
             }
         }
 
-        // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName)
-        //  INSERT INTO dbo.Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ClassName], [FullName], [Declaration], [Documentation], [Description],[AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [IsAbstract],[IsAnsiClass],[IsArray],[IsAutoClass],[IsAutoLayout],[IsBeforeFieldInit],[IsByReference],[IsClass],[IsDefinition],[IsEnum],[IsExplicitLayout],[IsFunctionPointer],[IsGenericInstance],[IsGenericParameter],[IsImport],[IsInterface],[IsNested],[IsNestedAssembly],[IsNestedPrivate],[IsNestedPublic],[IsNotPublic])
-        //   VALUES (@NamespaceId, @ComponentId, @ClassName, @FullName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL, -1, GETDATE(), -1, GETDATE(), @IsAbstract, @IsAnsiClass, @IsArray, @IsAutoClass, @IsAutoLayout, @IsBeforeFieldInit, @IsByReference, @IsClass, @IsDefinition, @IsEnum, @IsExplicitLayout, @IsFunctionPointer, @IsGenericInstance, @IsGenericParameter, @IsImport, @IsInterface, @IsNested, @IsNestedAssembly, @IsNestedPrivate, @IsNestedPublic, @IsNotPublic);
+        // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName)
+        //  INSERT INTO dbo.Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ParentClassId], [ClassName], [FullName], [Declaration], [Documentation], [Description],[AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [IsAbstract],[IsAnsiClass],[IsArray],[IsAutoClass],[IsAutoLayout],[IsBeforeFieldInit],[IsByReference],[IsClass],[IsDefinition],[IsEnum],[IsExplicitLayout],[IsFunctionPointer],[IsGenericInstance],[IsGenericParameter],[IsImport],[IsInterface],[IsNested],[IsNestedAssembly],[IsNestedPrivate],[IsNestedPublic],[IsNotPublic])
+        //   VALUES (@NamespaceId, @ComponentId, @ParentClassId, @ClassName, @FullName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL, -1, GETDATE(), -1, GETDATE(), @IsAbstract, @IsAnsiClass, @IsArray, @IsAutoClass, @IsAutoLayout, @IsBeforeFieldInit, @IsByReference, @IsClass, @IsDefinition, @IsEnum, @IsExplicitLayout, @IsFunctionPointer, @IsGenericInstance, @IsGenericParameter, @IsImport, @IsInterface, @IsNested, @IsNestedAssembly, @IsNestedPrivate, @IsNestedPublic, @IsNotPublic);
         // UPDATE dbo.Connect_ApiBrowser_ApiClasses
         //  SET [AppearedInVersion]=@Version, [FullName]=@FullName
-        //  WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName AND [AppearedInVersion]>@Version;
+        //  WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName AND [AppearedInVersion]>@Version;
         // IF @IsDeprecated=1
         // BEGIN
         //  IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName
@@ -149,26 +149,25 @@ namespace Connect.ApiBrowser.Core.Data
         //   SET [DeprecatedInVersion]=@Version,
         //    [IsDeprecated]=1,
         //    [DeprecationMessage]=ISNULL([DeprecationMessage], @DeprecationMessage)
-        //   WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+        //   WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;
         // END;
         // UPDATE dbo.Connect_ApiBrowser_ApiClasses
         //  SET [Declaration]=ISNULL([Declaration],@Declaration),
         //   [Documentation]=ISNULL([Documentation],@Documentation)
         //  WHERE
-        //   [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+        //   [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;
         // SELECT
         //  *
         // FROM dbo.Connect_ApiBrowser_ApiClasses
         // WHERE
-        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
-        // ;  
-        public static ApiClass GetOrCreateClass(int namespaceId, int componentId, string className, string fullName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage, bool isAbstract, bool isAnsiClass, bool isArray, bool isAutoClass, bool isAutoLayout, bool isBeforeFieldInit, bool isByReference, bool isClass, bool isDefinition, bool isEnum, bool isExplicitLayout, bool isFunctionPointer, bool isGenericInstance, bool isGenericParameter, bool isImport, bool isInterface, bool isNested, bool isNestedAssembly, bool isNestedPrivate, bool isNestedPublic, bool isNotPublic)
+        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;;  
+        public static ApiClass GetOrCreateClass(int namespaceId, int componentId, int parentClassId, string className, string fullName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage, bool isAbstract, bool isAnsiClass, bool isArray, bool isAutoClass, bool isAutoLayout, bool isBeforeFieldInit, bool isByReference, bool isClass, bool isDefinition, bool isEnum, bool isExplicitLayout, bool isFunctionPointer, bool isGenericInstance, bool isGenericParameter, bool isImport, bool isInterface, bool isNested, bool isNestedAssembly, bool isNestedPrivate, bool isNestedPublic, bool isNotPublic)
         {
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteSingleOrDefault<ApiClass>(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_GetOrCreateClass",
-                    namespaceId, componentId, className, fullName, declaration, documentation, description, version, isDeprecated, deprecationMessage, isAbstract, isAnsiClass, isArray, isAutoClass, isAutoLayout, isBeforeFieldInit, isByReference, isClass, isDefinition, isEnum, isExplicitLayout, isFunctionPointer, isGenericInstance, isGenericParameter, isImport, isInterface, isNested, isNestedAssembly, isNestedPrivate, isNestedPublic, isNotPublic);
+                    namespaceId, componentId, parentClassId, className, fullName, declaration, documentation, description, version, isDeprecated, deprecationMessage, isAbstract, isAnsiClass, isArray, isAutoClass, isAutoLayout, isBeforeFieldInit, isByReference, isClass, isDefinition, isEnum, isExplicitLayout, isFunctionPointer, isGenericInstance, isGenericParameter, isImport, isInterface, isNested, isNestedAssembly, isNestedPrivate, isNestedPublic, isNotPublic);
             }
         }
 
