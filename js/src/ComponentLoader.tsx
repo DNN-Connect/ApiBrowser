@@ -2,18 +2,26 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import { AppManager } from "./AppManager";
-import SearchScreen from "./Components/Search/SearchScreen";
+import NamespaceBrowser from "./Components/ClassesAndNamespaces/NamespaceBrowser";
 import FileManager from "./Components/Files/FileManager";
 import ClassesAndNamespacesGrid from "./Components/ClassesAndNamespaces/Grid";
 import DocumentationEditor from "./Components/Editor/DocumentationEditor";
 import ModerationScreen from "./Components/Moderation/ModerationScreen";
+import Browser from "./Components/Browser/Browser";
 
 export class ComponentLoader {
 
   public static load(): void {
-    $('.searchscreen').each(function (i, el) {
+    $('.apibrowser').each(function (i, el) {
       var moduleId = $(el).data('moduleid');
-      ReactDOM.render(<SearchScreen
+      ReactDOM.render(<Browser
+        module={AppManager.Modules.Item(moduleId.toString())}
+        detailLink={$(el).data('detail-link')}
+        />, el);
+    });
+    $('.nsbrowser').each(function (i, el) {
+      var moduleId = $(el).data('moduleid');
+      ReactDOM.render(<NamespaceBrowser
         module={AppManager.Modules.Item(moduleId.toString())}
         selection={$(el).data('selection')}
         classes={$(el).data('classes')}
