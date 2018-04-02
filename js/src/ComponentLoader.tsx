@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import { AppManager } from "./AppManager";
-import Browser from "./Components/Browser/Browser";
+import SearchScreen from "./Components/Search/SearchScreen";
 import FileManager from "./Components/Files/FileManager";
 import ClassesAndNamespacesGrid from "./Components/ClassesAndNamespaces/Grid";
 import DocumentationEditor from "./Components/Editor/DocumentationEditor";
@@ -11,9 +11,9 @@ import ModerationScreen from "./Components/Moderation/ModerationScreen";
 export class ComponentLoader {
 
   public static load(): void {
-    $('.apibrowser').each(function (i, el) {
+    $('.searchscreen').each(function (i, el) {
       var moduleId = $(el).data('moduleid');
-      ReactDOM.render(<Browser
+      ReactDOM.render(<SearchScreen
         module={AppManager.Modules.Item(moduleId.toString())}
         selection={$(el).data('selection')}
         classes={$(el).data('classes')}

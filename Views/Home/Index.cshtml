@@ -8,6 +8,9 @@
      <a href="@Url.Action("Index", "Components")" class="btn btn-default">
       @Dnn.LocalizeString("Components")
      </a>
+     <a href="@Url.Action("Index", "Search")" class="btn btn-default">
+      @Dnn.LocalizeString("Search")
+     </a>
  @if (ApiBrowserModuleContext.Security.CanModerate)
  {
      <a href="@Url.Action("Moderate", "Documentation")" class="btn btn-default">
@@ -22,7 +25,7 @@
  }
 </div>
 
-<div class="connectapibrowser classesandnamespaces"
+<div class="connectapibrowser newui"
      data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
      data-moduleid="@Dnn.ActiveModule.ModuleID"
      data-tabid="@Dnn.ActiveModule.TabID"

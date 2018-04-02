@@ -1,18 +1,20 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
-import ClassDetails from './ClassDetails';
-import MemberDetails from './MemberDetails';
-import NamespaceDetails from './NamespaceDetails';
-import BrowserNavBar from './BrowserNavBar';
+import ClassTree from '../ClassesAndNamespaces/ClassTree';
+import ClassDetails from '../ClassesAndNamespaces/ClassDetails';
+import MemberDetails from '../ClassesAndNamespaces/MemberDetails';
+import NamespaceDetails from '../ClassesAndNamespaces/NamespaceDetails';
+import Tree, { TreeNode, TreeNodeProps } from 'rc-tree';
+import { IApiClass } from '../../../../_Development/Out/js/src/Models/index';
 
-interface IBrowserProps {
+interface ISearchScreenProps {
     module: Models.IAppModule;
     selection: Models.IViewSelection;
     classes: Models.IApiClass[];
     documentationLink: string;
 };
 
-interface IBrowserState {
+interface ISearchScreenState {
     selectedClass: Models.IApiClass | null;
     selectedMember: Models.IMember | null;
     selectedMemberCodeblocks: Models.IMemberCodeBlock[];
@@ -20,12 +22,12 @@ interface IBrowserState {
     expandedNodes: string[];
 };
 
-export default class Browser extends React.Component<IBrowserProps, IBrowserState> {
+export default class SearchScreen extends React.Component<ISearchScreenProps, ISearchScreenState> {
 
     refs: {
     }
 
-    constructor(props: IBrowserProps) {
+    constructor(props: ISearchScreenProps) {
         super(props);
         this.state = {
             selectedClass: props.selection.SelectedClass,

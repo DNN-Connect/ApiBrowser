@@ -1,0 +1,21 @@
+@inherits ApiBrowserWebPage
+@using Connect.DNN.Modules.ApiBrowser.Common;
+@{
+    ApiBrowserModuleContext.AddModuleScript();
+}
+
+<div class="text-right">
+     <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+      @Dnn.LocalizeString("Home")
+     </a>
+</div>
+
+<div class="connectapibrowser searchscreen"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-resources="@SerializedResources()"
+     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
+     data-detail-link="@Url.Action("Namespace", "Namespaces")">
+</div>
+

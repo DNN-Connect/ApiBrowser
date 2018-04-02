@@ -147,4 +147,7 @@
   <data name="Return.Text" xml:space="preserve">
     <value>Return</value>
   </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>
