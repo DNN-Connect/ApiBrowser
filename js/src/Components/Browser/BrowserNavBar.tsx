@@ -25,16 +25,16 @@ export default class BrowserNavBar extends React.Component<
             module={this.props.module}
             classes={this.props.classes}
             class={c}
-            level={0}
+            level={1}
             changeSelection={(c, m) => this.props.changeSelection(c, m)}
           />
         );
       }
     });
     return (
-      <nav role="navigation" className="sidebar-nav">
+      <div id="toc" className="toc-list-h1">
         {mainClasses}
-      </nav>
+      </div>
     );
   }
 }

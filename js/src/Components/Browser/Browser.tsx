@@ -221,10 +221,10 @@ export default class Browser extends React.Component<
     }
     return (
       <div>
-        <div className="sidebar">
-          <h4>
+        <div className="toc-wrapper">
             <a
               href="#"
+              className="toc-h1 toc-link"
               onClick={e => {
                 e.preventDefault();
                 this.changeSelection(null, null);
@@ -232,7 +232,6 @@ export default class Browser extends React.Component<
             >
               {this.props.selection.SelectedNamespace.NamespaceName}
             </a>
-          </h4>
           <BrowserNavBar
             module={this.props.module}
             namespace={this.props.selection.SelectedNamespace}
@@ -240,7 +239,10 @@ export default class Browser extends React.Component<
             changeSelection={(c, m) => this.changeSelection(c, m)}
           />
         </div>
-        <div className="content">{mainScreen}</div>
+        <div className="page-wrapper">
+          <div className="dark-box" />
+          {mainScreen}
+        </div>
       </div>
     );
   }

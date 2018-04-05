@@ -21,7 +21,9 @@ export default class BrowserNavBarClass extends React.Component<
           return (
             <li key={m.MemberId}>
               <a
-                className="sidebar-nav-item"
+                className={
+                  "toc-h" + (this.props.level + 1).toString() + " toc-link"
+                }
                 href="#"
                 onClick={e => {
                   e.preventDefault();
@@ -50,21 +52,25 @@ export default class BrowserNavBarClass extends React.Component<
       }
     });
     return (
-      <div className={"sidebar-level-" + this.props.level.toString()}>
-        <h5 className="sidebar-nav-heading">
-          <a
-            href="#"
-            onClick={e => {
-              e.preventDefault();
-              this.props.changeSelection(this.props.class, null);
-            }}
-          >
-            {this.props.class.ClassName}
-          </a>
-        </h5>
-        <ul className="sidebar-nav-items">{members}</ul>
-        {subClasses}
-      </div>
+      <li>
+        <a
+          href="#"
+          className={"toc-h" + this.props.level.toString() + " toc-link"}
+          onClick={e => {
+            e.preventDefault();
+            this.props.changeSelection(this.props.class, null);
+          }}
+        >
+          {this.props.class.ClassName}
+        </a>
+        <ul
+          className={"toc-list-h" + (this.props.level + 1).toString()}
+          style={{ display: "inherit" }}
+        >
+          {members}
+          {subClasses}
+        </ul>
+      </li>
     );
   }
 }

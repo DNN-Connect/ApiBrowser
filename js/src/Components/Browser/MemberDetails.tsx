@@ -81,7 +81,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
             <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
         ) : null;
         return (
-            <div>
+            <div className="content">
                 <h2>{this.props.member.ClassName}.{this.props.member.MemberName} {memType}</h2>
                 {deprecation}
                 <dl className="dl-horizontal">
@@ -113,7 +113,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                 <h4>{this.props.module.resources.Declaration}</h4>
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>{this.props.module.resources.Codeblocks}</h4>
-                <table className="table">
+                <table>
                     <thead>
                         <tr>
                             <th>{this.props.module.resources.Version}</th>

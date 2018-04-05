@@ -45,7 +45,7 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
             <a href={this.props.documentationLink + "?" + editurl} className="btn btn-sm btn-default"><i className="glyphicon glyphicon-pencil"></i></a>
         ) : null;
         return (
-            <div>
+            <div className="content">
                 <h2>{this.props.apiclass.ClassName} Class</h2>
                 {deprecation}
                 <dl className="dl-horizontal">

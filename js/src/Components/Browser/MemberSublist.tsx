@@ -34,7 +34,7 @@ export default class MemberSublist extends React.Component<IMemberSublistProps> 
         return (
             <div>
                 <h6>{this.props.title}</h6>
-                <table className="table">
+                <table>
                     <tbody>
                         {rows}
                     </tbody>

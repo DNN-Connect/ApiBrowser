@@ -29,11 +29,11 @@ export default class NamespaceDetails extends React.Component<INamespaceDetailsP
             );
         });
         return (
-            <div>
+            <div className="content">
                 <h2>{this.props.namespace.NamespaceName} Namespace</h2>
                 <p>{this.props.namespace.Description}</p>
                 <h3>{this.props.module.resources.Classes}</h3>
-                <table className="table">
+                <table>
                     <tbody>
                         {classRows}
                     </tbody>
