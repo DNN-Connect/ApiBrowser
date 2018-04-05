@@ -1,0 +1,135 @@
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesClassesAndMembers'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesClassesAndMembers
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesClassesAndMembers
+AS
+SELECT
+ n.ModuleId,
+ a.NamespaceId, 
+ a.ClassId,
+ -1 MemberId,
+ 1 MainType,
+ -1 SubType,
+ n.NamespaceName + '.' + a.ClassName [Name],
+ a.Description,
+ a.PendingDescription,
+ a.IsDeprecated,
+ a.DeprecatedInVersion,
+ a.DisappearedInVersion,
+ a.LastModifiedByUserID,
+ a.LastModifiedOnDate
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses a
+INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=a.NamespaceId
+UNION
+SELECT
+ n.ModuleId,
+ n.NamespaceId,
+ -1 ClassId,
+ -1 MemberId,
+ 0 MainType,
+ -1 SubType,
+ n.NamespaceName [Name],
+ n.Description,
+ '' PendingDescription,
+ 0 IsDeprecated,
+ NULL DeprecatedInVersion,
+ NULL DisappearedInVersion,
+ -1 LastModifiedByUserID,
+ GETDATE() LastModifiedOnDate
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n
+UNION
+SELECT
+ n.ModuleId,
+ a.NamespaceId, 
+ a.ClassId,
+ m.MemberId,
+ 2 MainType,
+ m.MemberType SubType,
+ n.NamespaceName + '.' + a.ClassName + '.' + m.MemberName [Name],
+ m.Description,
+ m.PendingDescription,
+ m.IsDeprecated,
+ m.DeprecatedInVersion,
+ m.DisappearedInVersion,
+ m.LastModifiedByUserID,
+ m.LastModifiedOnDate
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members m
+INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses a ON a.ClassId=m.ClassId
+INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=a.NamespaceId
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass
+ @NamespaceId INT,
+ @ComponentId INT,
+ @ParentClassId INT,
+ @ClassName NVARCHAR(200),
+ @FullName VARCHAR(1000),
+ @Declaration NVARCHAR(500),
+ @Documentation NVARCHAR(MAX),
+ @Description NVARCHAR(MAX),
+ @Version VARCHAR(15),
+ @IsDeprecated BIT,
+ @DeprecationMessage NVARCHAR(1000),
+ @IsAbstract BIT,
+ @IsAnsiClass BIT,
+ @IsArray BIT,
+ @IsAutoClass BIT,
+ @IsAutoLayout BIT,
+ @IsBeforeFieldInit BIT,
+ @IsByReference BIT,
+ @IsClass BIT,
+ @IsDefinition BIT,
+ @IsEnum BIT,
+ @IsExplicitLayout BIT,
+ @IsFunctionPointer BIT,
+ @IsGenericInstance BIT,
+ @IsGenericParameter BIT,
+ @IsImport BIT,
+ @IsInterface BIT,
+ @IsNested BIT,
+ @IsNestedAssembly BIT,
+ @IsNestedPrivate BIT,
+ @IsNestedPublic BIT,
+ @IsNotPublic BIT
+AS
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ParentClassId], [ClassName], [FullName], [Declaration], [Documentation], [Description],[AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [IsAbstract],[IsAnsiClass],[IsArray],[IsAutoClass],[IsAutoLayout],[IsBeforeFieldInit],[IsByReference],[IsClass],[IsDefinition],[IsEnum],[IsExplicitLayout],[IsFunctionPointer],[IsGenericInstance],[IsGenericParameter],[IsImport],[IsInterface],[IsNested],[IsNestedAssembly],[IsNestedPrivate],[IsNestedPublic],[IsNotPublic])
+  VALUES (@NamespaceId, @ComponentId, @ParentClassId, @ClassName, @FullName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL, -1, GETDATE(), -1, GETDATE(), @IsAbstract, @IsAnsiClass, @IsArray, @IsAutoClass, @IsAutoLayout, @IsBeforeFieldInit, @IsByReference, @IsClass, @IsDefinition, @IsEnum, @IsExplicitLayout, @IsFunctionPointer, @IsGenericInstance, @IsGenericParameter, @IsImport, @IsInterface, @IsNested, @IsNestedAssembly, @IsNestedPrivate, @IsNestedPublic, @IsNotPublic);
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+ SET [AppearedInVersion]=@Version, [FullName]=@FullName
+ WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName AND [AppearedInVersion]>@Version;
+IF @IsDeprecated=1
+BEGIN
+ IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName
+  AND ISNULL([DeprecatedInVersion],'99.99.99') < @Version)
+ UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+  SET [DeprecatedInVersion]=@Version,
+   [IsDeprecated]=1,
+   [DeprecationMessage]=ISNULL([DeprecationMessage], @DeprecationMessage)
+  WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;
+END;
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+ SET [Declaration]=ISNULL([Declaration],@Declaration),
+  [Documentation]=ISNULL([Documentation],@Documentation)
+ WHERE
+  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;
+SELECT
+ *
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+WHERE
+ [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;;  
+GO
+
