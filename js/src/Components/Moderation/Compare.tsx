@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Models from '../../Models/';
-const ReactMarkdown = require('react-markdown');
+import * as ReactMarkdown from 'react-markdown';
 
 interface ICompareProps {
     module: Models.IAppModule;

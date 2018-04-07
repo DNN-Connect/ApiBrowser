@@ -12,25 +12,7 @@ var gulp = require('gulp'),
     markdown = require('gulp-markdown'),
     rename = require('gulp-rename'),
     manifest = require('gulp-dnn-manifest'),
-    path = require('path'),
-    less = require('gulp-less'),
-    lessPluginCleanCSS = require('less-plugin-clean-css'),
-    cleancss = new lessPluginCleanCSS({
-        advanced: true
-    });
-
-gulp.task('less', function() {
-    return gulp.src('css/less/module.less')
-        .pipe(less({
-            paths: [path.join(__dirname, 'less', 'includes')],
-            plugins: [cleancss]
-        }))
-        .pipe(gulp.dest('.'));
-});
-
-gulp.task('watch', function() {
-    gulp.watch('css/src/**/*.less', ['less']);
-});
+    path = require('path');
 
 gulp.task('assemblyInfo', function() {
     return gulp

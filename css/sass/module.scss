@@ -1,4 +1,5 @@
-@import (inline) '../../node_modules/rc-tree/dist/rc-tree.css';
+@import '../../node_modules/rc-tree/dist/rc-tree.css';
+@import './slate/screen.css.scss';
 .ModConnectApiBrowserC {
     .greylabel {
         color: #aaa;

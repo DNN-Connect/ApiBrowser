@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Models from '../../Models/';
 import DocumentationList from './DocumentationList';
 import Viewer from './Viewer';
-const ReactMarkdown = require('react-markdown');
+import * as ReactMarkdown from 'react-markdown';
 
 interface IDocumentationEditorProps {
     module: Models.IAppModule;

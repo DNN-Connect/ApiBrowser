@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Models from '../../Models/';
 import CodeBlock from './CodeBlock';
 import EditableText from '../Generic/EditableText';
-const ReactMarkdown = require('react-markdown');
+import * as ReactMarkdown from 'react-markdown';
 
 interface IMemberDetailsProps {
     module: Models.IAppModule;

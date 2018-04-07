@@ -16,10 +16,12 @@
             //,"Types"
         ]
     },
+    "files": [
+        "js/src/App.tsx"
+    ],
     "include": [
         "js/src/**/*.ts",
-        "js/src/**/*.tsx",
-        "**/*.js"
+        "js/src/**/*.tsx"
     ],
     "exclude": [
         "node_modules"
