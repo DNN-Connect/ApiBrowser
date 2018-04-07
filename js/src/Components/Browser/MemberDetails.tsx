@@ -22,6 +22,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
         declaration: HTMLElement;
     }
     componentDidUpdate(prevProps: IMemberDetailsProps) {
+        this.refs.codeblock.show(-1);
         hljs.highlightBlock(this.refs.declaration);
     }
     private showCodeBlock(codeblockId: number): void {
@@ -113,6 +114,7 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                 <h4>{this.props.module.resources.Declaration}</h4>
                 <pre><code className="cs" ref="declaration">{this.props.member.Declaration}</code></pre>
                 <h4>{this.props.module.resources.Codeblocks}</h4>
+                <CodeBlock ref="codeblock" module={this.props.module} />
                 <table>
                     <thead>
                         <tr>
@@ -126,7 +128,6 @@ export default class MemberDetails extends React.Component<IMemberDetailsProps> 
                         {cbrows}
                     </tbody>
                 </table>
-                <CodeBlock ref="codeblock" module={this.props.module} />
                 <h4>{this.props.module.resources.Documentation} {docedit}</h4>
                 {documentation}
             </div>

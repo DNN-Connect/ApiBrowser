@@ -326,7 +326,7 @@ html, body {
     clear: both;
   }
 
-  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl, &>div {
     margin-right: $examples-width;
     padding: 0 $main-padding;
     box-sizing: border-box;
@@ -539,6 +539,7 @@ html, body {
     padding-top: 2em;
     padding-bottom: 2em;
     padding: 2em $main-padding;
+    margin-bottom: 10px;
   }
 
   blockquote {
