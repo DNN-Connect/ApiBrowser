@@ -222,20 +222,22 @@ export default class Browser extends React.Component<
     return (
       <div>
         <div className="toc-wrapper">
-            <a
-              href="#"
-              className="toc-h1 toc-link"
-              onClick={e => {
-                e.preventDefault();
-                this.changeSelection(null, null);
-              }}
-            >
-              {this.props.selection.SelectedNamespace.NamespaceName}
-            </a>
+          <a
+            href="#"
+            className={"toc-h1 toc-link" + (this.state.selectedClass == null ? " active" : "")}
+            onClick={e => {
+              e.preventDefault();
+              this.changeSelection(null, null);
+            }}
+          >
+            {this.props.selection.SelectedNamespace.NamespaceName}
+          </a>
           <BrowserNavBar
             module={this.props.module}
             namespace={this.props.selection.SelectedNamespace}
             classes={this.state.classes}
+            selectedClassId={this.state.selectedClass == null ? -1 : this.state.selectedClass.ClassId}
+            selectedMemberId={this.state.selectedMember == null ? -1 : this.state.selectedMember.MemberId}
             changeSelection={(c, m) => this.changeSelection(c, m)}
           />
         </div>

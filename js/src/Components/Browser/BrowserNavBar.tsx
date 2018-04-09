@@ -6,6 +6,8 @@ interface IBrowserNavBarProps {
   module: Models.IAppModule;
   namespace: Models.IApiNamespace;
   classes: Models.IApiClass[];
+  selectedClassId: number;
+  selectedMemberId: number;
   changeSelection: (
     newClass: Models.IApiClass | null,
     newMember: Models.IMember | null
@@ -24,6 +26,8 @@ export default class BrowserNavBar extends React.Component<
             key={c.ClassId}
             module={this.props.module}
             classes={this.props.classes}
+            selectedClassId={this.props.selectedClassId}
+            selectedMemberId={this.props.selectedMemberId}
             class={c}
             level={1}
             changeSelection={(c, m) => this.props.changeSelection(c, m)}

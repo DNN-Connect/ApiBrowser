@@ -4,6 +4,8 @@ import * as Models from "../../Models/";
 interface IBrowserNavBarClassProps {
   module: Models.IAppModule;
   classes: Models.IApiClass[];
+  selectedClassId: number;
+  selectedMemberId: number;
   class: Models.IApiClass;
   level: number;
   changeSelection: (
@@ -22,7 +24,10 @@ export default class BrowserNavBarClass extends React.Component<
             <li key={m.MemberId}>
               <a
                 className={
-                  "toc-h" + (this.props.level + 1).toString() + " toc-link"
+                  "toc-item toc-h" +
+                  (this.props.level + 1).toString() +
+                  " toc-link" +
+                  (this.props.selectedMemberId == m.MemberId ? " active" : "")
                 }
                 href="#"
                 onClick={e => {
@@ -44,6 +49,8 @@ export default class BrowserNavBarClass extends React.Component<
             key={c.ClassId}
             module={this.props.module}
             classes={this.props.classes}
+            selectedClassId={this.props.selectedClassId}
+            selectedMemberId={this.props.selectedMemberId}
             class={c}
             level={this.props.level + 1}
             changeSelection={(c, m) => this.props.changeSelection(c, m)}
@@ -55,7 +62,15 @@ export default class BrowserNavBarClass extends React.Component<
       <li>
         <a
           href="#"
-          className={"toc-h" + this.props.level.toString() + " toc-link"}
+          className={
+            "toc-h toc-h" +
+            this.props.level.toString() +
+            " toc-link" +
+            (this.props.selectedMemberId == -1 &&
+            this.props.selectedClassId == this.props.class.ClassId
+              ? " active"
+              : "")
+          }
           onClick={e => {
             e.preventDefault();
             this.props.changeSelection(this.props.class, null);
@@ -63,10 +78,7 @@ export default class BrowserNavBarClass extends React.Component<
         >
           {this.props.class.ClassName}
         </a>
-        <ul
-          className={"toc-list-h" + (this.props.level + 1).toString()}
-          style={{ display: "inherit" }}
-        >
+        <ul className={"toc-list-h" + (this.props.level + 1).toString()}>
           {members}
           {subClasses}
         </ul>
