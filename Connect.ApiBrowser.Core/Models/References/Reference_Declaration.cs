@@ -20,13 +20,37 @@ namespace Connect.ApiBrowser.Core.Models.References
 
         #region Properties
         [DataMember]
-        public string MemberName { get; set; }
+        public int FromRefMemberId { get; set; }
         [DataMember]
-        public string AppearedInVersion { get; set; }
+        public int? FromRefStartLine { get; set; }
         [DataMember]
-        public string DeprecatedInVersion { get; set; }
+        public int? FromRefEndLine { get; set; }
         [DataMember]
-        public string DisappearedInVersion { get; set; }
+        public string FromRefMemberName { get; set; }
+        [DataMember]
+        public string FromRefFullName { get; set; }
+        [DataMember]
+        public string FromRefAppearedInVersion { get; set; }
+        [DataMember]
+        public string FromRefDeprecatedInVersion { get; set; }
+        [DataMember]
+        public string FromRefDisappearedInVersion { get; set; }
+        [DataMember]
+        public int FromRefClassId { get; set; }
+        [DataMember]
+        public string FromRefClassName { get; set; }
+        [DataMember]
+        public string FromRefFullQualifier { get; set; }
+        [DataMember]
+        public string ToRefMemberName { get; set; }
+        [DataMember]
+        public string ToRefFullName { get; set; }
+        [DataMember]
+        public string ToRefAppearedInVersion { get; set; }
+        [DataMember]
+        public string ToRefDeprecatedInVersion { get; set; }
+        [DataMember]
+        public string ToRefDisappearedInVersion { get; set; }
         #endregion
 
         #region Methods
@@ -48,10 +72,22 @@ namespace Connect.ApiBrowser.Core.Models.References
             res.FullName = FullName;
             res.Offset = Offset;
             res.ReferencedMemberId = ReferencedMemberId;
-            res.MemberName = MemberName;
-            res.AppearedInVersion = AppearedInVersion;
-            res.DeprecatedInVersion = DeprecatedInVersion;
-            res.DisappearedInVersion = DisappearedInVersion;
+            res.FromRefMemberId = FromRefMemberId;
+            res.FromRefStartLine = FromRefStartLine;
+            res.FromRefEndLine = FromRefEndLine;
+            res.FromRefMemberName = FromRefMemberName;
+            res.FromRefFullName = FromRefFullName;
+            res.FromRefAppearedInVersion = FromRefAppearedInVersion;
+            res.FromRefDeprecatedInVersion = FromRefDeprecatedInVersion;
+            res.FromRefDisappearedInVersion = FromRefDisappearedInVersion;
+            res.FromRefClassId = FromRefClassId;
+            res.FromRefClassName = FromRefClassName;
+            res.FromRefFullQualifier = FromRefFullQualifier;
+            res.ToRefMemberName = ToRefMemberName;
+            res.ToRefFullName = ToRefFullName;
+            res.ToRefAppearedInVersion = ToRefAppearedInVersion;
+            res.ToRefDeprecatedInVersion = ToRefDeprecatedInVersion;
+            res.ToRefDisappearedInVersion = ToRefDisappearedInVersion;
             return res;
         }
         #endregion

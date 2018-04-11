@@ -132,6 +132,7 @@
     <Compile Include="Api\CommentsController.cs" />
     <Compile Include="Api\ComponentsController.cs" />
     <Compile Include="Api\MemberCodeBlocksController.cs" />
+    <Compile Include="Api\ReferencesController.cs" />
     <Compile Include="Api\MembersController.cs" />
     <Compile Include="Api\NamespacesClassesAndMembersController.cs" />
     <Compile Include="Common\ApiBrowserApiController.cs" />

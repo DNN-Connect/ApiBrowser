@@ -3,8 +3,8 @@ export interface INamespacesClassesAndMember {
   NamespaceId: number;
   ClassId: number;
   MemberId: number;
-  MainType?: number;
-  SubType?: number;
+  MainType: number;
+  SubType: number;
   Name: string;
   Description: string;
   PendingDescription: string;
@@ -20,8 +20,8 @@ export class NamespacesClassesAndMember implements INamespacesClassesAndMember {
   NamespaceId: number;
   ClassId: number;
   MemberId: number;
-  MainType?: number;
-  SubType?: number;
+  MainType: number;
+  SubType: number;
   Name: string;
   Description: string;
   PendingDescription: string;
@@ -35,6 +35,8 @@ export class NamespacesClassesAndMember implements INamespacesClassesAndMember {
   this.NamespaceId = -1;
   this.ClassId = -1;
   this.MemberId = -1;
+  this.MainType = -1;
+  this.SubType = -1;
   this.Name = "";
   this.IsDeprecated = -1;
    }

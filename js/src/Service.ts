@@ -61,6 +61,12 @@ export default class DataService {
     public getModerationItems(success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'Documentations', 'Moderation', null, null, success)
     }
+    public getReferencesFromBlock(codeBlockId: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'References', 'FromBlock', codeBlockId, null, success)
+    }
+    public getReferencesToMember(memberId: number, success: Function): any {
+        this.ajaxCall('GET', this.baseServicepath, 'References', 'ToMember', memberId, null, success)
+    }
     public getScheduledFiles(success: Function): any {
         this.ajaxCall('GET', this.baseServicepath, 'Files', 'Files', null, null, success)
     }

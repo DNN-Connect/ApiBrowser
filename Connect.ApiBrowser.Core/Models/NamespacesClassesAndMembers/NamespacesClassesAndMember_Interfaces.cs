@@ -46,17 +46,9 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesClassesAndMembers
     case "memberid": // Int
      return MemberId.ToString(strFormat, formatProvider);
     case "maintype": // Int
-     if (MainType == null)
-     {
-         return "";
-     };
-     return ((int)MainType).ToString(strFormat, formatProvider);
+     return MainType.ToString(strFormat, formatProvider);
     case "subtype": // Int
-     if (SubType == null)
-     {
-         return "";
-     };
-     return ((int)SubType).ToString(strFormat, formatProvider);
+     return SubType.ToString(strFormat, formatProvider);
     case "name": // NVarChar
      return PropertyAccess.FormatString(Name, strFormat);
     case "description": // NVarCharMax

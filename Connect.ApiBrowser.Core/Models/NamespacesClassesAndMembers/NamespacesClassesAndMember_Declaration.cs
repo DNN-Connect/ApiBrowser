@@ -25,9 +25,9 @@ namespace Connect.ApiBrowser.Core.Models.NamespacesClassesAndMembers
         [DataMember]
         public int MemberId { get; set; }
         [DataMember]
-        public int? MainType { get; set; }
+        public int MainType { get; set; }
         [DataMember]
-        public int? SubType { get; set; }
+        public int SubType { get; set; }
         [DataMember]
         public string Name { get; set; }
         [DataMember]
