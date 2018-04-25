@@ -24,12 +24,12 @@ export default class ClassDetails extends React.Component<IClassDetailsProps> {
     public render(): JSX.Element {
         var props = [];
         if (this.props.apiclass.DeprecatedInVersion) {
-            props.push(<dt className="red">Deprecated in:</dt>);
-            props.push(<dd className="red">{this.props.apiclass.DeprecatedInVersion}</dd>);
+            props.push(<dt key={0} className="red">Deprecated in:</dt>);
+            props.push(<dd key={1} className="red">{this.props.apiclass.DeprecatedInVersion}</dd>);
         }
         if (this.props.apiclass.DisappearedInVersion) {
-            props.push(<dt className="red">Disappeared in:</dt>);
-            props.push(<dd className="red">{this.props.apiclass.DisappearedInVersion}</dd>);
+            props.push(<dt key={2} className="red">Disappeared in:</dt>);
+            props.push(<dd key={3} className="red">{this.props.apiclass.DisappearedInVersion}</dd>);
         }
         var deprecation = this.props.apiclass.DeprecationMessage == undefined ? null : (
             <div className="alert alert-danger">{this.props.apiclass.DeprecationMessage}</div>

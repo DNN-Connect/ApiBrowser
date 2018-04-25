@@ -203,6 +203,7 @@ export default class Browser extends React.Component<
       ) : (
         <MemberDetails
           module={this.props.module}
+          classes={this.state.classes}
           member={this.state.selectedMember}
           apiclass={this.state.selectedClass}
           changeSelection={(a, b) => this.changeSelection(a, b)}

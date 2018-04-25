@@ -117,21 +117,25 @@ export default class Grid extends React.Component<IGridProps, IGridState> {
     switch (newValue) {
       case "all":
         this.setState({
+          pageIndex: 0,
           mainType: -1
         });
         break;
       case "class":
         this.setState({
+          pageIndex: 0,
           mainType: 1
         });
         break;
       case "namespace":
         this.setState({
+          pageIndex: 0,
           mainType: 0
         });
         break;
       case "member":
         this.setState({
+          pageIndex: 0,
           mainType: 2
         });
         break;

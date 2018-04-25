@@ -6,6 +6,7 @@ import * as ReactMarkdown from "react-markdown";
 interface IMemberDetailsProps {
   module: Models.IAppModule;
   member: Models.IMember;
+  classes: Models.IApiClass[];
   changeSelection: (
     newClass: Models.IApiClass | null,
     newMember: Models.IMember | null
@@ -52,7 +53,6 @@ export default class MemberDetails extends React.Component<
       });
       this.loadReferences(nextProps.member.MemberId);
     }
-    console.log(window.location);
   }
   private loadReferences(memberId: number) {
     this.setState(
@@ -72,9 +72,28 @@ export default class MemberDetails extends React.Component<
       }
     );
   }
-
   componentDidUpdate(prevProps: IMemberDetailsProps) {
     hljs.highlightBlock(this.refs.declaration);
+  }
+  private url(memberFullname: string): string | Object {
+    for (var i = 0; i < this.props.classes.length; i++) {
+      var c = this.props.classes[i];
+      if (c.Members) {
+        for (var j = 0; j < c.Members.length; j++) {
+          var m = c.Members[j];
+          if (
+            m.NamespaceName + "." + m.ClassName + "." + m.MemberName ==
+            memberFullname
+          ) {
+            return {
+              class: c,
+              member: m
+            };
+          }
+        }
+      }
+    }
+    return window.location.pathname + "?view=" + memberFullname;
   }
   private showCodeBlock(codeblockId: number): void {
     this.props.module.service.getCodeblock(
@@ -189,21 +208,37 @@ export default class MemberDetails extends React.Component<
           <table>
             <tbody>
               {this.state.incomingReferences.map(r => {
-                return (
-                  <tr key={r.ReferenceId}>
-                    <td>
-                      <a
-                        href={
-                          window.location.pathname +
-                          "?view=" +
-                          r.FromRefFullQualifier
-                        }
-                      >
-                        {r.FromRefClassName}::{r.FromRefMemberName}
-                      </a>
-                    </td>
-                  </tr>
-                );
+                var url = this.url(r.FromRefFullQualifier);
+                if (typeof url === "string") {
+                  return (
+                    <tr key={r.ReferenceId}>
+                      <td>
+                        <a href={url}>
+                          {r.FromRefClassName}::{r.FromRefMemberName}
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                } else {
+                  return (
+                    <tr key={r.ReferenceId}>
+                      <td>
+                        <a
+                          href="#"
+                          onClick={e => {
+                            e.preventDefault();
+                            this.props.changeSelection(
+                              (url as any).class as Models.IApiClass,
+                              (url as any).member as Models.IMember
+                            );
+                          }}
+                        >
+                          {r.FromRefClassName}::{r.FromRefMemberName}
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>
