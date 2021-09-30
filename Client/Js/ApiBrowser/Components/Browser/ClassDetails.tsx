@@ -89,14 +89,17 @@ const ClassDetails: Component<IClassDetailsProps> = (props) => {
       <h4>
         {props.module.resources.Documentation}
         <Show when={props.module.security.CanComment}>
-          <a
-            href={
-              props.documentationLink + "?name=" + props.apiclass.FullQualifier
-            }
-            class="btn btn-sm btn-outline-secondary"
-          >
-            <i class="fas fa-edit"></i>
-          </a>
+          <span style={{ float: "right" }}>
+            <a
+              href={
+                props.documentationLink +
+                "?name=" +
+                props.apiclass.FullQualifier
+              }
+            >
+              <i class="fas fa-edit"></i>
+            </a>
+          </span>
         </Show>
       </h4>
       <Show when={props.apiclass.DocumentationContents}>

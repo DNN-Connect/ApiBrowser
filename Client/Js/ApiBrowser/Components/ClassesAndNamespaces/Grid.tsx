@@ -125,8 +125,8 @@ const Grid: Component<IGridProps> = (props) => {
           <span>{props.module.resources.Members}</span>
         </div>
         <div class="col-sm-8">
-          <div class="input-group">
-            <span class="input-group-addon">
+          <div class="input-group ml-2">
+            <span class="input-group-text">
               <i class="fas fa-search" />
             </span>
             <input

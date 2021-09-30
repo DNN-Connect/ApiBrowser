@@ -6,6 +6,7 @@ import {
   Show,
   Switch,
   Match,
+  onMount,
 } from "solid-js";
 import ClassDetails from "./ClassDetails";
 import MemberDetails from "./MemberDetails";
@@ -21,6 +22,7 @@ interface IBrowserProps {
   selection: IViewSelection;
   classes: IApiClass[];
   documentationLink: string;
+  returnLink: string;
 }
 
 const Browser: Component<IBrowserProps> = (props) => {
@@ -34,10 +36,21 @@ const Browser: Component<IBrowserProps> = (props) => {
     IMemberCodeBlock[]
   >([]);
   const [classes, setClasses] = createSignal<IApiClass[]>(props.classes);
-  createEffect(() => {
+
+  onMount(() => {
     props.classes.forEach((c) => {
       checkClass(c);
     });
+    var body = document.getElementsByTagName("body");
+    if (body) body[0].style.paddingLeft = "230px";
+    if (selectedMember() != null) {
+      props.module.service.getMemberCodeBlocks(
+        (selectedMember() as IMember).MemberId,
+        (data: IMemberCodeBlock[]) => {
+          setSelectedMemberCodeblocks(data);
+        }
+      );
+    }
   });
 
   const checkClass = (classToCheck: IApiClass) => {
@@ -140,10 +153,15 @@ const Browser: Component<IBrowserProps> = (props) => {
   return (
     <div>
       <div className="toc-wrapper">
+        <a href={props.returnLink} className="toc-h1 toc-link mb-1">
+          {props.module.resources.Namespaces}
+        </a>
+        <hr class="mb-3" />
         <a
           href="#"
           className={
-            "toc-h1 toc-link" + (selectedClass() == null ? " active" : "")
+            "toc-ns toc-h1 toc-link" +
+            (selectedClass() == null ? " active" : "")
           }
           onClick={(e) => {
             e.preventDefault();
@@ -169,7 +187,7 @@ const Browser: Component<IBrowserProps> = (props) => {
           changeSelection={(c, m) => changeSelection(c, m)}
         />
       </div>
-      <div className="page-wrapper">
+      <div className="page-wrapper pb-4">
         <div className="dark-box" />
         <Switch>
           <Match when={selectedClass() === null}>

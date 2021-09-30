@@ -245,7 +245,7 @@ under the License.
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
 ////////////////////////////////////////////////////////////////////////////////
 .page-wrapper {
-    margin-left: $nav-width;
+    // margin-left: $nav-width;
     position: relative;
     z-index: 10;
     background-color: $main-bg;
@@ -386,7 +386,7 @@ under the License.
     h4,
     h5,
     h6 {
-        font-size: 10px;
+        font-size: 14px;
     }
     hr {
         margin: 2em 0;

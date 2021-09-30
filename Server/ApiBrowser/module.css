@@ -449,7 +449,6 @@ under the License.
     left: 230px; }
 
 .page-wrapper {
-  margin-left: 230px;
   position: relative;
   z-index: 10;
   background-color: #F3F7F9;
@@ -557,7 +556,7 @@ under the License.
   .content h4,
   .content h5,
   .content h6 {
-    font-size: 10px; }
+    font-size: 14px; }
   .content hr {
     margin: 2em 0;
     border-top: 2px solid #2E3336;
@@ -864,4 +863,22 @@ under the License.
   color: #fff;
   background-color: #0050c5;
   border: none; }
+
+.ModConnectApiBrowserC .toc-wrapper {
+  padding-top: 10px; }
+  .ModConnectApiBrowserC .toc-wrapper hr {
+    color: #fff; }
+  .ModConnectApiBrowserC .toc-wrapper .toc-ns {
+    text-transform: uppercase;
+    padding-bottom: 5px; }
+  .ModConnectApiBrowserC .toc-wrapper .toc-h1,
+  .ModConnectApiBrowserC .toc-wrapper .toc-h2 {
+    font-weight: normal; }
+  .ModConnectApiBrowserC .toc-wrapper .toc-list-h1 {
+    padding-left: 10px; }
+  .ModConnectApiBrowserC .toc-wrapper .toc-list-h2 {
+    background-color: transparent; }
+
+.personabar-visible .ModConnectApiBrowserC .toc-wrapper {
+  left: 80px; }
 

@@ -17,6 +17,7 @@ export class ComponentLoader {
             selection={$(el).data("selection")}
             classes={$(el).data("classes")}
             documentationLink={$(el).data("documentation-link")}
+            returnLink={$(el).data("return-link")}
           />
         ),
         el

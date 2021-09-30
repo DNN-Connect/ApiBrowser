@@ -74,4 +74,39 @@
             }
         }
     }
+
+    .toc-wrapper {
+        padding-top: 10px;
+
+        hr {
+            color: #fff;
+        }
+
+        .toc-ns {
+            text-transform: uppercase;
+            padding-bottom: 5px;
+        }
+
+        .toc-h1,
+        .toc-h2 {
+            font-weight: normal;
+        }
+
+        .toc-list-h1 {
+            padding-left: 10px;
+        }
+
+        .toc-list-h2 {
+            background-color: transparent;
+        }
+    }
+
+}
+
+.personabar-visible {
+    .ModConnectApiBrowserC {
+        .toc-wrapper {
+            left: 80px;
+        }
+    }
 }

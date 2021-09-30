@@ -144,7 +144,7 @@ const DocumentationEditor: Component<IDocumentationEditorProps> = (props) => {
         </div>
       </div>
       <div class="text-right">
-        <a href="#" class="btn btn-primary" onClick={(e) => save(e)}>
+        <a href="#" class="btn btn-primary mb-4" onClick={(e) => save(e)}>
           Save
         </a>
       </div>

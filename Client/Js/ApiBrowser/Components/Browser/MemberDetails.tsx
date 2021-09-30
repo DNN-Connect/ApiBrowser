@@ -260,14 +260,15 @@ const MemberDetails: Component<IMemberDetailsProps> = (props) => {
       <h4>
         {props.module.resources.Documentation}
         <Show when={props.module.security.CanComment}>
-          <a
-            href={
-              props.documentationLink + "?name=" + props.member.FullQualifier
-            }
-            class="btn btn-sm btn-outline-secondary"
-          >
-            <i class="fas fa-edit" />
-          </a>
+          <span style={{ float: "right" }}>
+            <a
+              href={
+                props.documentationLink + "?name=" + props.member.FullQualifier
+              }
+            >
+              <i class="fas fa-edit"></i>
+            </a>
+          </span>
         </Show>
       </h4>
       <Show when={props.member.DocumentationContents}>

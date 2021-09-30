@@ -35,15 +35,14 @@ const Viewer: Component<IViewerProps> = (props) => {
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
+          <h5 class="modal-title">{props.module.resources.Documentation}</h5>
             <button
               type="button"
-              class="close"
-              data-dismiss="modal"
+              class="btn-close"
+              data-bs-dismiss="modal"
               aria-label="Close"
             >
-              <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title">{props.module.resources.Documentation}</h4>
           </div>
           <div class="modal-body">
             <MarkdownBlock source={item().Contents} />

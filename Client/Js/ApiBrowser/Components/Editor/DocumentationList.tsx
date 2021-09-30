@@ -40,6 +40,7 @@ const DocumentationList: Component<IDocumentationListProps> = (props) => {
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

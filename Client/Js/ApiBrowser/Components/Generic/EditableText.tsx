@@ -76,12 +76,11 @@ const EditableText: Component<IEditableTextProps> = (props) => {
             rows={3}
             onChange={(e) => setEditValue(e.currentTarget.value)}
           ></textarea>
-          <br />
           <div class="text-right">
-            <a href="#" class="btn btn-outline-secondary" onClick={(e) => cancel(e)}>
+            <a href="#" class="btn btn-outline-secondary m-2" onClick={(e) => cancel(e)}>
               {props.module.resources.Cancel}
             </a>
-            <a href="#" class="btn btn-primary" onClick={(e) => save(e)}>
+            <a href="#" class="btn btn-primary m-2" onClick={(e) => save(e)}>
               {props.module.resources.Save}
             </a>
           </div>

@@ -16,9 +16,6 @@
      data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(ApiBrowserModuleContext.Security))"
      data-selection="@(Newtonsoft.Json.JsonConvert.SerializeObject(Model))"
      data-classes="@(Newtonsoft.Json.JsonConvert.SerializeObject(classes))"
-     data-documentation-link="@Url.Action("Edit", "Documentation")">
-</div>
-
-<div class="text-right">
- <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@Dnn.LocalizeString("Return")</a>
+     data-documentation-link="@Url.Action("Edit", "Documentation")"
+     data-return-link="@Url.Action("Index", "Home")">
 </div>
