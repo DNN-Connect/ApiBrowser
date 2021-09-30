@@ -199,13 +199,13 @@ const MemberDetails: Component<IMemberDetailsProps> = (props) => {
                 <td style={{ width: "32px" }}>
                   <a
                     href="#"
-                    class="btn btn-sm btn-default"
+                    class="btn btn-sm btn-outline-secondary"
                     onClick={(e) => {
                       e.preventDefault();
                       showCodeBlock(cb.CodeBlockId);
                     }}
                   >
-                    <i class="glyphicon glyphicon-eye-open" />
+                    <i class="fas fa-eye" />
                   </a>
                 </td>
               </tr>
@@ -264,9 +264,9 @@ const MemberDetails: Component<IMemberDetailsProps> = (props) => {
             href={
               props.documentationLink + "?name=" + props.member.FullQualifier
             }
-            class="btn btn-sm btn-default"
+            class="btn btn-sm btn-outline-secondary"
           >
-            <i class="glyphicon glyphicon-pencil" />
+            <i class="fas fa-edit" />
           </a>
         </Show>
       </h4>

@@ -1,10 +1,20 @@
-$theme-colors: (
-  "blue": #007bff,
-  "red": #dc3545,
-  "orange": #fd7e14,
-  "yellow": #ffc107,
-  "green": #28a745);
-$body-color: #5a5c69;
+// $theme-colors: (
+//   "blue": #007bff,
+//   "red": #dc3545,
+//   "orange": #fd7e14,
+//   "yellow": #ffc107,
+//   "green": #28a745);
+// $body-color: #5a5c69;
 
 // Import Bootstrap
 @import "../../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Import Font Awesome
+$fa-font-path: "./webfonts";
+$fa-font-display: block;
+
+// @import "../../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+// @import "../../../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';

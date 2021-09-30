@@ -51,7 +51,7 @@
   },
   "scripts": {
     "build": "set NODE_ENV=production&&webpack --config Client/webpack.config.js",
-    "watch": "webpack --config Client/webpack.config.js --progress --watch",
+    "watch": "webpack --config Client/webpack.config.js --progress --watch --mode=development",
     "watch-server": "node watch.js"
   },
   "author": "Peter Donker",
@@ -84,6 +84,7 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "marked": "^3.0.4",
     "solid-js": "^1.1.5"
   }

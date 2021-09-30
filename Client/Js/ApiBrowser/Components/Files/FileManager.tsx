@@ -43,7 +43,7 @@ const FileManager: Component<IFileManagerProps> = (props) => {
           <div class="col-sm-1">
             <a
               href="#"
-              class="btn btn-default"
+              class="btn btn-outline-secondary"
               onClick={(e) => {
                 e.preventDefault();
                 processFiles();
@@ -59,7 +59,7 @@ const FileManager: Component<IFileManagerProps> = (props) => {
         <div class="row">
           <div class="col-sm-12">
             <div class="alert alert-info">
-              <span class="glyphicon glyphicon-refresh spinning"></span>
+              <span class="fas fa-sync spinning"></span>
               {props.module.resources.Uploading}
             </div>
           </div>

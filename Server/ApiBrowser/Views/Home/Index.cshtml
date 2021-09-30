@@ -1,25 +1,25 @@
 @inherits ApiBrowserWebPage
 @using Connect.DNN.Modules.ApiBrowser.Common;
 @{
-    ApiBrowserModuleContext.AddModuleScript();
+  ApiBrowserModuleContext.AddModuleScript();
 }
 
-<div class="text-right">
-     <a href="@Url.Action("Index", "Components")" class="btn btn-default">
-      @Dnn.LocalizeString("Components")
-     </a>
- @if (ApiBrowserModuleContext.Security.CanModerate)
- {
-     <a href="@Url.Action("Moderate", "Documentation")" class="btn btn-default">
+<div class="text-right m-3">
+  <a href="@Url.Action("Index", "Components")" class="btn btn-secondary">
+    @Dnn.LocalizeString("Components")
+  </a>
+  @if (ApiBrowserModuleContext.Security.CanModerate)
+  {
+    <a href="@Url.Action("Moderate", "Documentation")" class="btn btn-secondary">
       @Dnn.LocalizeString("Moderate")
-     </a>
- }
- @if (ApiBrowserModuleContext.Security.CanEdit)
- {
-     <a href="@Url.Action("Upload", "Files")" class="btn btn-default">
+    </a>
+  }
+  @if (ApiBrowserModuleContext.Security.CanEdit)
+  {
+    <a href="@Url.Action("Upload", "Files")" class="btn btn-secondary">
       @Dnn.LocalizeString("Upload")
-     </a>
- }
+    </a>
+  }
 </div>
 
 <div class="connectapibrowser classesandnamespaces"

@@ -79,7 +79,7 @@ const Grid: Component<IGridProps> = (props) => {
   const loadMoreButton =
     loading() || lastPage() ? null : (
       <div
-        class="btn btn-default btn-block"
+        class="btn btn-outline-secondary btn-block"
         onClick={(e) => setPageIndex(pageIndex() + 1)}
         ref={loadMoreDiv}
       >
@@ -127,7 +127,7 @@ const Grid: Component<IGridProps> = (props) => {
         <div class="col-sm-8">
           <div class="input-group">
             <span class="input-group-addon">
-              <i class="glyphicon glyphicon-search" />
+              <i class="fas fa-search" />
             </span>
             <input
               type="text"

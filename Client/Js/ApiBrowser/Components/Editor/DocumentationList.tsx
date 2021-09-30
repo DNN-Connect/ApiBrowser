@@ -49,13 +49,13 @@ const DocumentationList: Component<IDocumentationListProps> = (props) => {
               d.IsCurrentVersion ? null : (
                 <a
                   href="#"
-                  class="btn btn-default"
+                  class="btn btn-outline-secondary"
                   onClick={(e) => {
                     e.preventDefault();
                     props.setLastVersion(d);
                   }}
                 >
-                  <i class="glyphicon glyphicon-asterisk"></i>
+                  <i class="fas fa-asterisk"></i>
                 </a>
               )
             ) : null;
@@ -64,25 +64,25 @@ const DocumentationList: Component<IDocumentationListProps> = (props) => {
               d.CreatedByUserID == props.module.security.UserId ? (
                 <a
                   href="#"
-                  class="btn btn-default"
+                  class="btn btn-outline-secondary"
                   onClick={(e) => {
                     e.preventDefault();
                     props.edit(d);
                   }}
                 >
-                  <i class="glyphicon glyphicon-pencil"></i>
+                  <i class="fas fa-edit"></i>
                 </a>
               ) : null;
             var copybtn = props.module.security.CanComment ? (
               <a
                 href="#"
-                class="btn btn-default"
+                class="btn btn-outline-secondary"
                 onClick={(e) => {
                   e.preventDefault();
                   props.copy(d);
                 }}
               >
-                <i class="glyphicon glyphicon-repeat"></i>
+                <i class="fas fa-redo"></i>
               </a>
             ) : null;
             var deletebtn =
@@ -90,13 +90,13 @@ const DocumentationList: Component<IDocumentationListProps> = (props) => {
               d.CreatedByUserID == props.module.security.UserId ? (
                 <a
                   href="#"
-                  class="btn btn-default"
+                  class="btn btn-outline-secondary"
                   onClick={(e) => {
                     e.preventDefault();
                     props.delete(d);
                   }}
                 >
-                  <i class="glyphicon glyphicon-remove"></i>
+                  <i class="fas fa-trash"></i>
                 </a>
               ) : null;
             return (
@@ -115,7 +115,7 @@ const DocumentationList: Component<IDocumentationListProps> = (props) => {
                       props.show(d);
                     }}
                   >
-                    <i class="glyphicon glyphicon-eye-open"></i>
+                    <i class="fas fa-eye"></i>
                   </a>
                 </td>
                 <td style={btncol}>{editbtn}</td>

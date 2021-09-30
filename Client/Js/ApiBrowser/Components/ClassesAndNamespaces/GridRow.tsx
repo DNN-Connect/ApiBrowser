@@ -93,7 +93,7 @@ const GridRow: Component<IGridRowProps> = (props) => {
       props.module.security.CanModerate) ? (
       <span style={{ float: "right" }}>
         <a href="#" onClick={(e) => beginEdit(e)}>
-          <i class="glyphicon glyphicon-pencil"></i>
+          <i class="fas fa-edit"></i>
         </a>
       </span>
     ) : null;
@@ -117,7 +117,7 @@ const GridRow: Component<IGridRowProps> = (props) => {
         ></textarea>
         <br />
         <div class="text-right">
-          <a href="#" class="btn btn-default" onClick={(e) => cancel(e)}>
+          <a href="#" class="btn btn-outline-secondary" onClick={(e) => cancel(e)}>
             {props.module.resources.Cancel}
           </a>
           <a href="#" class="btn btn-primary" onClick={(e) => save(e)}>

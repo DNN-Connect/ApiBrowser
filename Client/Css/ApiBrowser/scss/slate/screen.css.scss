@@ -22,19 +22,19 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
-html,
-body {
-    color: $main-text;
-    padding: 0;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    @extend %default-font;
-    background-color: $main-bg;
-    height: 100%;
-    -webkit-text-size-adjust: none;
-    /* Never autoresize text */
-}
+// html,
+// body {
+//     color: $main-text;
+//     padding: 0;
+//     margin: 0;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     @extend %default-font;
+//     background-color: $main-bg;
+//     height: 100%;
+//     -webkit-text-size-adjust: none;
+//     /* Never autoresize text */
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS

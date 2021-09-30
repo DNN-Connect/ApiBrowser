@@ -93,9 +93,9 @@ const ClassDetails: Component<IClassDetailsProps> = (props) => {
             href={
               props.documentationLink + "?name=" + props.apiclass.FullQualifier
             }
-            class="btn btn-sm btn-default"
+            class="btn btn-sm btn-outline-secondary"
           >
-            <i class="glyphicon glyphicon-pencil"></i>
+            <i class="fas fa-edit"></i>
           </a>
         </Show>
       </h4>
