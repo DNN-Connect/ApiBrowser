@@ -1,0 +1,636 @@
+/******* TABLES *******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses(
+ [ClassId] [int] IDENTITY(1,1) NOT NULL,
+ [NamespaceId] [int] NOT NULL,
+ [ComponentId] [int] NULL,
+ [ClassName] [nvarchar](200) NOT NULL,
+ [Declaration] [nvarchar](500) NULL,
+ [Documentation] [nvarchar](max) NULL,
+ [Description] [nvarchar](max) NULL,
+ [AppearedInVersion] [varchar](15) NOT NULL,
+ [DeprecatedInVersion] [varchar](15) NULL,
+ [DisappearedInVersion] [varchar](15) NULL,
+ [IsDeprecated] [bit] NOT NULL,
+ [DeprecationMessage] [nvarchar](1000) NULL,
+ [DocumentationId] [int] NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_ApiClasses PRIMARY KEY CLUSTERED 
+(
+ [ClassId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces(
+ [NamespaceId] [int] IDENTITY(1,1) NOT NULL,
+ [ParentId] [int] NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [NamespaceName] [nvarchar](500) NOT NULL,
+ [LastQualifier] [nvarchar](100) NOT NULL,
+ [Description] [nvarchar](max) NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_ApiNamespaces PRIMARY KEY CLUSTERED 
+(
+ [NamespaceId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes(
+ [CommentId] [int] NOT NULL,
+ [UserId] [int] NOT NULL,
+ [Datime] [datetime] NOT NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_CommentLikes PRIMARY KEY CLUSTERED 
+(
+ [CommentId] ASC,
+ [UserId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments(
+ [CommentID] [int] IDENTITY(1,1) NOT NULL,
+ [ComponentId] [int] NOT NULL,
+ [ItemType] [int] NOT NULL,
+ [ItemId] [int] NOT NULL,
+ [ParentId] [int] NULL,
+ [Message] [nvarchar](max) NOT NULL,
+ [Approved] [bit] NULL,
+ [CreatedByUserID] [int] NULL,
+ [CreatedOnDate] [datetime] NULL,
+ [LastModifiedByUserID] [int] NULL,
+ [LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_Comments PRIMARY KEY CLUSTERED 
+(
+ [CommentID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Components') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components(
+ [ComponentId] [int] IDENTITY(1,1) NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [ComponentName] [nvarchar](100) NOT NULL,
+ [LatestVersion] [varchar](15) NOT NULL,
+ [Description] [nvarchar](max) NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_Components PRIMARY KEY CLUSTERED 
+(
+ [ComponentId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations(
+ [DocumentationId] [int] IDENTITY(1,1) NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [FullName] [nvarchar](1000) NOT NULL,
+ [Contents] [nvarchar](max) NOT NULL,
+ [CreatedByUserID] [int] NOT NULL,
+ [CreatedOnDate] [datetime] NOT NULL,
+ [LastModifiedByUserID] [int] NOT NULL,
+ [LastModifiedOnDate] [datetime] NOT NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_Documentations PRIMARY KEY CLUSTERED 
+(
+ [DocumentationId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks(
+ [CodeBlockId] [int] IDENTITY(1,1) NOT NULL,
+ [MemberId] [int] NOT NULL,
+ [Version] [varchar](15) NOT NULL,
+ [CodeHash] [char](32) NOT NULL,
+ [StartLine] [int] NULL,
+ [StartColumn] [int] NULL,
+ [EndLine] [int] NULL,
+ [EndColumn] [int] NULL,
+ [FileName] [nvarchar](300) NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks PRIMARY KEY CLUSTERED 
+(
+ [CodeBlockId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Members') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members(
+ [MemberId] [int] IDENTITY(1,1) NOT NULL,
+ [ClassId] [int] NOT NULL,
+ [MemberType] [int] NOT NULL,
+ [MemberName] [nvarchar](100) NOT NULL,
+ [Declaration] [nvarchar](500) NULL,
+ [Documentation] [nvarchar](max) NULL,
+ [Description] [nvarchar](max) NULL,
+ [AppearedInVersion] [varchar](15) NOT NULL,
+ [DeprecatedInVersion] [varchar](15) NULL,
+ [DisappearedInVersion] [varchar](15) NULL,
+ [IsDeprecated] [bit] NOT NULL,
+ [DeprecationMessage] [nvarchar](1000) NULL,
+ [DocumentationId] [int] NULL,
+ CONSTRAINT PK_{objectQualifier}Connect_ApiBrowser_Members PRIMARY KEY CLUSTERED 
+(
+ [MemberId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF)
+)
+END
+GO
+
+/******* STRUCTURE *******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces FOREIGN KEY([NamespaceId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces ([NamespaceId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components FOREIGN KEY([ComponentId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components ([ComponentId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments FOREIGN KEY([CommentId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments ([CommentID])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Comments_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Comments_Components FOREIGN KEY([ComponentId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components ([ComponentId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Comments_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Comments_Components
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Components_Modules') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Components'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Components_Modules FOREIGN KEY([ModuleId])
+REFERENCES {databaseOwner}{objectQualifier}Modules ([ModuleID])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Components_Modules') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Components'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Components_Modules
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members FOREIGN KEY([MemberId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members ([MemberId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Members'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members  WITH CHECK ADD  CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses FOREIGN KEY([ClassId])
+REFERENCES {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses ([ClassId])
+ON DELETE CASCADE
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Members'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members CHECK CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses
+GO
+
+/******* TRIGGERS *******/
+/******* VIEWS *******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses
+AS
+SELECT
+ c.*,
+ docs.Contents DocumentationContents,
+ n.NamespaceName,
+ n.NamespaceName + '.' + c.ClassName FullQualifier,
+ comp.ModuleId,
+ comp.ComponentName,
+ comp.LatestVersion,
+ (SELECT COUNT(MemberId) FROM {objectQualifier}Connect_ApiBrowser_Members WHERE ClassId=c.ClassId) AS MemberCount
+FROM
+ {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses c
+ INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=c.NamespaceId
+ INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components comp ON comp.ComponentId=c.ComponentId
+ LEFT JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations docs ON docs.DocumentationId=c.DocumentationId
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members
+AS
+SELECT
+ m.*,
+ docs.Contents DocumentationContents,
+ c.ClassName,
+ n.NamespaceName,
+ n.NamespaceName + '.' + c.ClassName + '.' + m.MemberName FullQualifier,
+ comp.ModuleId,
+ comp.ComponentName,
+ comp.LatestVersion,
+ (SELECT COUNT(CodeBlockId) FROM {objectQualifier}Connect_ApiBrowser_MemberCodeBlocks WHERE MemberId=m.MemberId) AS CodeBlockCount
+FROM
+ {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members m
+ INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses c ON c.ClassId=m.ClassId
+ INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=c.NamespaceId
+ INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components comp ON comp.ComponentId=c.ComponentId
+ LEFT JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations docs ON docs.DocumentationId=m.DocumentationId
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesAndClasses'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesAndClasses
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesAndClasses
+AS
+SELECT
+ n.ModuleId,
+ a.NamespaceId, 
+ a.ClassId,
+ CAST(1 AS BIT) IsClass,
+ n.NamespaceName + '.' + a.ClassName [Name],
+ a.Description,
+ a.IsDeprecated,
+ a.DeprecatedInVersion,
+ a.DisappearedInVersion
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses a
+INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=a.NamespaceId
+UNION
+SELECT
+ n.ModuleId,
+ n.NamespaceId,
+ -1 ClassId,
+ CAST(0 AS BIT) IsClass,
+ n.NamespaceName [Name],
+ n.Description,
+ 0 IsDeprecated,
+ NULL DeprecatedInVersion,
+ NULL DisappearedInVersion
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
+AS
+SELECT
+ d.*,
+ CAST(CASE WHEN ISNULL(c.DocumentationId, -1)=d.DocumentationId 
+        OR ISNULL(m.DocumentationId, -1)=d.DocumentationId
+ THEN 1
+ ELSE 0
+ END AS BIT) IsCurrentVersion,
+ uc.DisplayName CreatedByUserDisplayName,
+ uc.Email CreatedByUserEmail,
+ um.DisplayName LastModifiedByUserDisplayName,
+ um.Email LastModifiedByUserEmail
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations d
+ INNER JOIN {databaseOwner}{objectQualifier}Users uc ON uc.UserID=d.CreatedByUserID
+ INNER JOIN {databaseOwner}{objectQualifier}Users um ON um.UserID=d.LastModifiedByUserID
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses c ON c.FullQualifier=d.FullName
+ LEFT JOIN {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members m ON m.FullQualifier=d.FullName
+GO
+
+/******* FUNCTIONS *******/
+/******* SPROCS *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ClassDisappeared') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ClassDisappeared
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ClassDisappeared
+ @ClassId INT,
+ @Version VARCHAR(15)
+AS
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+ SET [DisappearedInVersion]=@Version
+ WHERE [ClassId]=@ClassId
+  AND ISNULL([DisappearedInVersion],'99.99.99') > @Version
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetNamespacesAndClasses') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetNamespacesAndClasses
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetNamespacesAndClasses
+ @ModuleId INT
+AS
+SELECT
+*
+FROM (SELECT 
+ a.NamespaceId, 
+ a.ClassId,
+ n.NamespaceName + '.' + a.ClassName [Name],
+ a.Description,
+ a.IsDeprecated
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses a
+INNER JOIN {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n ON n.NamespaceId=a.NamespaceId
+WHERE n.ModuleId=@ModuleId
+UNION
+SELECT
+ n.NamespaceId,
+ -1 ClassId,
+ n.NamespaceName [Name],
+ n.Description,
+ 0 IsDeprecated
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces n
+WHERE n.ModuleId=@ModuleId) x
+ORDER BY x.[Name]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass
+ @NamespaceId INT,
+ @ComponentId INT,
+ @ClassName NVARCHAR(200),
+ @Declaration NVARCHAR(500),
+ @Documentation NVARCHAR(MAX),
+ @Description NVARCHAR(MAX),
+ @Version VARCHAR(15),
+ @IsDeprecated BIT,
+ @DeprecationMessage NVARCHAR(1000)
+AS
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses ([NamespaceId], [ComponentId], [ClassName], [Declaration], [Documentation], [Description],[AppearedInVersion], [DeprecatedInVersion], [DisappearedInVersion], [IsDeprecated], [DeprecationMessage])
+  VALUES (@NamespaceId, @ComponentId, @ClassName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL);
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+ SET [AppearedInVersion]=@Version
+ WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName AND [AppearedInVersion]>@Version;
+IF @IsDeprecated=1
+BEGIN
+ IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName
+  AND ISNULL([DeprecatedInVersion],'99.99.99') < @Version)
+ UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+  SET [DeprecatedInVersion]=@Version,
+   [IsDeprecated]=1,
+   [DeprecationMessage]=ISNULL([DeprecationMessage], @DeprecationMessage)
+  WHERE [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+END;
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+ SET [Declaration]=ISNULL([Declaration],@Declaration),
+  [Documentation]=ISNULL([Documentation],@Documentation)
+ WHERE
+  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+SELECT
+ *
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+WHERE
+ [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ClassName]=@ClassName;
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponent') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponent
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponent
+ @ModuleId INT,
+ @ComponentName NVARCHAR(100),
+ @LatestVersion VARCHAR(15)
+AS
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components WHERE [ModuleId]=@ModuleId AND [ComponentName]=@ComponentName)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components ([ModuleId], [ComponentName], [LatestVersion])
+  VALUES (@ModuleId, @ComponentName, @LatestVersion);
+ELSE
+ UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components
+  SET [LatestVersion]=@LatestVersion
+  WHERE [ModuleId]=@ModuleId
+   AND [ComponentName]=@ComponentName
+   AND [LatestVersion]<@LatestVersion;
+SELECT *
+ FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components
+ WHERE [ModuleId]=@ModuleId
+   AND [ComponentName]=@ComponentName;
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMember') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMember
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMember
+ @ClassId INT,
+ @MemberType INT,
+ @MemberName NVARCHAR(100),
+ @Declaration NVARCHAR(500),
+ @Documentation NVARCHAR(MAX),
+ @Description NVARCHAR(MAX),
+ @Version VARCHAR(15),
+ @IsDeprecated BIT,
+ @DeprecationMessage NVARCHAR(1000)
+AS
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members ([ClassId],[MemberType],[MemberName],[Declaration],[Documentation],[Description], [AppearedInVersion],[DeprecatedInVersion],[DisappearedInVersion],[IsDeprecated],[DeprecationMessage])
+  VALUES (@ClassId, @MemberType, @MemberName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL);
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ SET [AppearedInVersion]=@Version
+ WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [AppearedInVersion]>@Version;
+IF @IsDeprecated=1
+BEGIN
+ IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName
+  AND ISNULL([DeprecatedInVersion],'99.99.99') < @Version)
+ UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+  SET [DeprecatedInVersion]=@Version,
+   [IsDeprecated]=1,
+   [DeprecationMessage]=ISNULL([DeprecationMessage], @DeprecationMessage)
+ WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+END;
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ SET [Declaration]=ISNULL([Declaration],@Declaration),
+  [Documentation]=ISNULL([Documentation],@Documentation)
+ WHERE
+  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+SELECT
+ *
+FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+WHERE
+ [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateNamespace') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateNamespace
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateNamespace
+ @ModuleId INT,
+ @ParentId INT,
+ @NamespaceName NVARCHAR(500),
+ @LastQualifier NVARCHAR(100)
+AS
+IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces WHERE [ModuleId]=@ModuleId AND [NamespaceName]=@NamespaceName)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces ([ModuleId], [ParentId], [NamespaceName], [LastQualifier])
+  VALUES (@ModuleId, @ParentId, @NamespaceName, @LastQualifier);
+SELECT *
+ FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces
+ WHERE [ModuleId]=@ModuleId
+   AND [NamespaceName]=@NamespaceName;
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberDisappeared') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberDisappeared
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberDisappeared
+ @MemberId INT,
+ @Version VARCHAR(15)
+AS
+UPDATE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ SET [DisappearedInVersion]=@Version
+ WHERE [MemberId]=@MemberId
+  AND ISNULL([DisappearedInVersion],'99.99.99') > @Version
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_RegisterCodeBlock') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_RegisterCodeBlock
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_RegisterCodeBlock
+ @MemberId INT,
+ @CodeHash CHAR(32),
+ @Version VARCHAR(15),
+ @FileName NVARCHAR (300), 
+ @StartLine INT, 
+ @StartColumn INT, 
+ @EndLine INT, 
+ @EndColumn INT
+AS
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks WHERE [MemberId]=@MemberId AND [Version]=@Version)
+ INSERT INTO {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks ([CodeHash], [EndColumn], [EndLine], [FileName], [MemberId], [StartColumn], [StartLine], [Version])
+  VALUES (@CodeHash, @EndColumn, @EndLine, @FileName, @MemberId, @StartColumn, @StartLine, @Version);
+GO
+
+-- new scheduled task
+INSERT INTO {databaseOwner}[{objectQualifier}Schedule]
+           ([TypeFullName]
+           ,[TimeLapse]
+           ,[TimeLapseMeasurement]
+           ,[RetryTimeLapse]
+           ,[RetryTimeLapseMeasurement]
+           ,[RetainHistoryNum]
+           ,[AttachToEvent]
+           ,[CatchUpEnabled]
+           ,[Enabled]
+           ,[ObjectDependencies]
+           ,[Servers]
+           ,[CreatedByUserID]
+           ,[CreatedOnDate]
+           ,[LastModifiedByUserID]
+           ,[LastModifiedOnDate]
+           ,[FriendlyName])
+     VALUES
+           ('Connect.ApiBrowser.Core.ApiScheduledTask, CONNECT.APIBROWSER.CORE'
+           ,24
+           ,'h'
+           ,5
+           ,'m'
+           ,20
+           ,''
+           ,0
+           ,1
+           ,''
+           ,null
+           ,-1
+           ,GETDATE()
+           ,-1
+           ,GETDATE()
+           ,'Api Browser Check New API Files')
+GO
+

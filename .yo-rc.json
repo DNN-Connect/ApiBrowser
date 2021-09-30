@@ -1,0 +1,22 @@
+{
+  "generator-dotnetnuke": {
+    "promptValues": {
+      "projectname": "apibrowser",
+      "projectdescription": "DNN ApiBrowser module",
+      "yourname": "Peter Donker",
+      "email": "info@dnn-connect.org",
+      "companyfull": "DNN Connect",
+      "companyshort": "Connect",
+      "companyUrl": "http://dnn-connect.org",
+      "dnnHost": "http://dnndev.me",
+      "dnnRoot": "http://custom",
+      "namespace": "Connect.ApiBrowser",
+      "dnnVersion": "9.9.0",
+      "npm": true
+    },
+    "Company": "DNN Connect",
+    "Project": "apibrowser",
+    "Namespace": "Connect.ApiBrowser",
+    "Solution": "Connect.ApiBrowser"
+  }
+}

@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Azeret Mono';
+  src:font-url('https://fonts.googleapis.com/css2?family=Azeret+Mono&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
+
+%icon {
+  font-family: 'Azeret Mono';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+
+%icon-exclamation-sign {
+  @extend %icon;
+  content: "\e600";
+}
+%icon-info-sign {
+  @extend %icon;
+  content: "\e602";
+}
+%icon-ok-sign {
+  @extend %icon;
+  content: "\e606";
+}
+%icon-search {
+  @extend %icon;
+  content: "\e607";
+}

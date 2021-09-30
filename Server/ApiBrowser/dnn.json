@@ -1,0 +1,59 @@
+{
+  "name": "DNN Connect.ApiBrowser",
+  "projectType": "module",
+  "friendlyName": "ApiBrowser Module",
+  "description": "DNN Connect ApiBrowser Module",
+  "packageName": "ApiBrowser",
+  "folder": "Connect/ApiBrowser",
+  "iconFile": "DesktopModules\\MVC\\DNN Connect\\ApiBrowser\\icon.png",
+  "module": {
+    "azureCompatible": "true",
+    "moduleName": "Connect_ApiBrowser",
+    "foldername": "Connect/ApiBrowser",
+    "supportedFeatures": [],
+    "moduleDefinitions": [
+      {
+        "friendlyName": "Connect ApiBrowser",
+        "defaultCacheTime": 0,
+        "moduleControls": [
+          {
+            "controlSrc": "Connect.DNN.Modules.ApiBrowser.Controllers/Home/Index.mvc",
+            "supportsPartialRendering": "False",
+            "controlTitle": "ApiBrowser",
+            "controlType": "View",
+            "viewOrder": 0
+          },
+          {
+            "controlKey": "Settings",
+            "controlSrc": "DesktopModules/MVC/Connect/ApiBrowser/Settings.ascx",
+            "supportsPartialRendering": "False",
+            "controlTitle": "ApiBrowser Module Settings",
+            "controlType": "Edit",
+            "viewOrder": 0
+          }
+        ],
+        "permissions": [
+          {
+            "code": "Connect_ApiBrowser_MODULE",
+            "key": "COMMENT",
+            "name": "Comment"
+          },
+          {
+            "code": "Connect_ApiBrowser_MODULE",
+            "key": "MODERATE",
+            "name": "Moderate"
+          }
+        ]
+      }
+    ]
+  },
+  "pathsAndFiles": {
+    "pathToAssemblies": "./bin",
+    "pathToScripts": "./Server/SqlScripts",
+    "assemblies": [
+      "Connect.DNN.Modules.ApiBrowser.dll",
+      "Connect.ApiBrowser.Core.dll"
+    ],
+    "excludeFilter": ["ApiBrowser/bin/", "ApiBrowser/obj/"]
+  }
+}

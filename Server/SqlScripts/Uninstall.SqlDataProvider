@@ -1,0 +1,186 @@
+/******* SPROCS *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ClassDisappeared') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ClassDisappeared
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetComponents') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetComponents
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetModerationList') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetModerationList
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetNamespacesAndClasses') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetNamespacesAndClasses
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateClass
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponent') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponent
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponentHistory') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateComponentHistory
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateDependency') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateDependency
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMember') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMember
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMemberCodeBlock') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateMemberCodeBlock
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateNamespace') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateNamespace
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateReference') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_GetOrCreateReference
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberDisappeared') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberDisappeared
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateDependencies') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateDependencies
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateReferences') AND type in (N'P', N'PC'))
+DROP PROCEDURE {databaseOwner}{objectQualifier}Connect_ApiBrowser_UpdateReferences
+GO
+
+/******* VIEWS *******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_ApiClasses
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Dependencies'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Dependencies
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Documentations
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_Members
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesAndClasses'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_NamespacesAndClasses
+GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_References'))
+DROP VIEW {databaseOwner}{objectQualifier}vw_Connect_ApiBrowser_References
+GO
+
+/******* FUNCTIONS *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_LTrimX
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_RTrimX
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION {databaseOwner}{objectQualifier}Connect_ApiBrowser_TrimX
+GO
+
+/******* TRIGGERS *******/
+/******* STRUCTURE *******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_ApiNamespaces
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ApiClasses_Components
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_CommentLikes_Comments
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Comments_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Comments_Components
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_ComponentHistories_Components') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ComponentHistories'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ComponentHistories DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_ComponentHistories_Components
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Components_Modules') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Components'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Components_Modules
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Dependencies_ComponentHistories') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Dependencies'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Dependencies DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Dependencies_ComponentHistories
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks_Members
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Members'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_Members_ApiClasses
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'{databaseOwner}FK_{objectQualifier}Connect_ApiBrowser_References_MemberCodeBlocks') AND parent_object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_References'))
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_References DROP CONSTRAINT FK_{objectQualifier}Connect_ApiBrowser_References_MemberCodeBlocks
+GO
+
+/******* TABLES *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiClasses
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ApiNamespaces
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_CommentLikes
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Comments
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_ComponentHistories') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_ComponentHistories
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Components') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Components
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Dependencies') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Dependencies
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Documentations
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_MemberCodeBlocks
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_Members') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}Connect_ApiBrowser_References') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_References
+GO
+
