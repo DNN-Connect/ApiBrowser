@@ -1,0 +1,12 @@
+{
+  "name": "ApiBrowser",
+  "projectType": "container",
+  "friendlyName": "ApiBrowser Container",
+  "description": "DNN Connect ApiBrowser Container",
+  "packageName": "Connect_ApiBrowser_Container",
+  "pathsAndFiles": {
+    "pathToAssemblies": "./bin",
+    "assemblies": [],
+    "excludeFilter": []
+  }
+}

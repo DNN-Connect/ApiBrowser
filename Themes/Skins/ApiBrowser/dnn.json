@@ -1,0 +1,12 @@
+{
+  "name": "ApiBrowser",
+  "projectType": "skin",
+  "friendlyName": "ApiBrowser Skin",
+  "description": "DNN Connect ApiBrowser Skin",
+  "packageName": "Connect_ApiBrowser_Skin",
+  "pathsAndFiles": {
+    "pathToAssemblies": "./bin",
+    "assemblies": [],
+    "excludeFilter": []
+  }
+}

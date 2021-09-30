@@ -32,21 +32,21 @@ var ignore = [
   "**/*.??proj",
   "**/web*.config",
   "**/packages.config",
-  "**/.*"
+  "**/.*",
 ];
 
 const allDlls = pkgApiBrowser.pathsAndFiles.assemblies
   // .concat(pkgApiBrowser.pathsAndFiles.assemblies)
-  .map(dll => "bin/" + dll);
+  .map((dll) => "bin/" + dll);
 
 const watcher = (src, dest) =>
   chokidar
     .watch(src, {
       ignored: ignore,
-      persistent: true
+      persistent: true,
     })
-    .on("add", path => copy(src, path, dest))
-    .on("change", path => copy(src, path, dest));
+    .on("add", (path) => copy(src, path, dest))
+    .on("change", (path) => copy(src, path, dest));
 // Todo: delete events?
 
 // Initialize watchers.
@@ -55,12 +55,21 @@ const ApiBrowserWatcher = watcher(
   pkg.dnn.pathsAndFiles.devSitePath +
     "\\DesktopModules\\MVC\\Connect\\ApiBrowser"
 );
+const SkinWatcher = watcher(
+  "Themes/Skins/ApiBrowser",
+  pkg.dnn.pathsAndFiles.devSitePath + "\\Portals\\_default\\Skins\\ApiBrowser"
+);
+const ContainerWatcher = watcher(
+  "Themes/Containers/ApiBrowser",
+  pkg.dnn.pathsAndFiles.devSitePath +
+    "\\Portals\\_default\\Containers\\ApiBrowser"
+);
 
 const DllWatcher = chokidar
   .watch(allDlls, {
-    persistent: true
+    persistent: true,
   })
-  .on("add", path => {
+  .on("add", (path) => {
     copy("bin", path, pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
     copy(
       "bin",
@@ -68,7 +77,7 @@ const DllWatcher = chokidar
       pkg.dnn.pathsAndFiles.devSitePath + "\\bin"
     );
   })
-  .on("change", path => {
+  .on("change", (path) => {
     copy("bin", path, pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
     copy(
       "bin",
