@@ -1,24 +1,16 @@
+<%
+ var homeUrl = DotNetNuke.Common.Globals.NavigateURL(PortalSettings.HomeTabId);
+%>
+
 <header>
-  <div>
-    <ul>
-      <li>
-        <dnn:Login runat="server" id="dnnLogin" />
-      </li>
-      <li>
-        <dnn:User runat="server" id="dnnUser" />
-      </li>
-      <li>
-        <dnn:Search runat="server" id="dnnSearch" ShowSite="false" ShowWeb="false" Submit="<i class='fas fa-search'></i>" />
-      </li>
-      <li style="display:none;">
-        <dnn:Language runat="server" id="dnnLanguage" ShowMenu="false" ShowLinks="false" />
-      </li>
-    </ul>
-  </div>
-  <div>
-    <dnn:LOGO id="dnnLOGO" runat="server" />
-    <nav id="nav-items">
-      <dnn:MENU id="menu" MenuStyle="menus/razor" runat="server" NodeSelector="*"></dnn:MENU>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<%= homeUrl %>"><%= PortalSettings.PortalName %></a>
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <dnn:MENU id="menu" MenuStyle="menus/razor" runat="server" NodeSelector="*"></dnn:MENU>
+        </div>
+      </div>
     </nav>
   </div>
 </header>

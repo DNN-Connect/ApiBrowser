@@ -2,7 +2,7 @@
 @using System.Dynamic;
 @inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
     
-<ul class="slimmenu normal" id="navigation">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
     @RenderPages(Model.Source.root.Children)
 </ul>
 
@@ -16,22 +16,22 @@
     foreach (var page in pages)
     {
         var hasChildren = page.HasChildren();
-        var split = hasChildren ? "split" : string.Empty;
-        var single = hasChildren ? "single" :string.Empty;
+        var dropdown = hasChildren ? "dropdown-toggle" :string.Empty;
+        var active = page.Selected ? "active" : string.Empty;
 
         <li class="@(page.Selected ? "active" : string.Empty)">
-            @if (page.Enabled)
+            @if (!page.Enabled)
             {
-                <a href="@page.Url" class="btn btn-primary @split" target="@page.Target">@page.Text</a>
+                @page.Text
             }
             else
             {
-                <a href="#" class="btn btn-primary @single" target="@page.Target">@page.Text</a>
+                <a href="@page.Url" class="nav-link @dropdown @active">@page.Text</a>
             }
 
             @if (hasChildren)
             {
-                <ul>
+                <ul class="dropdown-menu">
                     @RenderNestedPages(page.Children)
                 </ul>
             }
@@ -44,23 +44,16 @@
     foreach (var page in pages)
     {
         var hasChildren = page.HasChildren();
-        var split = hasChildren ? "split" : string.Empty;
+        var active = page.Selected ? "active" : string.Empty;
 
-        <li class="@(page.Selected ? "active" : string.Empty)">
-            @if (page.Enabled)
+        <li>
+            @if (!page.Enabled)
             {
-                <a href="@page.Url" class="@split" target="@page.Target">@page.Text</a>
+                @page.Text
             }
             else
             {
-                <a href="#" target="@page.Target">@page.Text</a>
-            }
-
-            @if (hasChildren)
-            {
-                <ul>
-                    @RenderNestedPages(page.Children)
-                </ul>
+                <a href="@page.Url" class="dropdown-item @active">@page.Text</a>
             }
         </li>
     }
