@@ -1,4 +1,4 @@
-import { createSignal, Component, For, Show } from "solid-js";
+import { createSignal, Component, For, Show, onMount } from "solid-js";
 import { IAppModule } from "../../Models/IAppModule";
 import { IScheduledFile } from "../../Models/IScheduledFile";
 
@@ -9,6 +9,29 @@ interface IFileManagerProps {
 const FileManager: Component<IFileManagerProps> = (props) => {
   const [files, setFiles] = createSignal<IScheduledFile[]>([]);
   const [uploading, setUploading] = createSignal(false);
+
+  onMount(() => {
+    $('input[data-action="upload"]').on("change", (e: any) => {
+      if (!uploading()) {
+        setUploading(true);
+        var files = e.target.files;
+        var that = this;
+        props.module.service.postFiles(
+          files,
+          (data: IScheduledFile[]) => {
+            setFiles(data);
+            setUploading(false);
+            e.target.value = "";
+          },
+          (err: any) => {
+            setUploading(false);
+            e.target.value = "";
+          }
+        );
+      }
+    });
+    updateFiles();
+  });
 
   const updateFiles = () => {
     props.module.service.getScheduledFiles((data: IScheduledFile[]) => {
@@ -27,31 +50,27 @@ const FileManager: Component<IFileManagerProps> = (props) => {
 
   return (
     <div>
-      <div class="row">
-        <div class="form-group">
-          <label htmlFor="Documents" class="col-sm-2 control-label">
-            {props.module.resources.Files}
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="file"
-              class="form-control"
-              data-action="upload"
-              multiple
-            />
-          </div>
-          <div class="col-sm-1">
-            <a
-              href="#"
-              class="btn btn-outline-secondary"
-              onClick={(e) => {
-                e.preventDefault();
-                processFiles();
-              }}
-            >
-              {props.module.resources.Process}
-            </a>
-          </div>
+      <div class="d-flex my-3 align-items-center ms-2">
+        <label htmlFor="Documents">{props.module.resources.Files}</label>
+        <div class="ms-3">
+          <input
+            type="file"
+            class="form-control"
+            data-action="upload"
+            multiple
+          />
+        </div>
+        <div class="ms-3">
+          <a
+            href="#"
+            class="btn btn-secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              processFiles();
+            }}
+          >
+            {props.module.resources.Process}
+          </a>
         </div>
       </div>
       <div>&nbsp;</div>
