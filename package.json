@@ -1,6 +1,6 @@
 {
   "name": "apibrowser",
-  "version": "01.01.02",
+  "version": "2.0.0",
   "description": "DNN Connect Api Browser Module",
   "dnn": {
     "projectFolders": [
@@ -44,6 +44,7 @@
         "**/*.ttf",
         "**/*.woff",
         "**/*.woff2",
+        "**/*.xml",
         "*.txt"
       ],
       "zipName": "Connect.ApiBrowser"

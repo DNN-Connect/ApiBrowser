@@ -110,4 +110,6 @@ js/*.js
 _BuildSupport
 _Development
 _References
+Releases/*
+local.json
 
