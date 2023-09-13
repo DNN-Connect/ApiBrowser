@@ -16,7 +16,7 @@ interface IGridProps {
 
 const Grid: Component<IGridProps> = (props) => {
   const [searchText, setSearchText] = createSignal("");
-  const [mainType, setMainType] = createSignal(-1);
+  const [mainType, setMainType] = createSignal(0);
   const [subType, setSubType] = createSignal(-1);
   const [status, setStatus] = createSignal(-1);
   const [pageIndex, setPageIndex] = createSignal(0);

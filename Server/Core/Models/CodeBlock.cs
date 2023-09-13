@@ -42,7 +42,7 @@ namespace Connect.ApiBrowser.Core.Models
         {
             foreach (var mcb in codeblocks)
             {
-                if (mcb.CodeHash == Hash && mcb.StartLine == StartLine && mcb.FileName == FileName)
+                if (mcb.CodeHash == Hash)
                 {
                     return true;
                 }

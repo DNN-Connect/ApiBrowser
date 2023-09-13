@@ -21,7 +21,10 @@ function copy(start, srcRelativePath, destDir) {
   log("Copying: " + srcRelativePath);
   return fs
     .ensureDir(path.dirname(fullDestPath))
-    .then(() => fs.copy(srcRelativePath, fullDestPath));
+    .then(() => fs.copy(srcRelativePath, fullDestPath))
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 var ignore = [

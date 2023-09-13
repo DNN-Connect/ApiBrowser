@@ -77,6 +77,7 @@ const MemberDetails: Component<IMemberDetailsProps> = (props) => {
 
   const showCodeBlock = (codeblockId: number) => {
     props.module.service.getCodeblock(codeblockId, (data: ICodeBlock) => {
+      setCurrentCodeblock(null);
       setCurrentCodeblock(data);
       Prism.highlightAll();
     });
@@ -205,7 +206,7 @@ const MemberDetails: Component<IMemberDetailsProps> = (props) => {
                       showCodeBlock(cb.CodeBlockId);
                     }}
                   >
-                    <i class="fas fa-eye" />
+                    <i class="fas fa-eye" /> &gt;
                   </a>
                 </td>
               </tr>
