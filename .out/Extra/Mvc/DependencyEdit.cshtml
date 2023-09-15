@@ -1,0 +1,50 @@
+
+WebPage<Dependency>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("DependencyId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.DependencyId, new { placeholder = Dnn.LocalizeString("DependencyId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentHistoryId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentHistoryId, new { placeholder = Dnn.LocalizeString("ComponentHistoryId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("FullName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.FullName, new { placeholder = Dnn.LocalizeString("FullName") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Version")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Version, new { placeholder = Dnn.LocalizeString("Version") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("VersionNormalized")</label>
+  </div>
+  @Html.TextBoxFor(m => m.VersionNormalized, new { placeholder = Dnn.LocalizeString("VersionNormalized") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Name")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Name, new { placeholder = Dnn.LocalizeString("Name") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("DepComponentHistoryId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.DepComponentHistoryId, new { placeholder = Dnn.LocalizeString("DepComponentHistoryId") })
+ </div>
+</fieldset>

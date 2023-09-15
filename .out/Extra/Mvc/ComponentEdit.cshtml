@@ -1,0 +1,38 @@
+
+WebPage<Component>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentId, new { placeholder = Dnn.LocalizeString("ComponentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ModuleId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ModuleId, new { placeholder = Dnn.LocalizeString("ModuleId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentName, new { placeholder = Dnn.LocalizeString("ComponentName") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LatestVersion")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LatestVersion, new { placeholder = Dnn.LocalizeString("LatestVersion") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Description")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Description, new { placeholder = Dnn.LocalizeString("Description") })
+ </div>
+</fieldset>

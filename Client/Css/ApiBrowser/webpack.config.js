@@ -14,8 +14,18 @@ var apibrowserAppConfig = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              url: false,
+            },
+          },
+          "postcss-loader",
+          "sass-loader",
+        ],
       },
     ],
   },

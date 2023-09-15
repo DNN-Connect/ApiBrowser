@@ -1,0 +1,56 @@
+
+WebPage<ComponentHistory>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<div class="form-horizontal">
+ <div class="form-group">
+   <label for="ComponentHistoryId" class="col-sm-2 control-label">@Dnn.LocalizeString("ComponentHistoryId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ComponentHistoryId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ComponentHistoryId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ComponentId" class="col-sm-2 control-label">@Dnn.LocalizeString("ComponentId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ComponentId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ComponentId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Version" class="col-sm-2 control-label">@Dnn.LocalizeString("Version")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Version, new { @class = "form-control", placeholder = Dnn.LocalizeString("Version"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="VersionNormalized" class="col-sm-2 control-label">@Dnn.LocalizeString("VersionNormalized")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.VersionNormalized, new { @class = "form-control", placeholder = Dnn.LocalizeString("VersionNormalized"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="FullName" class="col-sm-2 control-label">@Dnn.LocalizeString("FullName")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = Dnn.LocalizeString("FullName"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CodeLines" class="col-sm-2 control-label">@Dnn.LocalizeString("CodeLines")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CodeLines, new { @class = "form-control", placeholder = Dnn.LocalizeString("CodeLines"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CommentLines" class="col-sm-2 control-label">@Dnn.LocalizeString("CommentLines")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CommentLines, new { @class = "form-control", placeholder = Dnn.LocalizeString("CommentLines"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="EmptyLines" class="col-sm-2 control-label">@Dnn.LocalizeString("EmptyLines")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.EmptyLines, new { @class = "form-control", placeholder = Dnn.LocalizeString("EmptyLines"), type = &quot;number&quot; })
+   </div>
+ </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@inherits RazorTemplate<ObjectDefinition>
+@using Bring2mind.CodeGen.Cli.Common
+@using Bring2mind.CodeGen.Cli.Data
+@using Bring2mind.CodeGen.Cli.Razor
+@using Microsoft.SqlServer.Management.Smo
+@{
+}
+using System;
+
+namespace @(Settings.RootNameSpace).Models.@(Model.PluralName)
+{
+
+    public partial class @(Model.SingularName) @if (Model.TableAndView){@: : @(Model.SingularName)Base 
+    }
+    {
+        public @(Model.SingularName)() @if (Model.TableAndView){@: : base() 
+        }
+        {
+        }
+
+@foreach (Column c in Model.UniqueViewColumns)
+{
+@:@Raw(Engine.RunCompile("PropertyField2.cshtml", c).TrimEnd('\r', '\n'))
+}
+
+@if (Model.TableAndView)
+{
+@:        public @(Model.SingularName)Base Get@(Model.SingularName)Base()
+@:        {
+@:            @(Model.SingularName)Base res = new @(Model.SingularName)Base();
+foreach (Column c in Model.TableColumns)
+{
+ @:            res.@c.Name = @c.Name;
+}   
+ if (Model.HasAuditFields)
+ {
+@:            res.CreatedByUserID = CreatedByUserID;
+@:            res.CreatedOnDate = CreatedOnDate;
+@:            res.LastModifiedByUserID = LastModifiedByUserID;
+@:            res.LastModifiedOnDate = LastModifiedOnDate;
+ }
+@:            return res;
+@:        }
+}
+        public @(Model.SingularName) Clone()
+        {
+            @(Model.SingularName) res = new @(Model.SingularName)();
+@foreach (Column c in Model.TableColumns)
+{
+@:            res.@c.Name = @c.Name;
+}    
+@if (Model.TableAndView)
+{
+foreach (Column c in Model.UniqueViewColumns)
+{
+@:            res.@c.Name = @c.Name;
+}    
+}
+@if (Model.HasAuditFields)
+{
+@:            res.CreatedByUserID = CreatedByUserID;
+@:            res.CreatedOnDate = CreatedOnDate;
+@:            res.LastModifiedByUserID = LastModifiedByUserID;
+@:            res.LastModifiedOnDate = LastModifiedOnDate;
+}
+            return res;
+        }
+    }
+}

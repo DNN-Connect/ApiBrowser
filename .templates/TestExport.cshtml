@@ -1,0 +1,77 @@
+﻿@inherits RazorTemplate<ObjectDefinition>
+@using Bring2mind.CodeGen.Cli.Common
+@using Bring2mind.CodeGen.Cli.Data
+@using Bring2mind.CodeGen.Cli.Razor
+@using Microsoft.SqlServer.Management.Smo
+
+@foreach (Column c in Model.TableColumns)
+{
+  if (c.DataType.DataTypeToCs() == "string")
+  {
+@:        ws[$"{column}{row}"].SetValue(input.@(c.Name));
+@:        column = column.NextColumn();
+  } else {
+@:        ws[$"{column}{row}"].SetValue(input.@(c.Name), userUnits["um"]);
+@:        column = column.NextColumn();
+  }
+}
+@foreach (Column c in Model.UniqueViewColumns)
+{
+  if (c.DataType.DataTypeToCs() == "string")
+  {
+@:        ws[$"{column}{row}"].SetValue(input.@(c.Name));
+@:        column = column.NextColumn();
+  } else {
+@:        ws[$"{column}{row}"].SetValue(input.@(c.Name), userUnits["um"]);
+@:        column = column.NextColumn();
+  }
+}
+
+@foreach (Column c in Model.TableColumns)
+{
+  if (c.DataType.DataTypeToCs() == "string")
+  {
+@:        ws[$"{column}{row}"].Text = "@(c.Name)";
+@:        ws[$"{column}{row + 1}"].Text = GetString("@(c.Name)");
+@:        column = column.NextColumn();
+  } else {
+@:        ws[$"{column}{row}"].Text = "@(c.Name);" + userUnits["um"].Suffix;
+@:        ws[$"{column}{row + 1}"].Text = GetString("@(c.Name)") + " (" + userUnits["um"].Suffix + ")";
+@:        column = column.NextColumn();
+  }
+}
+@foreach (Column c in Model.UniqueViewColumns)
+{
+  if (c.DataType.DataTypeToCs() == "string")
+  {
+@:        ws[$"{column}{row}"].Text = "@(c.Name)";
+@:        ws[$"{column}{row + 1}"].Text = GetString("@(c.Name)");
+@:        column = column.NextColumn();
+  } else {
+@:        ws[$"{column}{row}"].Text = "@(c.Name);" + userUnits["um"].Suffix;
+@:        ws[$"{column}{row + 1}"].Text = GetString("@(c.Name)") + " (" + userUnits["um"].Suffix + ")";
+@:        column = column.NextColumn();
+  }
+}
+
+@foreach (Column c in Model.TableColumns)
+{
+@:            case "@(c.Name)":
+@:              mp.@(c.Name) = ws[$"{crtCol}{row}"].Text;
+@:              break;
+}
+@foreach (Column c in Model.UniqueViewColumns)
+{
+@:            case "@(c.Name)":
+@:              mp.@(c.Name) = ws[$"{crtCol}{row}"].Text;
+@:              break;
+}
+
+@foreach (Column c in Model.TableColumns)
+{
+@:            this.@(c.Name) = mp.@(c.Name);
+}
+@foreach (Column c in Model.UniqueViewColumns)
+{
+@:            this.@(c.Name) = mp.@(c.Name);
+}

@@ -1,0 +1,26 @@
+
+WebPage<CommentLike>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CommentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CommentId, new { placeholder = Dnn.LocalizeString("CommentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("UserId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.UserId, new { placeholder = Dnn.LocalizeString("UserId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Datime")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Datime, new { placeholder = Dnn.LocalizeString("Datime") })
+ </div>
+</fieldset>

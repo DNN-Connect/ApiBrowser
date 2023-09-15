@@ -1,0 +1,33 @@
+﻿@inherits RazorTemplate<ObjectDefinition>
+@using Bring2mind.CodeGen.Cli.Common
+@using Bring2mind.CodeGen.Cli.Data
+@using Bring2mind.CodeGen.Cli.Razor
+@using Microsoft.SqlServer.Management.Smo
+@{
+ string baseQualifier = "Base";
+ if (Model.TableOnly)
+ {
+  baseQualifier = "";
+ }
+}
+using System;
+using System.Collections.Generic;
+using @(Settings.RootNameSpace).Core.Services.Logging;
+
+namespace @(Settings.RootNameSpace).Models.@(Model.PluralName)
+{
+    public partial class @(Model.SingularName)@baseQualifier
+ {
+        public List<LogChange> CompareWith(@(Model.SingularName)@baseQualifier @(Model.SingularNameLowered))
+        {
+      var res = new List<LogChange>();
+@foreach (Column c in Model.TableColumns)
+{
+@:            if (@(c.Name) != @(Model.SingularNameLowered).@(c.Name))
+@:        res.Add(new LogChange("@(c.Name)",this.@(c.Name), @(Model.SingularNameLowered).@(c.Name)));
+}
+
+            return res;
+        }
+ }
+}

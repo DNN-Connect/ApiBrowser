@@ -1,0 +1,54 @@
+﻿@inherits RazorTemplate<ObjectDefinition>
+@using Bring2mind.CodeGen.Cli.Common
+@using Bring2mind.CodeGen.Cli.Data
+@using Bring2mind.CodeGen.Cli.Razor
+@using Microsoft.SqlServer.Management.Smo
+@{
+ dynamic vb = new System.Dynamic.ExpandoObject();
+ vb.ObjectName = Model.SingularName;
+
+ string baseQualifier = "Base";
+ if (Model.TableOnly)
+ {
+  baseQualifier = "";
+ }
+ 
+}
+using System;
+
+namespace @(Settings.RootNameSpace).Models.@(Model.PluralName)
+{
+    public partial class @(Model.SingularName)@baseQualifier
+    {
+
+        public @(Model.SingularName)@(baseQualifier)()
+        {
+@if (@Model.Table.IsTableWithIdColumn())
+{
+@:            @Model.Table.PrimaryKeyParameters() = -1;
+}
+        }
+
+@foreach (Column c in Model.TableColumns)
+{
+@:@Raw(Engine.RunCompile("PropertyField2.cshtml", c))
+}
+@if (Model.HasAuditFields)
+{
+@:        public int CreatedByUserID { get; set; }
+@:        public DateTime CreatedOnDate { get; set; }
+@:        public int LastModifiedByUserID { get; set; }
+@:        public DateTime LastModifiedOnDate { get; set; }
+}
+
+        public void Read@(Model.SingularName)@(baseQualifier)(@(Model.SingularName)@baseQualifier @(Model.SingularName.Lowered()))
+        {
+@foreach (Column c in Model.TableColumns)
+{
+@:@Raw(Engine.RunCompile("ReadBaseField.cshtml", c, vb))
+}
+        }
+    }
+}
+
+

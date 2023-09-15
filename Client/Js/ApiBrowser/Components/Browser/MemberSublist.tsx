@@ -32,9 +32,10 @@ const MemberSublist: Component<IMemberSublistProps> = (props) => {
         newMembers.push(m);
       }
     }
-    console.log("members", newMembers);
     setMembers(newMembers);
   });
+
+  console.log(members());
 
   return (
     <Switch>

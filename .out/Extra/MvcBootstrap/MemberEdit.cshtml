@@ -1,0 +1,170 @@
+
+WebPage<Member>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<div class="form-horizontal">
+ <div class="form-group">
+   <label for="MemberId" class="col-sm-2 control-label">@Dnn.LocalizeString("MemberId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.MemberId, new { @class = "form-control", placeholder = Dnn.LocalizeString("MemberId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ClassId" class="col-sm-2 control-label">@Dnn.LocalizeString("ClassId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ClassId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ClassId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="MemberType" class="col-sm-2 control-label">@Dnn.LocalizeString("MemberType")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.MemberType, new { @class = "form-control", placeholder = Dnn.LocalizeString("MemberType"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="MemberName" class="col-sm-2 control-label">@Dnn.LocalizeString("MemberName")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.MemberName, new { @class = "form-control", placeholder = Dnn.LocalizeString("MemberName"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Declaration" class="col-sm-2 control-label">@Dnn.LocalizeString("Declaration")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Declaration, new { @class = "form-control", placeholder = Dnn.LocalizeString("Declaration") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Documentation" class="col-sm-2 control-label">@Dnn.LocalizeString("Documentation")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Documentation, new { @class = "form-control", placeholder = Dnn.LocalizeString("Documentation") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Description" class="col-sm-2 control-label">@Dnn.LocalizeString("Description")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = Dnn.LocalizeString("Description") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="AppearedInVersion" class="col-sm-2 control-label">@Dnn.LocalizeString("AppearedInVersion")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.AppearedInVersion, new { @class = "form-control", placeholder = Dnn.LocalizeString("AppearedInVersion"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="DeprecatedInVersion" class="col-sm-2 control-label">@Dnn.LocalizeString("DeprecatedInVersion")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.DeprecatedInVersion, new { @class = "form-control", placeholder = Dnn.LocalizeString("DeprecatedInVersion") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="DisappearedInVersion" class="col-sm-2 control-label">@Dnn.LocalizeString("DisappearedInVersion")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.DisappearedInVersion, new { @class = "form-control", placeholder = Dnn.LocalizeString("DisappearedInVersion") })
+   </div>
+ </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsDeprecated) @Dnn.LocalizeString("IsDeprecated")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+   <label for="DeprecationMessage" class="col-sm-2 control-label">@Dnn.LocalizeString("DeprecationMessage")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.DeprecationMessage, new { @class = "form-control", placeholder = Dnn.LocalizeString("DeprecationMessage") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="DocumentationId" class="col-sm-2 control-label">@Dnn.LocalizeString("DocumentationId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.DocumentationId, new { @class = "form-control", placeholder = Dnn.LocalizeString("DocumentationId"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="PendingDescription" class="col-sm-2 control-label">@Dnn.LocalizeString("PendingDescription")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.PendingDescription, new { @class = "form-control", placeholder = Dnn.LocalizeString("PendingDescription") })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CreatedByUserID" class="col-sm-2 control-label">@Dnn.LocalizeString("CreatedByUserID")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CreatedByUserID, new { @class = "form-control", placeholder = Dnn.LocalizeString("CreatedByUserID"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CreatedOnDate" class="col-sm-2 control-label">@Dnn.LocalizeString("CreatedOnDate")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CreatedOnDate, new { @class = "form-control", placeholder = Dnn.LocalizeString("CreatedOnDate"), type = &quot;datetime&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="LastModifiedByUserID" class="col-sm-2 control-label">@Dnn.LocalizeString("LastModifiedByUserID")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.LastModifiedByUserID, new { @class = "form-control", placeholder = Dnn.LocalizeString("LastModifiedByUserID"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="LastModifiedOnDate" class="col-sm-2 control-label">@Dnn.LocalizeString("LastModifiedOnDate")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.LastModifiedOnDate, new { @class = "form-control", placeholder = Dnn.LocalizeString("LastModifiedOnDate"), type = &quot;datetime&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="FullName" class="col-sm-2 control-label">@Dnn.LocalizeString("FullName")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = Dnn.LocalizeString("FullName"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsAbstract) @Dnn.LocalizeString("IsAbstract")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsPrivate) @Dnn.LocalizeString("IsPrivate")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsStatic) @Dnn.LocalizeString("IsStatic")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsGetter) @Dnn.LocalizeString("IsGetter")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.IsSetter) @Dnn.LocalizeString("IsSetter")
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

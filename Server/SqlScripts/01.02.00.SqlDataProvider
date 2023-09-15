@@ -1,0 +1,20 @@
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ADD IsAbstract BIT DEFAULT((0)) NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ADD IsPrivate BIT DEFAULT((0)) NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ADD IsStatic BIT DEFAULT((0)) NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ADD IsGetter BIT DEFAULT((0)) NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}Connect_ApiBrowser_Members
+ADD IsSetter BIT DEFAULT((0)) NOT NULL
+GO
+

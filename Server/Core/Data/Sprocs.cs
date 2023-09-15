@@ -17,8 +17,7 @@ namespace Connect.ApiBrowser.Core.Data
         // UPDATE dbo.Connect_ApiBrowser_ApiClasses
         //  SET [DisappearedInVersion]=@Version
         //  WHERE [ClassId]=@ClassId
-        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version
-        // ;  
+        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version;
         public static void ClassDisappeared(int classId, string version)
         {
             using (var context = DataContext.Instance())
@@ -36,8 +35,7 @@ namespace Connect.ApiBrowser.Core.Data
         //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_Members m INNER JOIN dbo.Connect_ApiBrowser_ApiClasses cl ON m.ClassId=cl.ClassId WHERE cl.ComponentId=c.ComponentId) NrMembers,
         //  (SELECT COUNT(*) FROM dbo.Connect_ApiBrowser_Members m INNER JOIN dbo.Connect_ApiBrowser_ApiClasses cl ON m.ClassId=cl.ClassId WHERE cl.ComponentId=c.ComponentId AND ISNULL(m.DocumentationId, -1) <> -1) NrDocumentedMembers
         // FROM dbo.Connect_ApiBrowser_Components c
-        // WHERE c.ModuleId=@ModuleId
-        // ;  
+        // WHERE c.ModuleId=@ModuleId;
         public static IEnumerable<ComponentWithStats> GetComponents(int moduleId)
         {
             using (var context = DataContext.Instance())
@@ -89,10 +87,7 @@ namespace Connect.ApiBrowser.Core.Data
         // FROM dbo.vw_Connect_ApiBrowser_Documentations d1
         //  LEFT JOIN dbo.vw_Connect_ApiBrowser_Documentations d2 ON d1.FullName=d2.FullName AND d2.IsCurrentVersion=1 AND d2.ModuleId=@ModuleId
         // WHERE d1.ModuleId=@ModuleId AND d1.LastModifiedOnDate > d2.LastModifiedOnDate OR d2.DocumentationId IS NULL) x
-        // ORDER BY x.FullQualifier, x.LastModifiedOnDate
-        // 
-        // 
-        // ;  
+        // ORDER BY x.FullQualifier, x.LastModifiedOnDate;
         public static IEnumerable<ModerationItem> GetModerationList(int moduleId)
         {
             using (var context = DataContext.Instance())
@@ -123,8 +118,7 @@ namespace Connect.ApiBrowser.Core.Data
         //  0 IsDeprecated
         // FROM dbo.Connect_ApiBrowser_ApiNamespaces n
         // WHERE n.ModuleId=@ModuleId) x
-        // ORDER BY x.[Name]
-        // ;  
+        // ORDER BY x.[Name];
         public static IEnumerable<ApiClassOrNamespace> GetNamespacesAndClasses(int moduleId)
         {
             using (var context = DataContext.Instance())
@@ -160,7 +154,7 @@ namespace Connect.ApiBrowser.Core.Data
         //  *
         // FROM dbo.Connect_ApiBrowser_ApiClasses
         // WHERE
-        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;;  
+        //  [NamespaceId]=@NamespaceId AND [ComponentId]=@ComponentId AND [ParentClassId]=@ParentClassId AND [ClassName]=@ClassName;;;
         public static ApiClass GetOrCreateClass(int namespaceId, int componentId, int parentClassId, string className, string fullName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage, bool isAbstract, bool isAnsiClass, bool isArray, bool isAutoClass, bool isAutoLayout, bool isBeforeFieldInit, bool isByReference, bool isClass, bool isDefinition, bool isEnum, bool isExplicitLayout, bool isFunctionPointer, bool isGenericInstance, bool isGenericParameter, bool isImport, bool isInterface, bool isNested, bool isNestedAssembly, bool isNestedPrivate, bool isNestedPublic, bool isNotPublic)
         {
             using (var context = DataContext.Instance())
@@ -183,8 +177,7 @@ namespace Connect.ApiBrowser.Core.Data
         // SELECT *
         //  FROM dbo.Connect_ApiBrowser_Components
         //  WHERE [ModuleId]=@ModuleId
-        //    AND [ComponentName]=@ComponentName;
-        // ;  
+        //    AND [ComponentName]=@ComponentName;;
         public static Component GetOrCreateComponent(int moduleId, string componentName, string latestVersion)
         {
             using (var context = DataContext.Instance())
@@ -207,9 +200,7 @@ namespace Connect.ApiBrowser.Core.Data
         //   WHERE [ComponentId]=@ComponentId AND [Version]=@Version;
         // SELECT *
         //  FROM dbo.Connect_ApiBrowser_ComponentHistories 
-        //  WHERE [ComponentId]=@ComponentId AND [Version]=@Version;
-        // 
-        // ;  
+        //  WHERE [ComponentId]=@ComponentId AND [Version]=@Version;;
         public static ComponentHistory GetOrCreateComponentHistory(int componentId, string fullName, string version, string versionNormalized, int codeLines, int commentLines, int emptyLines)
         {
             using (var context = DataContext.Instance())
@@ -221,7 +212,7 @@ namespace Connect.ApiBrowser.Core.Data
         }
 
         // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Dependencies WHERE [ComponentHistoryId]=@ComponentHistoryId AND [FullName]=@FullName)
-        // INSERT INTO [dbo].[Connect_ApiBrowser_Dependencies]
+        // INSERT INTO dbo.Connect_ApiBrowser_Dependencies
         // ([ComponentHistoryId],[FullName],[Version],[VersionNormalized],[Name])
         // VALUES (@ComponentHistoryId, @FullName, @Version, @VersionNormalized, @Name)
         // ELSE
@@ -229,8 +220,7 @@ namespace Connect.ApiBrowser.Core.Data
         // SET [Version]=@Version, [VersionNormalized]=@VersionNormalized, [Name]=@Name
         // WHERE [ComponentHistoryId]=@ComponentHistoryId AND [FullName]=@FullName
         // SELECT * FROM dbo.vw_Connect_ApiBrowser_Dependencies
-        // WHERE [ComponentHistoryId]=@ComponentHistoryId AND [FullName]=@FullName
-        // ;  
+        // WHERE [ComponentHistoryId]=@ComponentHistoryId AND [FullName]=@FullName;
         public static Dependency GetOrCreateDependency(int componentHistoryId, string fullName, string version, string versionNormalized, string name)
         {
             using (var context = DataContext.Instance())
@@ -241,49 +231,47 @@ namespace Connect.ApiBrowser.Core.Data
             }
         }
 
-        // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName)
-        //  INSERT INTO dbo.Connect_ApiBrowser_Members ([ClassId],[MemberType],[MemberName],[FullName],[Declaration],[Documentation],[Description], [AppearedInVersion],[DeprecatedInVersion],[DisappearedInVersion],[IsDeprecated],[DeprecationMessage], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate])
-        //   VALUES (@ClassId, @MemberType, @MemberName, @FullName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL, -1, GETDATE(), -1, GETDATE());
+        // IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter)
+        //  INSERT INTO dbo.Connect_ApiBrowser_Members ([ClassId],[MemberType],[MemberName],[FullName],[Declaration],[Documentation],[Description], [AppearedInVersion],[DeprecatedInVersion],[DisappearedInVersion],[IsDeprecated],[DeprecationMessage], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [IsAbstract], [IsPrivate], [IsStatic], [IsGetter], [IsSetter])
+        //   VALUES (@ClassId, @MemberType, @MemberName, @FullName, @Declaration, @Documentation, @Description, @Version, NULL, NULL, 0, NULL, -1, GETDATE(), -1, GETDATE(), @IsAbstract, @IsPrivate, @IsStatic, @IsGetter, @IsSetter);
         // UPDATE dbo.Connect_ApiBrowser_Members
         //  SET [AppearedInVersion]=@Version, [FullName]=@FullName
-        //  WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [AppearedInVersion]>@Version;
+        //  WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter AND [AppearedInVersion]>@Version;
         // IF @IsDeprecated=1
         // BEGIN
-        //  IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName
+        //  IF NOT EXISTS (SELECT * FROM dbo.Connect_ApiBrowser_Members WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter
         //   AND ISNULL([DeprecatedInVersion],'99.99.99') < @Version)
         //  UPDATE dbo.Connect_ApiBrowser_Members
         //   SET [DeprecatedInVersion]=@Version,
         //    [IsDeprecated]=1,
         //    [DeprecationMessage]=ISNULL([DeprecationMessage], @DeprecationMessage)
-        //  WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+        //  WHERE [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter;
         // END;
         // UPDATE dbo.Connect_ApiBrowser_Members
         //  SET [Declaration]=ISNULL([Declaration],@Declaration),
         //   [Documentation]=ISNULL([Documentation],@Documentation)
         //  WHERE
-        //   [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+        //   [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter;
         // SELECT
         //  *
         // FROM dbo.Connect_ApiBrowser_Members
         // WHERE
-        //  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName;
+        //  [ClassId]=@ClassId AND [MemberType]=@MemberType AND [MemberName]=@MemberName AND [IsAbstract]=@IsAbstract AND [IsPrivate]=@IsPrivate AND [IsStatic]=@IsStatic AND [IsGetter]=@IsGetter AND [IsSetter]=@IsSetter;
         // ;  
-        public static Member GetOrCreateMember(int classId, int memberType, string memberName, string fullName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage)
+        public static Member GetOrCreateMember(int classId, int memberType, string memberName, string fullName, string declaration, string documentation, string description, string version, bool isDeprecated, string deprecationMessage, bool IsAbstract, bool IsPrivate, bool IsStatic, bool IsGetter, bool IsSetter)
         {
             using (var context = DataContext.Instance())
             {
                 return context.ExecuteSingleOrDefault<Member>(System.Data.CommandType.StoredProcedure,
                     "Connect_ApiBrowser_GetOrCreateMember",
-                    classId, memberType, memberName, fullName, declaration, documentation, description, version, isDeprecated, deprecationMessage);
+                    classId, memberType, memberName, fullName, declaration, documentation, description, version, isDeprecated, deprecationMessage, IsAbstract, IsPrivate, IsStatic, IsGetter, IsSetter);
             }
         }
 
         // IF NOT EXISTS(SELECT * FROM dbo.Connect_ApiBrowser_MemberCodeBlocks WHERE [MemberId]=@MemberId AND [Version]=@Version)
         //  INSERT INTO dbo.Connect_ApiBrowser_MemberCodeBlocks ([CodeHash], [EndColumn], [EndLine], [FileName], [MemberId], [StartColumn], [StartLine], [Version])
         //   VALUES (@CodeHash, @EndColumn, @EndLine, @FileName, @MemberId, @StartColumn, @StartLine, @Version);
-        // SELECT * FROM dbo.Connect_ApiBrowser_MemberCodeBlocks WHERE [MemberId]=@MemberId AND [Version]=@Version;
-        // 
-        // ;  
+        // SELECT * FROM dbo.Connect_ApiBrowser_MemberCodeBlocks WHERE [MemberId]=@MemberId AND [Version]=@Version AND [CodeHash]=@CodeHash;;  
         public static MemberCodeBlock GetOrCreateMemberCodeBlock(int memberId, string codeHash, string version, string fileName, int startLine, int startColumn, int endLine, int endColumn)
         {
             using (var context = DataContext.Instance())
@@ -300,8 +288,7 @@ namespace Connect.ApiBrowser.Core.Data
         // SELECT *
         //  FROM dbo.Connect_ApiBrowser_ApiNamespaces
         //  WHERE [ModuleId]=@ModuleId
-        //    AND [NamespaceName]=@NamespaceName;
-        // ;  
+        //    AND [NamespaceName]=@NamespaceName;;
         public static ApiNamespace GetOrCreateNamespace(int moduleId, int parentId, string namespaceName, string lastQualifier)
         {
             using (var context = DataContext.Instance())
@@ -316,8 +303,7 @@ namespace Connect.ApiBrowser.Core.Data
         // INSERT INTO dbo.Connect_ApiBrowser_References ([CodeBlockId],[FullName],[Offset])
         // VALUES (@CodeBlockId, @FullName, @Offset)
         // SELECT * FROM dbo.vw_Connect_ApiBrowser_References
-        // WHERE [CodeBlockId]=@CodeBlockId AND [FullName]=@FullName
-        // ;  
+        // WHERE [CodeBlockId]=@CodeBlockId AND [FullName]=@FullName;
         public static Reference GetOrCreateReference(int codeBlockId, string fullName, int offset)
         {
             using (var context = DataContext.Instance())
@@ -331,8 +317,7 @@ namespace Connect.ApiBrowser.Core.Data
         // UPDATE dbo.Connect_ApiBrowser_Members
         //  SET [DisappearedInVersion]=@Version
         //  WHERE [MemberId]=@MemberId
-        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version
-        // ;  
+        //   AND ISNULL([DisappearedInVersion],'99.99.99') > @Version;
         public static void MemberDisappeared(int memberId, string version)
         {
             using (var context = DataContext.Instance())
@@ -352,9 +337,7 @@ namespace Connect.ApiBrowser.Core.Data
         // INNER JOIN dbo.Connect_ApiBrowser_ComponentHistories childch ON childch.FullName=d.FullName
         // INNER JOIN dbo.Connect_ApiBrowser_Components childc ON childc.ComponentId=childch.ComponentId AND childc.ModuleId=c.ModuleId
         // WHERE c.ModuleId=@ModuleId
-        // AND d.DepComponentHistoryId IS NULL
-        // 
-        // ;  
+        // AND d.DepComponentHistoryId IS NULL;
         public static void UpdateDependencies(int moduleId)
         {
             using (var context = DataContext.Instance())
@@ -396,9 +379,7 @@ namespace Connect.ApiBrowser.Core.Data
         // WHERE n.ModuleId=@ModuleId
         // AND childn.ModuleId=@ModuleId
         // AND d.DepComponentHistoryId=childch.ComponentHistoryId
-        // AND r.ReferencedMemberId IS NULL;
-        // 
-        // ;  
+        // AND r.ReferencedMemberId IS NULL;;
         public static void UpdateReferences(int moduleId)
         {
             using (var context = DataContext.Instance())

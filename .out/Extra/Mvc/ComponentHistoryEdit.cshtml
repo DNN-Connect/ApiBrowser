@@ -1,0 +1,56 @@
+
+WebPage<ComponentHistory>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentHistoryId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentHistoryId, new { placeholder = Dnn.LocalizeString("ComponentHistoryId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentId, new { placeholder = Dnn.LocalizeString("ComponentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Version")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Version, new { placeholder = Dnn.LocalizeString("Version") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("VersionNormalized")</label>
+  </div>
+  @Html.TextBoxFor(m => m.VersionNormalized, new { placeholder = Dnn.LocalizeString("VersionNormalized") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("FullName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.FullName, new { placeholder = Dnn.LocalizeString("FullName") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CodeLines")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CodeLines, new { placeholder = Dnn.LocalizeString("CodeLines") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CommentLines")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CommentLines, new { placeholder = Dnn.LocalizeString("CommentLines") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("EmptyLines")</label>
+  </div>
+  @Html.TextBoxFor(m => m.EmptyLines, new { placeholder = Dnn.LocalizeString("EmptyLines") })
+ </div>
+</fieldset>

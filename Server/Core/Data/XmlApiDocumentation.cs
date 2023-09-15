@@ -197,7 +197,12 @@ namespace Connect.ApiBrowser.Core.Data
         var documentation = memberNode.SelectSingleNode("documentation").InnerXml.Trim();
         var description = tryGetDescription(documentation);
         var fullName = memberNode.SelectSingleNode("fullName").InnerText.Trim();
-        var m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText.Trim(), fullName, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage.Trim());
+        var isAbstract = bool.Parse(memberNode.Attributes["IsAbstract"].InnerText);
+        var isPrivate = bool.Parse(memberNode.Attributes["IsPrivate"].InnerText);
+        var isStatic = bool.Parse(memberNode.Attributes["IsStatic"].InnerText);
+        var isGetter = bool.Parse(memberNode.Attributes["IsGetter"].InnerText);
+        var isSetter = bool.Parse(memberNode.Attributes["IsSetter"].InnerText);
+        var m = Sprocs.GetOrCreateMember(classId, (int)memberType, memberNode.Attributes["name"].InnerText.Trim(), fullName, memberNode.SelectSingleNode("declaration").InnerText, documentation, description, Version, isDeprecated, deprecationMessage.Trim(), isAbstract, isPrivate, isStatic, isGetter, isSetter);
         var existingCodeblocks = MemberCodeBlockRepository.Instance.GetMemberCodeBlocksByMember(m.MemberId);
         log.Log(StartTime, "Member {0} (ID={1})", m.MemberName, m.MemberId);
         res = m.MemberId;

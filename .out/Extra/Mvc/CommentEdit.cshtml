@@ -1,0 +1,74 @@
+
+WebPage<Comment>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CommentID")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CommentID, new { placeholder = Dnn.LocalizeString("CommentID") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ComponentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ComponentId, new { placeholder = Dnn.LocalizeString("ComponentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ItemType")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ItemType, new { placeholder = Dnn.LocalizeString("ItemType") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ItemId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ItemId, new { placeholder = Dnn.LocalizeString("ItemId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ParentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ParentId, new { placeholder = Dnn.LocalizeString("ParentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Message")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Message, new { placeholder = Dnn.LocalizeString("Message") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Approved")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Approved, new { placeholder = Dnn.LocalizeString("Approved") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CreatedByUserID")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CreatedByUserID, new { placeholder = Dnn.LocalizeString("CreatedByUserID") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CreatedOnDate")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CreatedOnDate, new { placeholder = Dnn.LocalizeString("CreatedOnDate") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LastModifiedByUserID")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LastModifiedByUserID, new { placeholder = Dnn.LocalizeString("LastModifiedByUserID") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LastModifiedOnDate")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LastModifiedOnDate, new { placeholder = Dnn.LocalizeString("LastModifiedOnDate") })
+ </div>
+</fieldset>

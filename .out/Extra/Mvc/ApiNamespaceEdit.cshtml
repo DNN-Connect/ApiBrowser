@@ -1,0 +1,44 @@
+
+WebPage<ApiNamespace>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("NamespaceId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.NamespaceId, new { placeholder = Dnn.LocalizeString("NamespaceId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ParentId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ParentId, new { placeholder = Dnn.LocalizeString("ParentId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ModuleId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ModuleId, new { placeholder = Dnn.LocalizeString("ModuleId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("NamespaceName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.NamespaceName, new { placeholder = Dnn.LocalizeString("NamespaceName") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("LastQualifier")</label>
+  </div>
+  @Html.TextBoxFor(m => m.LastQualifier, new { placeholder = Dnn.LocalizeString("LastQualifier") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Description")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Description, new { placeholder = Dnn.LocalizeString("Description") })
+ </div>
+</fieldset>

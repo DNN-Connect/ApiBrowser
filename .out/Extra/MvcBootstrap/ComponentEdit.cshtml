@@ -1,0 +1,38 @@
+
+WebPage<Component>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<div class="form-horizontal">
+ <div class="form-group">
+   <label for="ComponentId" class="col-sm-2 control-label">@Dnn.LocalizeString("ComponentId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ComponentId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ComponentId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ModuleId" class="col-sm-2 control-label">@Dnn.LocalizeString("ModuleId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ModuleId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ModuleId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ComponentName" class="col-sm-2 control-label">@Dnn.LocalizeString("ComponentName")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ComponentName, new { @class = "form-control", placeholder = Dnn.LocalizeString("ComponentName"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="LatestVersion" class="col-sm-2 control-label">@Dnn.LocalizeString("LatestVersion")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.LatestVersion, new { @class = "form-control", placeholder = Dnn.LocalizeString("LatestVersion"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Description" class="col-sm-2 control-label">@Dnn.LocalizeString("Description")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = Dnn.LocalizeString("Description") })
+   </div>
+ </div>
+</div>

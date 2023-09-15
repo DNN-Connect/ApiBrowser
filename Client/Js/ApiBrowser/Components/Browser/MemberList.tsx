@@ -3,6 +3,7 @@ import { IApiClass } from "../../Models/IApiClass";
 import { IAppModule } from "../../Models/IAppModule";
 import { IMember } from "../../Models/IMember";
 import MemberSublist from "./MemberSublist";
+import PropertyList from "./PropertyList";
 
 interface IMemberListProps {
   module: IAppModule;
@@ -31,11 +32,10 @@ const MemberList: Component<IMemberListProps> = (props) => {
         memberType={2}
         changeSelection={(a, b) => props.changeSelection(a, b)}
       />
-      <MemberSublist
+      <PropertyList
         module={props.module}
         title="Properties"
         members={props.members}
-        memberType={3}
         changeSelection={(a, b) => props.changeSelection(a, b)}
       />
       <MemberSublist

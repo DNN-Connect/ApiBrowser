@@ -1,0 +1,38 @@
+
+WebPage<Reference>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ReferenceId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ReferenceId, new { placeholder = Dnn.LocalizeString("ReferenceId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CodeBlockId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CodeBlockId, new { placeholder = Dnn.LocalizeString("CodeBlockId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("FullName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.FullName, new { placeholder = Dnn.LocalizeString("FullName") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Offset")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Offset, new { placeholder = Dnn.LocalizeString("Offset") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("ReferencedMemberId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.ReferencedMemberId, new { placeholder = Dnn.LocalizeString("ReferencedMemberId") })
+ </div>
+</fieldset>

@@ -1,0 +1,38 @@
+
+WebPage<Reference>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<div class="form-horizontal">
+ <div class="form-group">
+   <label for="ReferenceId" class="col-sm-2 control-label">@Dnn.LocalizeString("ReferenceId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ReferenceId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ReferenceId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CodeBlockId" class="col-sm-2 control-label">@Dnn.LocalizeString("CodeBlockId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CodeBlockId, new { @class = "form-control", placeholder = Dnn.LocalizeString("CodeBlockId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="FullName" class="col-sm-2 control-label">@Dnn.LocalizeString("FullName")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = Dnn.LocalizeString("FullName"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Offset" class="col-sm-2 control-label">@Dnn.LocalizeString("Offset")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Offset, new { @class = "form-control", placeholder = Dnn.LocalizeString("Offset"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ReferencedMemberId" class="col-sm-2 control-label">@Dnn.LocalizeString("ReferencedMemberId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ReferencedMemberId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ReferencedMemberId"), type = &quot;number&quot; })
+   </div>
+ </div>
+</div>

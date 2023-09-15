@@ -1,0 +1,15 @@
+{
+  "Template": ".\\.templates\\Main.cshtml",
+  "OutputDirectory": ".\\.out",
+  "OrgName": "Connect",
+  "ModuleName": "TenantManager",
+  "RootNameSpace": "Connect.ApiBrowser.Core",
+  "SiteConfig": "",
+  "ConnectionString": "Data Source=(local);Initial Catalog=DNNAPIBROWSER;uid=test;pwd=test;TrustServerCertificate=True",
+  "ObjectQualifier": "",
+  "DatabaseOwner": "dbo",
+  "ModuleObjectQualifier": "Connect_ApiBrowser",
+  "IncludeSqlScripts": true,
+  "EnumValues": null,
+  "FullDbPattern": ""
+}

@@ -1,0 +1,62 @@
+
+WebPage<MemberCodeBlock>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<fieldset>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CodeBlockId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CodeBlockId, new { placeholder = Dnn.LocalizeString("CodeBlockId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("MemberId")</label>
+  </div>
+  @Html.TextBoxFor(m => m.MemberId, new { placeholder = Dnn.LocalizeString("MemberId") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("Version")</label>
+  </div>
+  @Html.TextBoxFor(m => m.Version, new { placeholder = Dnn.LocalizeString("Version") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("CodeHash")</label>
+  </div>
+  @Html.TextBoxFor(m => m.CodeHash, new { placeholder = Dnn.LocalizeString("CodeHash") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("StartLine")</label>
+  </div>
+  @Html.TextBoxFor(m => m.StartLine, new { placeholder = Dnn.LocalizeString("StartLine") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("StartColumn")</label>
+  </div>
+  @Html.TextBoxFor(m => m.StartColumn, new { placeholder = Dnn.LocalizeString("StartColumn") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("EndLine")</label>
+  </div>
+  @Html.TextBoxFor(m => m.EndLine, new { placeholder = Dnn.LocalizeString("EndLine") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("EndColumn")</label>
+  </div>
+  @Html.TextBoxFor(m => m.EndColumn, new { placeholder = Dnn.LocalizeString("EndColumn") })
+ </div>
+ <div class="dnnFormItem">
+  <div class="dnnLabel" style="position: relative;">
+   <label>@Dnn.LocalizeString("FileName")</label>
+  </div>
+  @Html.TextBoxFor(m => m.FileName, new { placeholder = Dnn.LocalizeString("FileName") })
+ </div>
+</fieldset>

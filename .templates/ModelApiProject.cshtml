@@ -1,0 +1,31 @@
+﻿@inherits RazorTemplate<ObjectDefinition>
+@using Bring2mind.CodeGen.Cli.Common
+@using Bring2mind.CodeGen.Cli.Data
+@using Bring2mind.CodeGen.Cli.Razor
+@using Microsoft.SqlServer.Management.Smo
+@{
+}
+using System;
+using PetaPoco;
+
+namespace @(Settings.RootNameSpace).PublicApi.Models
+{
+
+    [TableName("@Model.Prefix@Model.ModuleQualifier@Model.Name")]
+@if (Model.Table.IsTableWithIdColumn())
+{
+@:    [PrimaryKey("@Model.Table.PrimaryKeyParameters()", AutoIncrement = true)]
+}
+    public partial class @(Model.SingularName)
+    {
+
+@foreach (Column c in Model.TableColumns)
+{
+@:@Raw(Engine.RunCompile("PropertyField2.cshtml", c).TrimEnd('\r', '\n'))
+}
+@foreach (Column c in Model.UniqueViewColumns)
+{
+@:@Raw(Engine.RunCompile("PropertyField2.cshtml", c).TrimEnd('\r', '\n'))
+}
+    }
+}

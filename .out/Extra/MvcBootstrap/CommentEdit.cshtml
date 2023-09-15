@@ -1,0 +1,77 @@
+
+WebPage<Comment>
+@using Connect.DNN.Modules.Conference.Common;
+@using Connect.Conference.Core.Models.Conferences;
+@using DotNetNuke.Web.Mvc.Helpers;
+
+<div class="form-horizontal">
+ <div class="form-group">
+   <label for="CommentID" class="col-sm-2 control-label">@Dnn.LocalizeString("CommentID")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CommentID, new { @class = "form-control", placeholder = Dnn.LocalizeString("CommentID"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ComponentId" class="col-sm-2 control-label">@Dnn.LocalizeString("ComponentId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ComponentId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ComponentId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ItemType" class="col-sm-2 control-label">@Dnn.LocalizeString("ItemType")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ItemType, new { @class = "form-control", placeholder = Dnn.LocalizeString("ItemType"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ItemId" class="col-sm-2 control-label">@Dnn.LocalizeString("ItemId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ItemId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ItemId"), required = &quot;true&quot;, type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="ParentId" class="col-sm-2 control-label">@Dnn.LocalizeString("ParentId")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.ParentId, new { @class = "form-control", placeholder = Dnn.LocalizeString("ParentId"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="Message" class="col-sm-2 control-label">@Dnn.LocalizeString("Message")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.Message, new { @class = "form-control", placeholder = Dnn.LocalizeString("Message"), required = &quot;true&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          @Html.CheckBoxFor(m => m.Approved) @Dnn.LocalizeString("Approved")
+        </label>
+      </div>
+    </div>
+  </div>
+ <div class="form-group">
+   <label for="CreatedByUserID" class="col-sm-2 control-label">@Dnn.LocalizeString("CreatedByUserID")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CreatedByUserID, new { @class = "form-control", placeholder = Dnn.LocalizeString("CreatedByUserID"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="CreatedOnDate" class="col-sm-2 control-label">@Dnn.LocalizeString("CreatedOnDate")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.CreatedOnDate, new { @class = "form-control", placeholder = Dnn.LocalizeString("CreatedOnDate"), type = &quot;datetime&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="LastModifiedByUserID" class="col-sm-2 control-label">@Dnn.LocalizeString("LastModifiedByUserID")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.LastModifiedByUserID, new { @class = "form-control", placeholder = Dnn.LocalizeString("LastModifiedByUserID"), type = &quot;number&quot; })
+   </div>
+ </div>
+ <div class="form-group">
+   <label for="LastModifiedOnDate" class="col-sm-2 control-label">@Dnn.LocalizeString("LastModifiedOnDate")</label>
+   <div class="col-sm-10">
+     @Html.TextBoxFor(m => m.LastModifiedOnDate, new { @class = "form-control", placeholder = Dnn.LocalizeString("LastModifiedOnDate"), type = &quot;datetime&quot; })
+   </div>
+ </div>
+</div>
