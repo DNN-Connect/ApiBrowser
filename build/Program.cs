@@ -35,7 +35,7 @@ public class BuildContext : FrostingContext
         this.Solution = Solution.New(".\\package.json");
         this.BuildSettings = new MSBuildSettings()
             .SetConfiguration("Release")
-            .UseToolVersion(MSBuildToolVersion.VS2019)
+            .UseToolVersion(MSBuildToolVersion.VS2022)
             .WithProperty("OutDir", new System.IO.DirectoryInfo(this.Solution.dnn.pathsAndFiles.pathToAssemblies).FullName);
     }
 }

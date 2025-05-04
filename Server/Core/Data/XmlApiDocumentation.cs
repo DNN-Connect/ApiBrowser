@@ -61,7 +61,7 @@ namespace Connect.ApiBrowser.Core.Data
       string logFile = System.IO.Path.GetDirectoryName(FilePath) + "\\" + System.IO.Path.GetFileNameWithoutExtension(FilePath) + ".log";
       var log = new System.IO.StreamWriter(logFile, false);
       log.Log(StartTime, "Beginning import of {0}", FilePath);
-      Component component = Sprocs.GetOrCreateComponent(ModuleId, File, Version);
+      Component component = Sprocs.GetOrCreateComponent(ModuleId, File, VersionNormalized);
       ComponentHistory historyItem = Sprocs.GetOrCreateComponentHistory(component.ComponentId, FullName, Version, VersionNormalized, CodeLines, CommentLines, EmptyLines);
       log.Log(StartTime, "Component is {0}, ID={1}, version={2}", component.ComponentName, component.ComponentId, Version);
       foreach (XmlNode depNode in DocumentElement.SelectSingleNode("dependencies").SelectNodes("dependency"))
